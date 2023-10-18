@@ -1,15 +1,13 @@
 namespace PropertySim;
 
-public readonly record struct InterestRate(double Value)
+public readonly record struct InterestRate(decimal Value)
 {
-    public static InterestRate FromYearlyPercentage(double percentage)
+    public static InterestRate FromYearlyPercentage(decimal percentage)
     {
-        return new InterestRate(percentage / 100d);
+        return new InterestRate(percentage / 100m);
     }
 
-    public double Yearly => Value;
+    public decimal Yearly => Value;
 
-    public double Monthly => Value / 12;
-
-    public decimal MonthlyDecimal => new(Monthly);
+    public decimal Monthly => Value / 12;
 }

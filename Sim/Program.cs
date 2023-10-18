@@ -6,7 +6,7 @@ internal static class Sim
     {
         var initialPropertyValue = new decimal(200_000);
         var deposit = new decimal(50_000);
-        var interestRate = InterestRate.FromYearlyPercentage(2.09);
+        var interestRate = InterestRate.FromYearlyPercentage(2.09m);
         var mortgage = new Mortgage(initialPropertyValue - deposit, interestRate, 25);
 
         var balance = initialPropertyValue - deposit;

@@ -20,7 +20,7 @@ public sealed class Mortgage
 
     public (decimal Principal, decimal Interest) ComputePayment(decimal balance)
     {
-        var interest = balance * InterestRate.MonthlyDecimal;
+        var interest = balance * InterestRate.Monthly;
         var principal = MonthlyPayment - interest;
         return (principal, interest);
     }
@@ -28,7 +28,7 @@ public sealed class Mortgage
     private decimal ComputeMonthlyPayment()
     {
         var numberOfPayments = TermYears * 12;
-        var rate = InterestRate.Monthly;
+        var rate = (double)InterestRate.Monthly;
         var rateToPowerOfPayments = Math.Pow(1 + rate, numberOfPayments);
         var result = (double)Loan * (rate * rateToPowerOfPayments) / (rateToPowerOfPayments - 1);
         return new decimal(Math.Round(result, 2));
