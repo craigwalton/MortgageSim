@@ -1,8 +1,8 @@
 namespace PropertySim;
 
-public sealed class Mortgage
+public sealed class FixedMortgage
 {
-    public Mortgage(decimal loan, InterestRate interestRate, int termYears)
+    public FixedMortgage(decimal loan, InterestRate interestRate, int termYears)
     {
         Loan = loan;
         InterestRate = interestRate;
