@@ -1,27 +1,33 @@
-﻿namespace PropertySim;
+﻿using PropertySim.Plans;
+
+namespace PropertySim;
 
 internal static class Sim
 {
     public static void Main()
     {
-        var initialPropertyValue = new decimal(200_000);
-        var deposit = new decimal(50_000);
+        const decimal initialPropertyValue = 200_000m;
+        const decimal deposit = 50_000m;
+        const int mortgageTermYears = 25;
         var mortgageInterestRate = InterestRate.FromYearlyPercentage(2.09m);
         var savingsInterestRate = InterestRate.FromYearlyPercentage(1m);
-        var mortgage = new VariableMortgage(initialPropertyValue - deposit, 25);
-        var savings = new Savings();
-        var income = 1000m;
+        const decimal income = 1000m;
+        const decimal monthlyRent = 500m;
 
-        for (var y = 0; y < mortgage.InitialTermYears; y++)
+        var purchasePlan = new HousePurchasePlan(initialPropertyValue, deposit, mortgageTermYears);
+        var rentalPlan = new HouseRentalPlan(deposit, monthlyRent);
+
+        for (var y = 0; y < mortgageTermYears; y++)
         {
             for (var m = 0; m < 12; m++)
             {
                 Console.WriteLine($"M{m:00}/Y{y:00}");
-                var mortgagePayment = mortgage.MakePayment(mortgageInterestRate);
-                var incomeForSavings = income - mortgagePayment;
-                savings.MakePayment(incomeForSavings, savingsInterestRate);
+                purchasePlan.ProcessMonth(income, mortgageInterestRate, savingsInterestRate);
+                rentalPlan.ProcessMonth(income, mortgageInterestRate, savingsInterestRate);
             }
         }
-        Console.WriteLine($"Final mortgage loan={mortgage.RemainingLoan:C}; Final savings={savings.Balance:C}");
+
+        Console.WriteLine($"Purchase plan: Equity={purchasePlan.ComputeEquity():C}");
+        Console.WriteLine($"Rental plan: Equity={rentalPlan.ComputeEquity():C}");
     }
 }
