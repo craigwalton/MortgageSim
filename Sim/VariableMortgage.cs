@@ -2,29 +2,38 @@ namespace PropertySim;
 
 public class VariableMortgage
 {
-    public VariableMortgage(decimal loan, int termYears)
+    public VariableMortgage(decimal initialLoan, int initialTermYears)
     {
-        Loan = loan;
-        TermYears = termYears;
+        InitialLoan = initialLoan;
+        InitialTermYears = initialTermYears;
+        RemainingLoan = initialLoan;
+        RemainingPayments = 12 * initialTermYears;
     }
 
-    public decimal Loan { get; }
+    public decimal InitialLoan { get; }
 
-    public int TermYears { get; }
+    public int InitialTermYears { get; }
 
-    public (decimal Principal, decimal Interest) ComputePayment(decimal balance, InterestRate rate, int monthsRemaining)
+    public decimal RemainingLoan { get; private set; }
+
+    public int RemainingPayments { get; private set; }
+
+    public decimal MakePayment(InterestRate rate)
     {
-        var interest = balance * rate.Monthly;
-        var principal = ComputeMonthlyPayment(balance, rate, monthsRemaining) - interest;
-        return (principal, interest);
+        var payment = ComputeMonthlyPayment(rate);
+        var interest = RemainingLoan * rate.Monthly;
+        var principal = payment - interest;
+        RemainingLoan -= principal;
+        RemainingPayments--;
+        Console.WriteLine($"payment={payment:C} (interest={interest:C}; principal={principal:C}); loan={RemainingLoan:C}");
+        return payment;
     }
-    
-    private static decimal ComputeMonthlyPayment(decimal balance, InterestRate rate, int monthsRemaining)
+
+    private decimal ComputeMonthlyPayment(InterestRate rate)
     {
-        var numberOfPayments = monthsRemaining;
         var interest = (double)rate.Monthly;
-        var rateToPowerOfPayments = Math.Pow(1 + interest, numberOfPayments);
-        var result = (double)balance * (interest * rateToPowerOfPayments) / (rateToPowerOfPayments - 1);
+        var rateToPowerOfPayments = Math.Pow(1 + interest, RemainingPayments);
+        var result = (double)RemainingLoan * (interest * rateToPowerOfPayments) / (rateToPowerOfPayments - 1);
         return new decimal(Math.Round(result, 2));
     }
 }
