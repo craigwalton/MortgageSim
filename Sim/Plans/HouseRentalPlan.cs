@@ -1,3 +1,5 @@
+using PropertySim.Accounts;
+
 namespace PropertySim.Plans;
 
 public sealed class HouseRentalPlan : Plan

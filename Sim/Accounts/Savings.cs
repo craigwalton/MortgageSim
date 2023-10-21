@@ -1,4 +1,4 @@
-namespace PropertySim;
+namespace PropertySim.Accounts;
 
 public class Savings
 {
