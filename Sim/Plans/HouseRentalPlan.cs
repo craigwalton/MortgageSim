@@ -2,11 +2,11 @@ namespace PropertySim.Plans;
 
 public sealed class HouseRentalPlan : Plan
 {
-    private readonly decimal _monthlyRent;
+    private readonly RentPrice _rent;
 
-    public HouseRentalPlan(decimal deposit, decimal monthlyRent, StreamWriter output)
+    public HouseRentalPlan(decimal deposit, RentPrice rent, StreamWriter output)
     {
-        _monthlyRent = monthlyRent;
+        _rent = rent;
         Savings = new Savings(deposit, output);
     }
 
@@ -14,7 +14,7 @@ public sealed class HouseRentalPlan : Plan
 
     public override void ProcessMonth(decimal income, InterestRate _, InterestRate savingsInterestRate)
     {
-        var incomeForSavings = income - _monthlyRent;
+        var incomeForSavings = income - _rent.MonthlyPrice;
         Savings.MakePayment(incomeForSavings, savingsInterestRate);
     }
 
