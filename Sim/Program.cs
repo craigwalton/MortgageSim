@@ -15,13 +15,14 @@ internal static class Sim
         var mortgageInterestRate = new InterestRate(new Normal(0.0209, 0.01));
         var savingsInterestRate = new InterestRate(new Normal(0.001, 0.01));
         var rent = new RentPrice(500m, new Normal(0.02, 0.02));
+        var propertyValue = new PropertyValue(initialPropertyValue, new Normal(0.03, 0.01));
 
         var output = new StreamWriter(Console.OpenStandardOutput());
         output.AutoFlush = true;
         // output = StreamWriter.Null;
 
         var purchasePlan = new HousePurchasePlan(
-            initialPropertyValue,
+            propertyValue,
             deposit,
             mortgageTermYears,
             mortgageInterestRate,
@@ -29,7 +30,7 @@ internal static class Sim
             output);
         var rentalPlan = new HouseRentalPlan(deposit, rent, savingsInterestRate, output);
 
-        for (var y = 0; y < 10; y++)
+        for (var y = 0; y < 25; y++)
         {
             for (var m = 0; m < 12; m++)
             {
@@ -39,6 +40,7 @@ internal static class Sim
             }
             mortgageInterestRate.ProcessYearlyUpdate();
             savingsInterestRate.ProcessYearlyUpdate();
+            propertyValue.ProcessYearlyUpdate();
             rent.ProcessYearlyUpdate();
         }
 

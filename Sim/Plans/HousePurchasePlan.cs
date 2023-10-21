@@ -1,13 +1,15 @@
+using MathNet.Numerics.Distributions;
+
 namespace PropertySim.Plans;
 
 public sealed class HousePurchasePlan : Plan
 {
-    private readonly decimal _propertyValue;
+    private readonly PropertyValue _propertyValue;
     private readonly InterestRate _mortgageInterestRate;
     private readonly InterestRate _savingsInterestRate;
 
     public HousePurchasePlan(
-        decimal propertyValue,
+        PropertyValue propertyValue,
         decimal deposit,
         int mortgageTermYears,
         InterestRate mortgageInterestRate,
@@ -17,7 +19,7 @@ public sealed class HousePurchasePlan : Plan
         _propertyValue = propertyValue;
         _mortgageInterestRate = mortgageInterestRate;
         _savingsInterestRate = savingsInterestRate;
-        Mortgage = new VariableMortgage(propertyValue - deposit, mortgageTermYears, output);
+        Mortgage = new VariableMortgage(propertyValue.Value - deposit, mortgageTermYears, output);
         Savings = new Savings(0m, output);
     }
 
@@ -35,7 +37,7 @@ public sealed class HousePurchasePlan : Plan
     public override decimal ComputeEquity()
     {
         var liabilities = Mortgage.RemainingLoan;
-        var assets = _propertyValue + Savings.Balance;
+        var assets = _propertyValue.Value + Savings.Balance;
         return assets - liabilities;
     }
 }
