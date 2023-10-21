@@ -2,9 +2,12 @@ namespace PropertySim;
 
 public class Savings
 {
-    public Savings(decimal initialBalance)
+    private readonly StreamWriter _output;
+
+    public Savings(decimal initialBalance, StreamWriter output)
     {
         Balance = initialBalance;
+        _output = output;
     }
 
     public decimal Balance { get; private set; }
@@ -13,6 +16,6 @@ public class Savings
     {
         var accruedInterest = Balance * interestRate.Monthly;
         Balance += accruedInterest + payment;
-        Console.WriteLine($"Savings={Balance:C}");
+        _output.WriteLine($"Savings={Balance:C}");
     }
 }

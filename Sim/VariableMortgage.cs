@@ -2,12 +2,15 @@ namespace PropertySim;
 
 public class VariableMortgage
 {
-    public VariableMortgage(decimal initialLoan, int initialTermYears)
+    private readonly StreamWriter _output;
+
+    public VariableMortgage(decimal initialLoan, int initialTermYears, StreamWriter output)
     {
         InitialLoan = initialLoan;
         InitialTermYears = initialTermYears;
         RemainingLoan = initialLoan;
         RemainingPayments = 12 * initialTermYears;
+        _output = output;
     }
 
     public decimal InitialLoan { get; }
@@ -25,7 +28,7 @@ public class VariableMortgage
         var principal = payment - interest;
         RemainingLoan -= principal;
         RemainingPayments--;
-        Console.WriteLine($"payment={payment:C} (interest={interest:C}; principal={principal:C}); loan={RemainingLoan:C}");
+        _output.WriteLine($"payment={payment:C} (interest={interest:C}; principal={principal:C}); loan={RemainingLoan:C}");
         return payment;
     }
 

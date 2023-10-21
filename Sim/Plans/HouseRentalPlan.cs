@@ -4,10 +4,10 @@ public sealed class HouseRentalPlan : Plan
 {
     private readonly decimal _monthlyRent;
 
-    public HouseRentalPlan(decimal deposit, decimal monthlyRent)
+    public HouseRentalPlan(decimal deposit, decimal monthlyRent, StreamWriter output)
     {
         _monthlyRent = monthlyRent;
-        Savings = new Savings(deposit);
+        Savings = new Savings(deposit, output);
     }
 
     public Savings Savings { get; }

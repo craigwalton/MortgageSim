@@ -4,11 +4,11 @@ public sealed class HousePurchasePlan : Plan
 {
     private readonly decimal _propertyValue;
 
-    public HousePurchasePlan(decimal propertyValue, decimal deposit, int mortgageTermYears)
+    public HousePurchasePlan(decimal propertyValue, decimal deposit, int mortgageTermYears, StreamWriter output)
     {
         _propertyValue = propertyValue;
-        Mortgage = new VariableMortgage(propertyValue - deposit, mortgageTermYears);
-        Savings = new Savings(0m);
+        Mortgage = new VariableMortgage(propertyValue - deposit, mortgageTermYears, output);
+        Savings = new Savings(0m, output);
     }
 
     public VariableMortgage Mortgage { get; }

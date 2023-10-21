@@ -14,20 +14,24 @@ internal static class Sim
         const decimal income = 1000m;
         const decimal monthlyRent = 500m;
 
-        var purchasePlan = new HousePurchasePlan(initialPropertyValue, deposit, mortgageTermYears);
-        var rentalPlan = new HouseRentalPlan(deposit, monthlyRent);
+        var output = new StreamWriter(Console.OpenStandardOutput());
+        output.AutoFlush = true;
+        // output = StreamWriter.Null;
+
+        var purchasePlan = new HousePurchasePlan(initialPropertyValue, deposit, mortgageTermYears, output);
+        var rentalPlan = new HouseRentalPlan(deposit, monthlyRent, output);
 
         for (var y = 0; y < mortgageTermYears; y++)
         {
             for (var m = 0; m < 12; m++)
             {
-                Console.WriteLine($"M{m:00}/Y{y:00}");
+                output.WriteLine($"M{m:00}/Y{y:00}");
                 purchasePlan.ProcessMonth(income, mortgageInterestRate, savingsInterestRate);
                 rentalPlan.ProcessMonth(income, mortgageInterestRate, savingsInterestRate);
             }
         }
 
-        Console.WriteLine($"Purchase plan: Equity={purchasePlan.ComputeEquity():C}");
-        Console.WriteLine($"Rental plan: Equity={rentalPlan.ComputeEquity():C}");
+        output.WriteLine($"Purchase plan: Equity={purchasePlan.ComputeEquity():C}");
+        output.WriteLine($"Rental plan: Equity={rentalPlan.ComputeEquity():C}");
     }
 }
