@@ -1,13 +1,21 @@
+using MathNet.Numerics.Distributions;
+
 namespace PropertySim;
 
-public readonly record struct InterestRate(decimal Value)
+public sealed class InterestRate
 {
-    public static InterestRate FromYearlyPercentage(decimal percentage)
+    private readonly IContinuousDistribution _yearlyInterest;
+
+    public InterestRate(IContinuousDistribution yearlyInterest)
     {
-        return new InterestRate(percentage / 100m);
+        _yearlyInterest = yearlyInterest;
+        ProcessYearlyUpdate();
     }
 
-    public decimal Yearly => Value;
+    public decimal Monthly { get; private set; }
 
-    public decimal Monthly => Value / 12;
+    public void ProcessYearlyUpdate()
+    {
+        Monthly = (decimal)_yearlyInterest.Sample() / 12;
+    }
 }
