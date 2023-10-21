@@ -16,6 +16,6 @@ public sealed class RentPrice
 
     public void ProcessYearlyUpdate()
     {
-        MonthlyPrice *= (decimal)_yearlyIncrease.Sample();
+        MonthlyPrice *= 1 + (decimal)_yearlyIncrease.Sample();
     }
 }

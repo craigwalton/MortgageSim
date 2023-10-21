@@ -14,7 +14,7 @@ internal static class Sim
         // TODO: consider modelling these rates as offsets from the base rate.
         var mortgageInterestRate = new InterestRate(new Normal(0.0209, 0.01));
         var savingsInterestRate = new InterestRate(new Normal(0.001, 0.01));
-        var rent = new RentPrice(500m, new Normal(1.02, 0.02));
+        var rent = new RentPrice(500m, new Normal(0.02, 0.02));
 
         var output = new StreamWriter(Console.OpenStandardOutput());
         output.AutoFlush = true;
