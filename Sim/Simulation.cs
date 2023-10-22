@@ -5,21 +5,24 @@ namespace PropertySim;
 
 public sealed class Simulation
 {
-    public Result Run()
+    public Result Run(
+        decimal initialPropertyValue = 200_000m,
+        decimal deposit = 50_000m,
+        decimal income = 1000m,
+        int mortgageTermYears = 25,
+        int simulationYears = 25,
+        InterestRate? mortgageInterestRate = null,
+        InterestRate? savingsInterestRate = null,
+        RentPrice? rent = null,
+        PropertyValue? propertyValue = null,
+        StreamWriter? output = null)
     {
-        const decimal initialPropertyValue = 200_000m;
-        const decimal deposit = 50_000m;
-        const int mortgageTermYears = 25;
-        const decimal income = 1000m;
         // TODO: consider modelling these rates as offsets from the base rate.
-        var mortgageInterestRate = new InterestRate(new Normal(0.0209, 0.01));
-        var savingsInterestRate = new InterestRate(new Normal(0.001, 0.01));
-        var rent = new RentPrice(500m, new Normal(0.02, 0.02));
-        var propertyValue = new PropertyValue(initialPropertyValue, new Normal(0.03, 0.01));
-
-        var output = new StreamWriter(Console.OpenStandardOutput());
-        output.AutoFlush = true;
-        output = StreamWriter.Null;
+        mortgageInterestRate ??= new InterestRate(new Normal(0.0209, 0.01));
+        savingsInterestRate ??= new InterestRate(new Normal(0.001, 0.01));
+        rent ??= new RentPrice(500m, new Normal(0.02, 0.02));
+        propertyValue ??= new PropertyValue(initialPropertyValue, new Normal(0.03, 0.01));
+        output ??= StreamWriter.Null;
 
         var purchasePlan = new HousePurchasePlan(
             propertyValue,
@@ -30,7 +33,7 @@ public sealed class Simulation
             output);
         var rentalPlan = new HouseRentalPlan(deposit, rent, savingsInterestRate, output);
 
-        for (var y = 0; y < 25; y++)
+        for (var y = 0; y < simulationYears; y++)
         {
             for (var m = 0; m < 12; m++)
             {

@@ -16,4 +16,11 @@ internal static class Sim
         var rentAverageEquity = results.Average(x => x.RentEquity);
         Console.WriteLine($"Avg Purchase equity={purchaseAverageEquity:C}; Avg Rent equity={rentAverageEquity:C}");
     }
+
+    private static StreamWriter CreateConsoleStreamWriter()
+    {
+        var output = new StreamWriter(Console.OpenStandardOutput());
+        output.AutoFlush = true;
+        return output;
+    }
 }
