@@ -8,6 +8,7 @@ public sealed class Simulation
     public Result Run(
         decimal initialPropertyValue = 200_000m,
         decimal deposit = 50_000m,
+        // TODO: can this be removed and instead assume only the amount which went towards mortgage is saved?
         decimal income = 1000m,
         int mortgageTermYears = 25,
         int simulationYears = 25,
