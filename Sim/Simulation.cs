@@ -6,7 +6,6 @@ namespace PropertySim;
 public sealed class Simulation
 {
     public Result Run(
-        decimal initialPropertyValue = 200_000m,
         decimal deposit = 50_000m,
         // TODO: can this be removed and instead assume only the amount which went towards mortgage is saved?
         decimal income = 1000m,
@@ -22,7 +21,7 @@ public sealed class Simulation
         mortgageInterestRate ??= new InterestRate(new Normal(0.0209, 0.01));
         savingsInterestRate ??= new InterestRate(new Normal(0.001, 0.01));
         rent ??= new RentPrice(500m, new Normal(0.02, 0.02));
-        propertyValue ??= new PropertyValue(initialPropertyValue, new Normal(0.03, 0.01));
+        propertyValue ??= new PropertyValue(200_000m, new Normal(0.03, 0.01));
         output ??= StreamWriter.Null;
 
         var purchasePlan = new HousePurchasePlan(
