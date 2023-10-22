@@ -59,5 +59,10 @@ public sealed class Simulation
         {
             return $"Purchase equity={PurchaseEquity:C}; Rent equity={RentEquity:C}";
         }
+
+        public decimal ComputeDelta()
+        {
+            return PurchaseEquity - RentEquity;
+        }
     }
 }
