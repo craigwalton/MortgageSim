@@ -1,4 +1,3 @@
-using MathNet.Numerics.Distributions;
 using PropertySim.Accounts;
 
 namespace PropertySim.Plans;
@@ -7,38 +6,30 @@ public sealed class HousePurchasePlan : Plan
 {
     private readonly PropertyValue _propertyValue;
     private readonly InterestRate _mortgageInterestRate;
-    private readonly InterestRate _savingsInterestRate;
 
     public HousePurchasePlan(
         PropertyValue propertyValue,
         decimal deposit,
         int mortgageTermYears,
         InterestRate mortgageInterestRate,
-        InterestRate savingsInterestRate,
         StreamWriter output)
     {
         _propertyValue = propertyValue;
         _mortgageInterestRate = mortgageInterestRate;
-        _savingsInterestRate = savingsInterestRate;
         Mortgage = new VariableMortgage(propertyValue.Value - deposit, mortgageTermYears, output);
-        Savings = new Savings(0m, output);
     }
 
     public VariableMortgage Mortgage { get; }
 
-    public Savings Savings { get; }
-
-    public override void ProcessMonth(decimal income)
+    public void ProcessMonth(out decimal mortgagePayment)
     {
-        var mortgagePayment = Mortgage.MakePayment(_mortgageInterestRate);
-        var incomeForSavings = income - mortgagePayment;
-        Savings.MakePayment(incomeForSavings, _savingsInterestRate);
+        mortgagePayment = Mortgage.MakePayment(_mortgageInterestRate);
     }
 
     public override decimal ComputeEquity()
     {
         var liabilities = Mortgage.RemainingLoan;
-        var assets = _propertyValue.Value + Savings.Balance;
+        var assets = _propertyValue.Value;
         return assets - liabilities;
     }
 }

@@ -11,15 +11,18 @@ public sealed class HouseRentalPlan : Plan
     {
         _rent = rent;
         _savingsInterestRate = savingsInterestRate;
+        Rent = new Rent(output);
         Savings = new Savings(deposit, output);
     }
 
+    public Rent Rent { get; }
+
     public Savings Savings { get; }
 
-    public override void ProcessMonth(decimal income)
+    public void ProcessMonth(decimal amountAvailable)
     {
-        var incomeForSavings = income - _rent.MonthlyPrice;
-        Savings.MakePayment(incomeForSavings, _savingsInterestRate);
+        Rent.MakePayment(_rent.MonthlyPrice);
+        Savings.MakePayment(amountAvailable - _rent.MonthlyPrice, _savingsInterestRate);
     }
 
     public override decimal ComputeEquity()

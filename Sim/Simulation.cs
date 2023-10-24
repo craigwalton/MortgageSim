@@ -7,8 +7,6 @@ public sealed class Simulation
 {
     public Result Run(
         decimal deposit = 50_000m,
-        // TODO: can this be removed and instead assume only the amount which went towards mortgage is saved?
-        decimal income = 1000m,
         int mortgageTermYears = 25,
         int simulationYears = 25,
         InterestRate? mortgageInterestRate = null,
@@ -29,7 +27,6 @@ public sealed class Simulation
             deposit,
             mortgageTermYears,
             mortgageInterestRate,
-            savingsInterestRate,
             output);
         var rentalPlan = new HouseRentalPlan(deposit, rent, savingsInterestRate, output);
 
@@ -37,9 +34,9 @@ public sealed class Simulation
         {
             for (var m = 0; m < 12; m++)
             {
-                output.WriteLine($"M{m:00}/Y{y:00}");
-                purchasePlan.ProcessMonth(income);
-                rentalPlan.ProcessMonth(income);
+                output.WriteLine($"## M{m:00}/Y{y:00} ##");
+                purchasePlan.ProcessMonth(out var payment);
+                rentalPlan.ProcessMonth(payment);
             }
             mortgageInterestRate.ProcessYearlyUpdate();
             savingsInterestRate.ProcessYearlyUpdate();

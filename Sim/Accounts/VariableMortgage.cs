@@ -28,7 +28,7 @@ public class VariableMortgage
         var principal = payment - interest;
         RemainingLoan -= principal;
         RemainingPayments--;
-        _output.WriteLine($"payment={payment:C} (interest={interest:C}; principal={principal:C}); loan={RemainingLoan:C}");
+        _output.WriteLine($"Mortgage payment={payment:C} (interest={interest:C}; principal={principal:C}); Loan={RemainingLoan:C}");
         return payment;
     }
 

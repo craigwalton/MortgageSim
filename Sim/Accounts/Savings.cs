@@ -16,6 +16,6 @@ public class Savings
     {
         var accruedInterest = Balance * interestRate.Monthly;
         Balance += accruedInterest + payment;
-        _output.WriteLine($"Savings={Balance:C}");
+        _output.WriteLine($"Savings payment={payment:C}; Interest={accruedInterest:C}; Balance={Balance:C}");
     }
 }
