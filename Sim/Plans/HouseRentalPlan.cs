@@ -5,15 +5,10 @@ namespace PropertySim.Plans;
 
 public sealed class HouseRentalPlan : Plan
 {
-    private readonly RentPrice _rent;
-    private readonly InterestRate _savingsInterestRate;
-
-    public HouseRentalPlan(decimal deposit, RentPrice rent, InterestRate savingsInterestRate, StreamWriter output)
+    public HouseRentalPlan(decimal deposit, RentPrice rentPrice, InterestRate savingsInterestRate, StreamWriter output)
     {
-        _rent = rent;
-        _savingsInterestRate = savingsInterestRate;
-        Rent = new Rent(output);
-        Savings = new Savings(deposit, output);
+        Rent = new Rent(rentPrice, output);
+        Savings = new Savings(deposit, savingsInterestRate, output);
     }
 
     public Rent Rent { get; }
@@ -22,8 +17,8 @@ public sealed class HouseRentalPlan : Plan
 
     public void ProcessMonth(decimal amountAvailable)
     {
-        Rent.MakePayment(_rent.MonthlyPrice);
-        Savings.MakePayment(amountAvailable - _rent.MonthlyPrice, _savingsInterestRate);
+        var rentPayment = Rent.MakePayment();
+        Savings.MakePayment(amountAvailable - rentPayment);
     }
 
     public override decimal ComputeEquity()

@@ -6,7 +6,6 @@ namespace PropertySim.Plans;
 public sealed class HousePurchasePlan : Plan
 {
     private readonly PropertyValue _propertyValue;
-    private readonly InterestRate _mortgageInterestRate;
 
     public HousePurchasePlan(
         PropertyValue propertyValue,
@@ -16,15 +15,14 @@ public sealed class HousePurchasePlan : Plan
         StreamWriter output)
     {
         _propertyValue = propertyValue;
-        _mortgageInterestRate = mortgageInterestRate;
-        Mortgage = new VariableMortgage(propertyValue.Value - deposit, mortgageTermYears, output);
+        Mortgage = new VariableMortgage(propertyValue.Value - deposit, mortgageTermYears, mortgageInterestRate, output);
     }
 
     public VariableMortgage Mortgage { get; }
 
     public void ProcessMonth(out decimal mortgagePayment)
     {
-        mortgagePayment = Mortgage.MakePayment(_mortgageInterestRate);
+        mortgagePayment = Mortgage.MakePayment();
     }
 
     public override decimal ComputeEquity()

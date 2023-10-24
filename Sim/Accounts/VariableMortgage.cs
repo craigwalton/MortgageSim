@@ -5,11 +5,17 @@ namespace PropertySim.Accounts;
 public class VariableMortgage
 {
     private readonly StreamWriter _output;
+    private readonly InterestRate _interestRate;
 
-    public VariableMortgage(decimal initialLoan, int initialTermYears, StreamWriter output)
+    public VariableMortgage(
+        decimal initialLoan,
+        int initialTermYears,
+        InterestRate interestRate,
+        StreamWriter output)
     {
         InitialLoan = initialLoan;
         InitialTermYears = initialTermYears;
+        _interestRate = interestRate;
         RemainingLoan = initialLoan;
         RemainingPayments = 12 * initialTermYears;
         _output = output;
@@ -23,10 +29,10 @@ public class VariableMortgage
 
     public int RemainingPayments { get; private set; }
 
-    public decimal MakePayment(InterestRate rate)
+    public decimal MakePayment()
     {
-        var payment = ComputeMonthlyPayment(rate);
-        var interest = RemainingLoan * rate.Monthly;
+        var payment = ComputeMonthlyPayment();
+        var interest = RemainingLoan * _interestRate.Monthly;
         var principal = payment - interest;
         RemainingLoan -= principal;
         RemainingPayments--;
@@ -34,9 +40,9 @@ public class VariableMortgage
         return payment;
     }
 
-    private decimal ComputeMonthlyPayment(InterestRate rate)
+    private decimal ComputeMonthlyPayment()
     {
-        var interest = (double)rate.Monthly;
+        var interest = (double)_interestRate.Monthly;
         var rateToPowerOfPayments = Math.Pow(1 + interest, RemainingPayments);
         var result = (double)RemainingLoan * (interest * rateToPowerOfPayments) / (rateToPowerOfPayments - 1);
         return new decimal(Math.Round(result, 2));

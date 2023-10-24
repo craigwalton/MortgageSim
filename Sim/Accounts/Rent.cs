@@ -1,16 +1,21 @@
+using PropertySim.Variables;
+
 namespace PropertySim.Accounts;
 
 public class Rent
 {
+    private readonly RentPrice _rentPrice;
     private readonly StreamWriter _output;
 
-    public Rent(StreamWriter output)
+    public Rent(RentPrice rentPrice, StreamWriter output)
     {
+        _rentPrice = rentPrice;
         _output = output;
     }
 
-    public void MakePayment(decimal payment)
+    public decimal MakePayment()
     {
-        _output.WriteLine($"Rent payment={payment:C}");
+        _output.WriteLine($"Rent payment={_rentPrice.MonthlyPrice:C}");
+        return _rentPrice.MonthlyPrice;
     }
 }
