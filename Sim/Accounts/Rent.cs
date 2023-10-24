@@ -13,7 +13,7 @@ public class Rent
         _output = output;
     }
 
-    public decimal MakePayment()
+    public decimal TakePayment()
     {
         _output.WriteLine($"Rent payment={_rentPrice.MonthlyPrice:C}");
         return _rentPrice.MonthlyPrice;

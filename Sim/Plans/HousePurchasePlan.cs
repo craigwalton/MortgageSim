@@ -22,7 +22,7 @@ public sealed class HousePurchasePlan : Plan
 
     public void ProcessMonth(out decimal mortgagePayment)
     {
-        mortgagePayment = Mortgage.MakePayment();
+        mortgagePayment = Mortgage.TakePayment();
     }
 
     public override decimal ComputeEquity()

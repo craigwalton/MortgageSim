@@ -29,7 +29,7 @@ public class VariableMortgage
 
     public int RemainingPayments { get; private set; }
 
-    public decimal MakePayment()
+    public decimal TakePayment()
     {
         var payment = ComputeMonthlyPayment();
         var interest = RemainingLoan * _interestRate.Monthly;
