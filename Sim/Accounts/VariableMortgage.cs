@@ -1,3 +1,5 @@
+using PropertySim.Variables;
+
 namespace PropertySim.Accounts;
 
 public class VariableMortgage

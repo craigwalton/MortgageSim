@@ -1,6 +1,6 @@
 using MathNet.Numerics.Distributions;
 
-namespace PropertySim;
+namespace PropertySim.Variables;
 
 public class PropertyValue
 {
