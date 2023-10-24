@@ -27,7 +27,7 @@ public sealed class HousePurchasePlan : Plan
 
     public override decimal ComputeEquity()
     {
-        var liabilities = Mortgage.RemainingLoan;
+        var liabilities = Mortgage.OutstandingLoan;
         var assets = _propertyValue.Value;
         return assets - liabilities;
     }

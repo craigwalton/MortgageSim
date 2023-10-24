@@ -4,8 +4,9 @@ namespace PropertySim.Accounts;
 
 public class VariableMortgage
 {
-    private readonly StreamWriter _output;
+    private int _outstandingPayments;
     private readonly InterestRate _interestRate;
+    private readonly StreamWriter _output;
 
     public VariableMortgage(
         decimal initialLoan,
@@ -13,38 +14,30 @@ public class VariableMortgage
         InterestRate interestRate,
         StreamWriter output)
     {
-        InitialLoan = initialLoan;
-        InitialTermYears = initialTermYears;
+        OutstandingLoan = initialLoan;
+        _outstandingPayments = 12 * initialTermYears;
         _interestRate = interestRate;
-        RemainingLoan = initialLoan;
-        RemainingPayments = 12 * initialTermYears;
         _output = output;
     }
 
-    public decimal InitialLoan { get; }
-
-    public int InitialTermYears { get; }
-
-    public decimal RemainingLoan { get; private set; }
-
-    public int RemainingPayments { get; private set; }
+    public decimal OutstandingLoan { get; private set; }
 
     public decimal TakePayment()
     {
         var payment = ComputeMonthlyPayment();
-        var interest = RemainingLoan * _interestRate.Monthly;
+        var interest = OutstandingLoan * _interestRate.Monthly;
         var principal = payment - interest;
-        RemainingLoan -= principal;
-        RemainingPayments--;
-        _output.WriteLine($"Mortgage payment={payment:C} (interest={interest:C}; principal={principal:C}); Loan={RemainingLoan:C}");
+        OutstandingLoan -= principal;
+        _outstandingPayments--;
+        _output.WriteLine($"Mortgage payment={payment:C} (interest={interest:C}; principal={principal:C}); Loan={OutstandingLoan:C}");
         return payment;
     }
 
     private decimal ComputeMonthlyPayment()
     {
         var interest = (double)_interestRate.Monthly;
-        var rateToPowerOfPayments = Math.Pow(1 + interest, RemainingPayments);
-        var result = (double)RemainingLoan * (interest * rateToPowerOfPayments) / (rateToPowerOfPayments - 1);
+        var rateToPowerOfPayments = Math.Pow(1 + interest, _outstandingPayments);
+        var result = (double)OutstandingLoan * (interest * rateToPowerOfPayments) / (rateToPowerOfPayments - 1);
         return new decimal(Math.Round(result, 2));
     }
 }
