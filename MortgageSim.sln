@@ -8,6 +8,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionIt
 		.gitignore = .gitignore
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sim.Tests", "Sim.Tests\Sim.Tests.csproj", "{01D8B31D-010C-4C4F-BC66-EBD423B082D6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{3BD8F6BB-8663-4768-A220-2BF07B384C2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3BD8F6BB-8663-4768-A220-2BF07B384C2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3BD8F6BB-8663-4768-A220-2BF07B384C2D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{01D8B31D-010C-4C4F-BC66-EBD423B082D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01D8B31D-010C-4C4F-BC66-EBD423B082D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01D8B31D-010C-4C4F-BC66-EBD423B082D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01D8B31D-010C-4C4F-BC66-EBD423B082D6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
