@@ -1,4 +1,4 @@
-﻿using MathNet.Numerics.Distributions;
+﻿using PropertySim.Variables;
 
 namespace PropertySim;
 
@@ -13,12 +13,13 @@ internal static class Sim
     {
         for (var i = 0d; i <= 0.2; i += 0.01)
         {
-            var mortgageInterestRate = new InterestRate(new Normal(i + 0.02, 0.0));
-            var savingsInterestRate = new InterestRate(new Normal(i, 0.0));
+            var mortgageInterestRate = new InterestRate(Distributions.Constant(i + 0.02));
+            var savingsInterestRate = new InterestRate(Distributions.Constant(i));
             var result = new Simulation().Run(
                 mortgageInterestRate: mortgageInterestRate,
                 savingsInterestRate: savingsInterestRate,
-                rent: new RentPrice(700m, new Normal(0.03, 0)),
+                rent: new RentPrice(700m, Distributions.Constant(0.03)),
+                propertyValue: new PropertyValue(200_000, Distributions.Constant(0.03)),
                 simulationYears: 5);
             Console.WriteLine($"Interest: {i:F2}; {result.ComputeDelta():C}");
         }
