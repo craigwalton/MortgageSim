@@ -35,6 +35,10 @@ public class VariableMortgage
 
     private decimal ComputeMonthlyPayment()
     {
+        if (_interestRate.Monthly == 0m)
+        {
+            return OutstandingLoan / _outstandingPayments;
+        }
         var interest = (double)_interestRate.Monthly;
         var rateToPowerOfPayments = Math.Pow(1 + interest, _outstandingPayments);
         var result = (double)OutstandingLoan * (interest * rateToPowerOfPayments) / (rateToPowerOfPayments - 1);

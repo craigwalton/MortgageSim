@@ -24,4 +24,15 @@ public class SimTests
         Assert.Equal(45_979.33m, actual.RentEquity, precision: 2);
         Assert.Equal(39_130.79m, actual.ComputeDelta(), precision: 2);
     }
+
+    [Fact]
+    public void Handles_zero_interest()
+    {
+        var sut = new Simulation();
+
+        sut.Run(
+            mortgageInterestRate: new InterestRate(Distributions.Constant(0d)),
+            savingsInterestRate: new InterestRate(Distributions.Constant(0d)),
+            simulationYears: 1);
+    }
 }
