@@ -8,4 +8,9 @@ public static class Distributions
     {
         return new Normal(value, 0.0);
     }
+
+    public static Normal Constant(decimal value)
+    {
+        return new Normal((double)value, 0.0);
+    }
 }
