@@ -2,9 +2,11 @@
 
 ## Independent variables
 
-- Interest rate
-- Property value change
-- Rent price
+- Mortgage interest rate
+- Savings interest rate
+- Property value evolution
+- Initial rent price
+- Rent price evolution
 
 ## Dependent variable
 
