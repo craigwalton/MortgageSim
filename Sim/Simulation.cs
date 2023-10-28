@@ -25,9 +25,9 @@ public sealed class Simulation
             propertyValue,
             deposit,
             mortgageTermYears,
-            mortgageInterestRate,
+            mortgageInterestRate.Value,
             output);
-        var rentalPlan = new HouseRentalPlan(deposit, rent, savingsInterestRate, output);
+        var rentalPlan = new HouseRentalPlan(deposit, rent, savingsInterestRate.Value, output);
 
         for (var y = 0; y < simulationYears; y++)
         {
