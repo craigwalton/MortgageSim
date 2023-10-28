@@ -19,8 +19,8 @@ public class SimTests
             propertyValue: new PropertyValue(200_000, 0.03m),
             simulationYears: 5);
 
-        Assert.Equal(85_110.12m, actual.PurchaseEquity, precision: 2);
-        Assert.Equal(45_979.33m, actual.RentEquity, precision: 2);
+        Assert.Equal(85_110.13m, actual.PurchaseEquity, precision: 2);
+        Assert.Equal(45_979.34m, actual.RentEquity, precision: 2);
         Assert.Equal(39_130.79m, actual.ComputeDelta(), precision: 2);
     }
 

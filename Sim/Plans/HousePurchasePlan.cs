@@ -15,10 +15,10 @@ public sealed class HousePurchasePlan : Plan
         StreamWriter output)
     {
         _propertyValue = propertyValue;
-        Mortgage = new VariableMortgage(propertyValue.InitialValue - deposit, mortgageTermYears, mortgageInterestRate, output);
+        Mortgage = new FixedMortgage(propertyValue.InitialValue - deposit, mortgageTermYears, mortgageInterestRate, output);
     }
 
-    public VariableMortgage Mortgage { get; }
+    public FixedMortgage Mortgage { get; }
 
     public void ProcessMonth(out decimal mortgagePayment)
     {
