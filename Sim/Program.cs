@@ -6,7 +6,7 @@ internal static class Sim
 {
     public static void Main()
     {
-        Run1DSensitivityAnalysis();
+        RunSim();
     }
 
     private static void Run1DSensitivityAnalysis()
@@ -58,8 +58,8 @@ internal static class Sim
                     var result = new Simulation().Run(
                         mortgageInterestRate: mortgageInterestRate,
                         savingsInterestRate: savingsInterestRate,
-                        rent: new RentPrice(Baseline.RentPrice.MonthlyPrice, r),
-                        propertyValue: new PropertyValue(Baseline.PropertyValue.Value, p),
+                        rent: Baseline.RentPrice with {YearlyIncrease = r},
+                        propertyValue: Baseline.PropertyValue with {YearlyIncrease = p},
                         simulationYears: 5);
                     sw.WriteLine($"{i},{p},{r},{result.ComputeDelta():F2}");
                 }

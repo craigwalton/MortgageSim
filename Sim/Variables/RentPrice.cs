@@ -1,19 +1,10 @@
 namespace PropertySim.Variables;
 
-public sealed class RentPrice
+/// <threadsafety static="true" instance="true"/>
+public readonly record struct RentPrice(decimal InitialMonthly, decimal YearlyIncrease)
 {
-    public RentPrice(decimal initialMonthly, decimal yearlyIncrease)
+    public decimal ComputeMonthlyPrice(Time time)
     {
-        MonthlyPrice = initialMonthly;
-        YearlyIncrease = yearlyIncrease;
-    }
-
-    public decimal MonthlyPrice { get; private set; }
-
-    public decimal YearlyIncrease { get; }
-
-    public void ProcessYearlyUpdate()
-    {
-        MonthlyPrice *= 1 + YearlyIncrease;
+        return InitialMonthly * (YearlyIncrease + 1).RaiseToPowerOf(time.Year);
     }
 }

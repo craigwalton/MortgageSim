@@ -13,9 +13,10 @@ public class Rent
         _output = output;
     }
 
-    public decimal TakePayment()
+    public decimal TakePayment(Time time)
     {
-        _output.WriteLine($"Rent payment={_rentPrice.MonthlyPrice:C}");
-        return _rentPrice.MonthlyPrice;
+        var price = _rentPrice.ComputeMonthlyPrice(time);
+        _output.WriteLine($"Rent payment={price:C}");
+        return price;
     }
 }

@@ -1,19 +1,11 @@
 namespace PropertySim.Variables;
 
-public class PropertyValue
+/// <threadsafety static="true" instance="true"/>
+public readonly record struct PropertyValue(decimal InitialValue, decimal YearlyIncrease)
 {
-    private readonly decimal _yearlyIncrease;
-
-    public PropertyValue(decimal initialValue, decimal yearlyIncrease)
+    public decimal ComputeValue(Time time)
     {
-        Value = initialValue;
-        _yearlyIncrease = yearlyIncrease;
+        return InitialValue * (YearlyIncrease + 1).RaiseToPowerOf(time.Year);
     }
 
-    public decimal Value { get; private set; }
-
-    public void ProcessYearlyUpdate()
-    {
-        Value *= 1 + _yearlyIncrease;
-    }
 }

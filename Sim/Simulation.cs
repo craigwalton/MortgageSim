@@ -22,29 +22,25 @@ public sealed class Simulation
         output ??= StreamWriter.Null;
 
         var purchasePlan = new HousePurchasePlan(
-            propertyValue,
+            propertyValue.Value,
             deposit,
             mortgageTermYears,
             mortgageInterestRate.Value,
             output);
-        var rentalPlan = new HouseRentalPlan(deposit, rent, savingsInterestRate.Value, output);
+        var rentalPlan = new HouseRentalPlan(deposit, rent.Value, savingsInterestRate.Value, output);
 
-        for (var time = new Time(); time.Year <= simulationYears; time.AdvanceOneMonth())
+        Time time;
+        for (time = new Time(); time.Year < simulationYears; time.AdvanceOneMonth())
         {
             output.WriteLine($"## {time} ##");
             purchasePlan.ProcessMonth(out var payment);
-            rentalPlan.ProcessMonth(payment);
-            if (time.Month == 12)
-            {
-                propertyValue.ProcessYearlyUpdate();
-                rent.ProcessYearlyUpdate();
-            }
+            rentalPlan.ProcessMonth(payment, time);
         }
 
-        output.WriteLine($"Purchase plan: Equity={purchasePlan.ComputeEquity():C}");
-        output.WriteLine($"Rental plan: Equity={rentalPlan.ComputeEquity():C}");
+        output.WriteLine($"Purchase plan: Equity={purchasePlan.ComputeEquity(time):C}");
+        output.WriteLine($"Rental plan: Equity={rentalPlan.ComputeEquity(time):C}");
 
-        return new Result(purchasePlan.ComputeEquity(), rentalPlan.ComputeEquity());
+        return new Result(purchasePlan.ComputeEquity(time), rentalPlan.ComputeEquity(time));
     }
 
     public readonly record struct Result(decimal PurchaseEquity, decimal RentEquity)

@@ -15,13 +15,13 @@ public sealed class HouseRentalPlan : Plan
 
     public Savings Savings { get; }
 
-    public void ProcessMonth(decimal amountAvailable)
+    public void ProcessMonth(decimal amountAvailable, Time time)
     {
-        var rentPayment = Rent.TakePayment();
+        var rentPayment = Rent.TakePayment(time);
         Savings.MakePayment(amountAvailable - rentPayment);
     }
 
-    public override decimal ComputeEquity()
+    public override decimal ComputeEquity(Time time)
     {
         return Savings.Balance;
     }

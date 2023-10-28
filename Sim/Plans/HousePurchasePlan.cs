@@ -15,7 +15,7 @@ public sealed class HousePurchasePlan : Plan
         StreamWriter output)
     {
         _propertyValue = propertyValue;
-        Mortgage = new VariableMortgage(propertyValue.Value - deposit, mortgageTermYears, mortgageInterestRate, output);
+        Mortgage = new VariableMortgage(propertyValue.InitialValue - deposit, mortgageTermYears, mortgageInterestRate, output);
     }
 
     public VariableMortgage Mortgage { get; }
@@ -25,10 +25,10 @@ public sealed class HousePurchasePlan : Plan
         mortgagePayment = Mortgage.TakePayment();
     }
 
-    public override decimal ComputeEquity()
+    public override decimal ComputeEquity(Time time)
     {
         var liabilities = Mortgage.OutstandingLoan;
-        var assets = _propertyValue.Value;
+        var assets = _propertyValue.ComputeValue(time);
         return assets - liabilities;
     }
 }
