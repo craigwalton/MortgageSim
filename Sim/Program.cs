@@ -6,27 +6,25 @@ internal static class Sim
 {
     public static void Main()
     {
-        RunSim();
+        Run1DSensitivityAnalysis();
     }
 
     private static void Run1DSensitivityAnalysis()
     {
-        using var sw = new StreamWriter("../../../../data/1d.csv");
-        sw.WriteLine("mortgageInterestRate,delta");
+        using var writer = new CsvWriter("1d.csv", "mortgageInterestRate", "delta");
         for (var i = 0m; i <= 0.2m; i += 0.01m)
         {
             var mortgageInterestRate = new InterestRate(i);
             var result = new Simulation().Run(
                 mortgageInterestRate: mortgageInterestRate,
                 simulationYears: 5).ComputeDelta();
-            sw.WriteLine($"{i},{result}");
+            writer.WriteLine(i, result);
         }
     }
 
     private static void Run2DSensitivityAnalysis()
     {
-        using var sw = new StreamWriter("../../../../data/2d.csv");
-        sw.WriteLine("interestRate,initialRent,delta");
+        using var writer = new CsvWriter("2d.csv", "interestRate", "initialRent", "delta");
         for (var i = -0.05m; i <= 0.2m; i += 0.01m)
         {
             for (var r = 500m; r <= 2000m; r += 100m)
@@ -38,15 +36,14 @@ internal static class Sim
                     savingsInterestRate: savingsInterestRate,
                     rent: new RentPrice(r, Baseline.RentPrice.YearlyIncrease),
                     simulationYears: 5);
-                sw.WriteLine($"{i},{r},{result.ComputeDelta():F2}");
+                writer.WriteLine(i, r, $"{result.ComputeDelta():F2}");
             }
         }
     }
 
     private static void Run3DSensitivityAnalysis()
     {
-        using var sw = new StreamWriter("../../../../data/3d.csv");
-        sw.WriteLine("interestRate,propertyValueIncrease,rentIncrease,delta");
+        using var writer = new CsvWriter("3d.csv", "interestRate", "propertyValueIncrease", "rentIncrease", "delta");
         for (var i = -0.05m; i <= 0.2m; i += 0.01m)
         {
             for (var p = -0.1m; p <= 0.1m; p += 0.01m)
@@ -61,7 +58,7 @@ internal static class Sim
                         rent: Baseline.RentPrice with {YearlyIncrease = r},
                         propertyValue: Baseline.PropertyValue with {YearlyIncrease = p},
                         simulationYears: 5);
-                    sw.WriteLine($"{i},{p},{r},{result.ComputeDelta():F2}");
+                    writer.WriteLine(i, p, r, $"{result.ComputeDelta():F2}");
                 }
             }
         }
