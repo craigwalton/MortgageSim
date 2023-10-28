@@ -37,8 +37,6 @@ public sealed class Simulation
                 purchasePlan.ProcessMonth(out var payment);
                 rentalPlan.ProcessMonth(payment);
             }
-            mortgageInterestRate.ProcessYearlyUpdate();
-            savingsInterestRate.ProcessYearlyUpdate();
             propertyValue.ProcessYearlyUpdate();
             rent.ProcessYearlyUpdate();
         }
