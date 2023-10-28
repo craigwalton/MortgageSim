@@ -29,16 +29,16 @@ public sealed class Simulation
             output);
         var rentalPlan = new HouseRentalPlan(deposit, rent, savingsInterestRate.Value, output);
 
-        for (var y = 0; y < simulationYears; y++)
+        for (var time = new Time(); time.Year <= simulationYears; time.AdvanceOneMonth())
         {
-            for (var m = 0; m < 12; m++)
+            output.WriteLine($"## {time} ##");
+            purchasePlan.ProcessMonth(out var payment);
+            rentalPlan.ProcessMonth(payment);
+            if (time.Month == 12)
             {
-                output.WriteLine($"## M{m:00}/Y{y:00} ##");
-                purchasePlan.ProcessMonth(out var payment);
-                rentalPlan.ProcessMonth(payment);
+                propertyValue.ProcessYearlyUpdate();
+                rent.ProcessYearlyUpdate();
             }
-            propertyValue.ProcessYearlyUpdate();
-            rent.ProcessYearlyUpdate();
         }
 
         output.WriteLine($"Purchase plan: Equity={purchasePlan.ComputeEquity():C}");
