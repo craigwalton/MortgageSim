@@ -2,6 +2,7 @@ using PropertySim.Variables;
 
 namespace PropertySim.Accounts;
 
+// TODO: This can be a FixedMortgage now.
 public class VariableMortgage
 {
     private int _outstandingPayments;
