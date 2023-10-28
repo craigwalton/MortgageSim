@@ -1,4 +1,3 @@
-using MathNet.Numerics.Distributions;
 using PropertySim;
 using PropertySim.Variables;
 using Xunit;
@@ -14,10 +13,10 @@ public class SimTests
 
         var actual = sut.Run(
             deposit: 30_000m,
-            mortgageInterestRate: new InterestRate(Distributions.Constant(0.035)),
-            savingsInterestRate: new InterestRate(Distributions.Constant(0.05)),
-            rent: new RentPrice(700m, Distributions.Constant(0.03)),
-            propertyValue: new PropertyValue(200_000, Distributions.Constant(0.03)),
+            mortgageInterestRate: new InterestRate(0.035m),
+            savingsInterestRate: new InterestRate(0.05m),
+            rent: new RentPrice(700m, 0.03m),
+            propertyValue: new PropertyValue(200_000, 0.03m),
             simulationYears: 5);
 
         Assert.Equal(85_110.12m, actual.PurchaseEquity, precision: 2);
@@ -31,8 +30,8 @@ public class SimTests
         var sut = new Simulation();
 
         sut.Run(
-            mortgageInterestRate: new InterestRate(Distributions.Constant(0d)),
-            savingsInterestRate: new InterestRate(Distributions.Constant(0d)),
+            mortgageInterestRate: new InterestRate(0m),
+            savingsInterestRate: new InterestRate(0m),
             simulationYears: 1);
     }
 }

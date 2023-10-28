@@ -1,4 +1,3 @@
-using MathNet.Numerics.Distributions;
 using PropertySim.Plans;
 using PropertySim.Variables;
 
@@ -17,10 +16,10 @@ public sealed class Simulation
         StreamWriter? output = null)
     {
         // TODO: consider modelling these rates as offsets from the base rate.
-        mortgageInterestRate ??= new InterestRate(new Normal(0.0209, 0.01));
-        savingsInterestRate ??= new InterestRate(new Normal(0.001, 0.01));
-        rent ??= new RentPrice(500m, new Normal(0.02, 0.02));
-        propertyValue ??= new PropertyValue(200_000m, new Normal(0.03, 0.01));
+        mortgageInterestRate ??= new InterestRate(0.0209m);
+        savingsInterestRate ??= new InterestRate(0.001m);
+        rent ??= new RentPrice(500m, 0.02m);
+        propertyValue ??= new PropertyValue(200_000m, 0.03m);
         output ??= StreamWriter.Null;
 
         var purchasePlan = new HousePurchasePlan(

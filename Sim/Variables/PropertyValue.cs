@@ -1,12 +1,10 @@
-using MathNet.Numerics.Distributions;
-
 namespace PropertySim.Variables;
 
 public class PropertyValue
 {
-    private readonly IContinuousDistribution _yearlyIncrease;
+    private readonly decimal _yearlyIncrease;
 
-    public PropertyValue(decimal initialValue, IContinuousDistribution yearlyIncrease)
+    public PropertyValue(decimal initialValue, decimal yearlyIncrease)
     {
         Value = initialValue;
         _yearlyIncrease = yearlyIncrease;
@@ -16,6 +14,6 @@ public class PropertyValue
 
     public void ProcessYearlyUpdate()
     {
-        Value *= 1 + (decimal)_yearlyIncrease.Sample();
+        Value *= 1 + _yearlyIncrease;
     }
 }

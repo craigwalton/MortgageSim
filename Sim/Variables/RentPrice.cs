@@ -1,12 +1,10 @@
-using MathNet.Numerics.Distributions;
-
 namespace PropertySim.Variables;
 
 public sealed class RentPrice
 {
-    private readonly IContinuousDistribution _yearlyIncrease;
+    private readonly decimal _yearlyIncrease;
 
-    public RentPrice(decimal initialMonthly, IContinuousDistribution yearlyIncrease)
+    public RentPrice(decimal initialMonthly, decimal yearlyIncrease)
     {
         MonthlyPrice = initialMonthly;
         _yearlyIncrease = yearlyIncrease;
@@ -16,6 +14,6 @@ public sealed class RentPrice
 
     public void ProcessYearlyUpdate()
     {
-        MonthlyPrice *= 1 + (decimal)_yearlyIncrease.Sample();
+        MonthlyPrice *= 1 + _yearlyIncrease;
     }
 }

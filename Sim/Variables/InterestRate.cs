@@ -1,12 +1,10 @@
-using MathNet.Numerics.Distributions;
-
 namespace PropertySim.Variables;
 
 public sealed class InterestRate
 {
-    private readonly IContinuousDistribution _yearlyInterest;
+    private readonly decimal _yearlyInterest;
 
-    public InterestRate(IContinuousDistribution yearlyInterest)
+    public InterestRate(decimal yearlyInterest)
     {
         _yearlyInterest = yearlyInterest;
         ProcessYearlyUpdate();
@@ -16,6 +14,6 @@ public sealed class InterestRate
 
     public void ProcessYearlyUpdate()
     {
-        Monthly = (decimal)_yearlyInterest.Sample() / 12;
+        Monthly = _yearlyInterest / 12;
     }
 }
