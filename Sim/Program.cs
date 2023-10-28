@@ -6,20 +6,20 @@ internal static class Sim
 {
     public static void Main()
     {
-        RunSim();
+        Run1DSensitivityAnalysis();
     }
 
-    private static void RunSensitivityAnalysis()
+    private static void Run1DSensitivityAnalysis()
     {
+        using var sw = new StreamWriter("../../../../data/1d.csv");
+        sw.WriteLine("mortgageInterestRate,delta");
         for (var i = 0m; i <= 0.2m; i += 0.01m)
         {
-            var mortgageInterestRate = new InterestRate(i + 0.02m);
-            var savingsInterestRate = new InterestRate(i);
+            var mortgageInterestRate = new InterestRate(i);
             var result = new Simulation().Run(
                 mortgageInterestRate: mortgageInterestRate,
-                savingsInterestRate: savingsInterestRate,
-                simulationYears: 5);
-            Console.WriteLine($"Interest: {i:F2}; {result.ComputeDelta():C}");
+                simulationYears: 5).ComputeDelta();
+            sw.WriteLine($"{i},{result}");
         }
     }
 
