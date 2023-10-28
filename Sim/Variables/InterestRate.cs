@@ -1,14 +1,9 @@
 namespace PropertySim.Variables;
 
-public sealed class InterestRate
+public readonly record struct InterestRate(decimal Yearly, decimal Monthly)
 {
     public InterestRate(decimal yearly)
+        : this(yearly, yearly / 12)
     {
-        Yearly = yearly;
-        Monthly = yearly / 12;
     }
-
-    public decimal Yearly { get; }
-
-    public decimal Monthly { get; private set; }
 }
