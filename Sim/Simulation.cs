@@ -6,8 +6,8 @@ namespace PropertySim;
 public sealed class Simulation
 {
     public Result Run(
-        decimal deposit = 50_000m,
-        int mortgageTermYears = 25,
+        decimal deposit = Baseline.Deposit,
+        int mortgageTermYears = Baseline.MortgageTermYears,
         int simulationYears = 25,
         InterestRate? mortgageInterestRate = null,
         InterestRate? savingsInterestRate = null,
@@ -15,11 +15,10 @@ public sealed class Simulation
         PropertyValue? propertyValue = null,
         StreamWriter? output = null)
     {
-        // TODO: consider modelling these rates as offsets from the base rate.
-        mortgageInterestRate ??= new InterestRate(0.0209m);
-        savingsInterestRate ??= new InterestRate(0.001m);
-        rent ??= new RentPrice(500m, 0.02m);
-        propertyValue ??= new PropertyValue(200_000m, 0.03m);
+        mortgageInterestRate ??= Baseline.MortgageInterestRate;
+        savingsInterestRate ??= Baseline.SavingsInterestRate;
+        rent ??= Baseline.RentPrice;
+        propertyValue ??= Baseline.PropertyValue;
         output ??= StreamWriter.Null;
 
         var purchasePlan = new HousePurchasePlan(

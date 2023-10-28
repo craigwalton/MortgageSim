@@ -18,8 +18,6 @@ internal static class Sim
             var result = new Simulation().Run(
                 mortgageInterestRate: mortgageInterestRate,
                 savingsInterestRate: savingsInterestRate,
-                rent: new RentPrice(700m, 0.03m),
-                propertyValue: new PropertyValue(200_000, 0.03m),
                 simulationYears: 5);
             Console.WriteLine($"Interest: {i:F2}; {result.ComputeDelta():C}");
         }
@@ -38,8 +36,7 @@ internal static class Sim
                 var result = new Simulation().Run(
                     mortgageInterestRate: mortgageInterestRate,
                     savingsInterestRate: savingsInterestRate,
-                    rent: new RentPrice(r, 0.03m),
-                    propertyValue: new PropertyValue(200_000, 0.03m),
+                    rent: new RentPrice(r, Baseline.RentPrice.YearlyIncrease),
                     simulationYears: 5);
                 sw.WriteLine($"{i},{r},{result.ComputeDelta():F2}");
             }
@@ -61,8 +58,8 @@ internal static class Sim
                     var result = new Simulation().Run(
                         mortgageInterestRate: mortgageInterestRate,
                         savingsInterestRate: savingsInterestRate,
-                        rent: new RentPrice(700m, r),
-                        propertyValue: new PropertyValue(200_000, p),
+                        rent: new RentPrice(Baseline.RentPrice.MonthlyPrice, r),
+                        propertyValue: new PropertyValue(Baseline.PropertyValue.Value, p),
                         simulationYears: 5);
                     sw.WriteLine($"{i},{p},{r},{result.ComputeDelta():F2}");
                 }
@@ -77,11 +74,7 @@ internal static class Sim
         for (var i = 0; i < count; i++)
         {
             var simulation = new Simulation();
-            var result = simulation.Run(
-                mortgageInterestRate: new InterestRate(0.0209m),
-                savingsInterestRate: new InterestRate(0.001m),
-                rent: new RentPrice(500m, 0.02m),
-                propertyValue: new PropertyValue(200_000m, 0.03m));
+            var result = simulation.Run();
             results.Add(result);
         }
         var purchaseAverageEquity = results.Average(x => x.PurchaseEquity);
