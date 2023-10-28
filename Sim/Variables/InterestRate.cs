@@ -2,10 +2,13 @@ namespace PropertySim.Variables;
 
 public sealed class InterestRate
 {
-    public InterestRate(decimal yearlyInterest)
+    public InterestRate(decimal yearly)
     {
-        Monthly = yearlyInterest / 12;
+        Yearly = yearly;
+        Monthly = yearly / 12;
     }
+
+    public decimal Yearly { get; }
 
     public decimal Monthly { get; private set; }
 }
