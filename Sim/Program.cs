@@ -7,10 +7,7 @@ internal static class Sim
     public static void Main()
     {
         RunBaseline();
-        RunPropertyValueYearlyIncreaseSensitivityAnalysis();
-        RunMortgageInterestRateSensitivityAnalysis();
-        RunSavingsInterestRateSensitivityAnalysis();
-        RunInitialMonthlyRentPriceSensitivityAnalysis();
+        RunOatSensitivityAnalysis();
     }
 
     private static void RunBaseline()
@@ -42,42 +39,29 @@ internal static class Sim
             result.ComputeDelta());
     }
 
-    private static void RunPropertyValueYearlyIncreaseSensitivityAnalysis()
+    private static void RunOatSensitivityAnalysis()
     {
-        using var writer = new CsvWriter("propertyValueYearlyIncrease.csv", "propertyValueYearlyIncrease", "delta");
-        for (var i = -0.15m; i <= 0.15m; i += 0.01m)
-        {
-            var result = Simulation.Run(propertyValue: Baseline.PropertyValue with {YearlyIncrease = i}).ComputeDelta();
-            writer.WriteLine(i, result);
-        }
+        RunOatSensitivityAnalysis("propertyValueYearlyIncrease", -0.15m, 0.15m, 0.01m,
+            x => Simulation.Run(propertyValue: Baseline.PropertyValue with { YearlyIncrease = x }));
+        RunOatSensitivityAnalysis("mortgageInterestRate", -0m, 0.2m, 0.01m,
+            x => Simulation.Run(mortgageInterestRate: new InterestRate(x)));
+        RunOatSensitivityAnalysis("savingsInterestRate", -0.1m, 0.2m, 0.01m,
+            x => Simulation.Run(savingsInterestRate: new InterestRate(x)));
+        RunOatSensitivityAnalysis("initialMonthlyRentPrice", 500m, 2000m, 100m,
+            x => Simulation.Run(rent: Baseline.RentPrice with {InitialMonthly = x}));
     }
 
-    private static void RunMortgageInterestRateSensitivityAnalysis()
+    private static void RunOatSensitivityAnalysis(
+        string variable,
+        decimal start,
+        decimal stop,
+        decimal step,
+        Func<decimal, Simulation.Result> func)
     {
-        using var writer = new CsvWriter("mortgageInterestRate.csv", "mortgageInterestRate", "delta");
-        for (var i = 0m; i <= 0.2m; i += 0.01m)
+        using var writer = new CsvWriter($"{variable}.csv", variable, "delta");
+        for (var i = start; i <= stop; i += step)
         {
-            var result = Simulation.Run(mortgageInterestRate: new InterestRate(i)).ComputeDelta();
-            writer.WriteLine(i, result);
-        }
-    }
-
-    private static void RunSavingsInterestRateSensitivityAnalysis()
-    {
-        using var writer = new CsvWriter("savingsInterestRate.csv", "savingsInterestRate", "delta");
-        for (var i = -0.1m; i <= 0.2m; i += 0.01m)
-        {
-            var result = Simulation.Run(savingsInterestRate: new InterestRate(i)).ComputeDelta();
-            writer.WriteLine(i, result);
-        }
-    }
-
-    private static void RunInitialMonthlyRentPriceSensitivityAnalysis()
-    {
-        using var writer = new CsvWriter("initialMonthlyRentPrice.csv", "initialMonthlyRentPrice", "delta");
-        for (var i = 500m; i <= 2000m; i += 100m)
-        {
-            var result = Simulation.Run(rent: Baseline.RentPrice with {InitialMonthly = i}).ComputeDelta();
+            var result = func(i).ComputeDelta();
             writer.WriteLine(i, result);
         }
     }
