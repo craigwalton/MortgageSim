@@ -1,6 +1,5 @@
 ﻿using PropertySim.Experiments;
 using PropertySim.Variables;
-using Range = PropertySim.Experiments.Range;
 
 namespace PropertySim;
 
@@ -9,8 +8,8 @@ internal static class Sim
     public static void Main()
     {
         RunBaseline();
-        RunOatSensitivityAnalyses();
-        Run2DSensitivityAnalyses();
+        SensitivityAnalysis.Run1D();
+        SensitivityAnalysis.Run2D();
     }
 
     private static void RunBaseline()
@@ -40,81 +39,6 @@ internal static class Sim
             Baseline.RentPrice.YearlyIncrease,
             Baseline.SavingsInterestRate.Yearly,
             result.ComputeDelta());
-    }
-
-    private static void RunOatSensitivityAnalyses()
-    {
-        RunOatSensitivityAnalysis(
-            "propertyValueYearlyIncrease",
-            Ranges.PropertyValueYearlyIncrease,
-            x => Simulation.Run(propertyValue: Baseline.PropertyValue with { YearlyIncrease = x }));
-        RunOatSensitivityAnalysis(
-            "mortgageInterestRate",
-            Ranges.MortgageInterestRateRange,
-            x => Simulation.Run(mortgageInterestRate: new InterestRate(x)));
-        RunOatSensitivityAnalysis(
-            "savingsInterestRate",
-            Ranges.SavingsInterestRateRange,
-            x => Simulation.Run(savingsInterestRate: new InterestRate(x)));
-        RunOatSensitivityAnalysis(
-            "initialMonthlyRentPrice",
-            Ranges.InitialMonthlyRentPrice,
-            x => Simulation.Run(rent: Baseline.RentPrice with {InitialMonthly = x}));
-    }
-
-    private static void RunOatSensitivityAnalysis(string variable, Range range, Func<decimal, Simulation.Result> run)
-    {
-        using var writer = new CsvWriter($"{variable}.csv", variable, "delta");
-        for (var i = range.Start; i <= range.Stop; i += range.Step)
-        {
-            var result = run(i).ComputeDelta();
-            writer.WriteLine(i, result);
-        }
-    }
-
-    private static void Run2DSensitivityAnalyses()
-    {
-        Run2DSensitivityAnalysis(
-            "mortgageInterestRate", Ranges.MortgageInterestRateRange,
-            "savingsInterestRate", Ranges.SavingsInterestRateRange,
-            (x, y) => Simulation.Run(
-                mortgageInterestRate: new InterestRate(x),
-                savingsInterestRate: new InterestRate(y)));
-        Run2DSensitivityAnalysis(
-            "initialPropertyValue", new Range(100_000m, 500_000m, 10_000m),
-            "initialMonthlyRentPrice", new Range(500m, 3000m, 100m),
-            (x, y) => Simulation.Run(
-                propertyValue: Baseline.PropertyValue with { InitialValue = x },
-                rent: Baseline.RentPrice with { InitialMonthly = y }));
-        Run2DSensitivityAnalysis(
-            "mortgageInterestRate", Ranges.MortgageInterestRateRange,
-            "propertyValueYearlyIncrease", Ranges.PropertyValueYearlyIncrease,
-            (x, y) => Simulation.Run(
-                mortgageInterestRate: new InterestRate(x),
-                propertyValue: Baseline.PropertyValue with {YearlyIncrease = y}));
-        Run2DSensitivityAnalysis(
-            "initialMonthlyRentPrice", Ranges.InitialMonthlyRentPrice,
-            "rentPriceYearlyIncrease", Ranges.RentPriceYearlyIncrease,
-            (x, y) => Simulation.Run(
-                rent: new RentPrice(x, y)));
-    }
-
-    private static void Run2DSensitivityAnalysis(
-        string variable1,
-        Range range1,
-        string variable2,
-        Range range2,
-        Func<decimal, decimal, Simulation.Result> run)
-    {
-        using var writer = new CsvWriter($"{variable1}-{variable2}.csv", variable1, variable2, "delta");
-        for (var i = range1.Start; i <= range1.Stop; i += range1.Step)
-        {
-            for (var j = range2.Start; j <= range2.Stop; j += range2.Step)
-            {
-                var result = run(i, j).ComputeDelta();
-                writer.WriteLine(i, j, result);
-            }
-        }
     }
 
     private static void Run3DSensitivityAnalysis()
