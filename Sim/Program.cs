@@ -112,21 +112,6 @@ internal static class Sim
         }
     }
 
-    private static void Run2DSensitivityAnalysis()
-    {
-        using var writer = new CsvWriter("2d.csv", "interestRate", "initialRent", "delta");
-        for (var i = -0.05m; i <= 0.2m; i += 0.01m)
-        {
-            for (var r = 500m; r <= 2000m; r += 100m)
-            {
-                var mortgageInterestRate = new InterestRate(i + 0.02m);
-                var savingsInterestRate = new InterestRate(i);
-                var result = Simulation.Run(mortgageInterestRate: mortgageInterestRate, rent: new RentPrice(r, Baseline.RentPrice.YearlyIncrease), savingsInterestRate: savingsInterestRate);
-                writer.WriteLine(i, r, $"{result.ComputeDelta():F2}");
-            }
-        }
-    }
-
     private static void Run3DSensitivityAnalysis()
     {
         using var writer = new CsvWriter("3d.csv", "interestRate", "propertyValueIncrease", "rentIncrease", "delta");
