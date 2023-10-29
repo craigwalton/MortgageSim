@@ -1,10 +1,7 @@
 namespace PropertySim.Variables;
 
 /// <threadsafety static="true" instance="true"/>
-public readonly record struct InterestRate(decimal Yearly, decimal Monthly)
+public readonly record struct InterestRate(decimal Yearly)
 {
-    public InterestRate(decimal yearly)
-        : this(yearly, yearly / 12)
-    {
-    }
+    public decimal Monthly => Yearly / 12;
 }
