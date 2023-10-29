@@ -5,7 +5,7 @@ namespace PropertySim;
 
 public sealed class Simulation
 {
-    public Result Run(
+    public static Result Run(
         decimal deposit = Baseline.Deposit,
         int mortgageTermYears = Baseline.MortgageTermYears,
         int simulationYears = 25,

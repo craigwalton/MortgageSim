@@ -9,9 +9,7 @@ public class SimTests
     [Fact]
     public void Verify_ground_truth_1()
     {
-        var sut = new Simulation();
-
-        var actual = sut.Run(
+        var actual = Simulation.Run(
             deposit: 30_000m,
             mortgageInterestRate: new InterestRate(0.035m),
             savingsInterestRate: new InterestRate(0.05m),
@@ -27,9 +25,7 @@ public class SimTests
     [Fact]
     public void Handles_zero_interest()
     {
-        var sut = new Simulation();
-
-        sut.Run(
+        Simulation.Run(
             mortgageInterestRate: new InterestRate(0m),
             savingsInterestRate: new InterestRate(0m),
             simulationYears: 1);

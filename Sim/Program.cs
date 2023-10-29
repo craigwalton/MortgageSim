@@ -6,17 +6,16 @@ internal static class Sim
 {
     public static void Main()
     {
-        Run1DSensitivityAnalysis();
+        RunMortgageInterestRateSensitivityAnalysis();
     }
 
-    private static void Run1DSensitivityAnalysis()
+    private static void RunMortgageInterestRateSensitivityAnalysis()
     {
-        using var writer = new CsvWriter("1d.csv", "mortgageInterestRate", "delta");
+        using var writer = new CsvWriter("mortgageInterestRate.csv", "mortgageInterestRate", "delta");
         for (var i = 0m; i <= 0.2m; i += 0.01m)
         {
-            var mortgageInterestRate = new InterestRate(i);
-            var result = new Simulation().Run(
-                mortgageInterestRate: mortgageInterestRate,
+            var result = Simulation.Run(
+                mortgageInterestRate: new InterestRate(i),
                 simulationYears: 5).ComputeDelta();
             writer.WriteLine(i, result);
         }
@@ -31,7 +30,7 @@ internal static class Sim
             {
                 var mortgageInterestRate = new InterestRate(i + 0.02m);
                 var savingsInterestRate = new InterestRate(i);
-                var result = new Simulation().Run(
+                var result = Simulation.Run(
                     mortgageInterestRate: mortgageInterestRate,
                     savingsInterestRate: savingsInterestRate,
                     rent: new RentPrice(r, Baseline.RentPrice.YearlyIncrease),
@@ -52,7 +51,7 @@ internal static class Sim
                 {
                     var mortgageInterestRate = new InterestRate(i + 0.02m);
                     var savingsInterestRate = new InterestRate(i);
-                    var result = new Simulation().Run(
+                    var result = Simulation.Run(
                         mortgageInterestRate: mortgageInterestRate,
                         savingsInterestRate: savingsInterestRate,
                         rent: Baseline.RentPrice with {YearlyIncrease = r},
@@ -70,8 +69,7 @@ internal static class Sim
         var results = new List<Simulation.Result>(count);
         for (var i = 0; i < count; i++)
         {
-            var simulation = new Simulation();
-            var result = simulation.Run();
+            var result = Simulation.Run();
             results.Add(result);
         }
         var purchaseAverageEquity = results.Average(x => x.PurchaseEquity);
