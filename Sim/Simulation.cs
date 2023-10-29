@@ -6,9 +6,9 @@ namespace PropertySim;
 public sealed class Simulation
 {
     public static Result Run(
+        int simulationYears = Baseline.SimulationYears,
         decimal deposit = Baseline.Deposit,
         int mortgageTermYears = Baseline.MortgageTermYears,
-        int simulationYears = 25,
         PropertyValue? propertyValue = null,
         InterestRate? mortgageInterestRate = null,
         RentPrice? rent = null,

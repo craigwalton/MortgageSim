@@ -10,8 +10,8 @@ public class SimTests
     public void Verify_ground_truth_1()
     {
         var actual = Simulation.Run(
-            deposit: 30_000m,
             simulationYears: 5,
+            deposit: 30_000m,
             propertyValue: new PropertyValue(200_000, 0.03m),
             mortgageInterestRate: new InterestRate(0.035m),
             rent: new RentPrice(700m, 0.03m),

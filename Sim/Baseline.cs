@@ -4,6 +4,7 @@ namespace PropertySim;
 
 public static class Baseline
 {
+    public const int SimulationYears = 5;
     public const decimal Deposit = 30_000m;
     public const int MortgageTermYears = 25;
 

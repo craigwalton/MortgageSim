@@ -15,6 +15,7 @@ internal static class Sim
     {
         using var writer = new CsvWriter(
             "baseline.csv",
+            "simulationYears",
             "deposit",
             "initialPropertyValue",
             "propertyValueYearlyIncrease",
@@ -27,6 +28,7 @@ internal static class Sim
         );
         var result = Simulation.Run();
         writer.WriteLine(
+            Baseline.SimulationYears,
             Baseline.Deposit,
             Baseline.PropertyValue.InitialValue,
             Baseline.PropertyValue.YearlyIncrease,
@@ -43,7 +45,7 @@ internal static class Sim
         using var writer = new CsvWriter("mortgageInterestRate.csv", "mortgageInterestRate", "delta");
         for (var i = 0m; i <= 0.2m; i += 0.01m)
         {
-            var result = Simulation.Run(simulationYears: 5, mortgageInterestRate: new InterestRate(i))
+            var result = Simulation.Run(mortgageInterestRate: new InterestRate(i))
                 .ComputeDelta();
             writer.WriteLine(i, result);
         }
@@ -54,7 +56,7 @@ internal static class Sim
         using var writer = new CsvWriter("savingsInterestRate.csv", "savingsInterestRate", "delta");
         for (var i = -0.1m; i <= 0.2m; i += 0.01m)
         {
-            var result = Simulation.Run(simulationYears: 5, savingsInterestRate: new InterestRate(i))
+            var result = Simulation.Run(savingsInterestRate: new InterestRate(i))
                 .ComputeDelta();
             writer.WriteLine(i, result);
         }
@@ -69,7 +71,7 @@ internal static class Sim
             {
                 var mortgageInterestRate = new InterestRate(i + 0.02m);
                 var savingsInterestRate = new InterestRate(i);
-                var result = Simulation.Run(simulationYears: 5, mortgageInterestRate: mortgageInterestRate, rent: new RentPrice(r, Baseline.RentPrice.YearlyIncrease), savingsInterestRate: savingsInterestRate);
+                var result = Simulation.Run(mortgageInterestRate: mortgageInterestRate, rent: new RentPrice(r, Baseline.RentPrice.YearlyIncrease), savingsInterestRate: savingsInterestRate);
                 writer.WriteLine(i, r, $"{result.ComputeDelta():F2}");
             }
         }
@@ -86,14 +88,12 @@ internal static class Sim
                 {
                     var mortgageInterestRate = new InterestRate(i + 0.02m);
                     var savingsInterestRate = new InterestRate(i);
-                    var result = Simulation.Run(simulationYears: 5, propertyValue: Baseline.PropertyValue with {YearlyIncrease = p}, mortgageInterestRate: mortgageInterestRate, rent: Baseline.RentPrice with {YearlyIncrease = r}, savingsInterestRate: savingsInterestRate);
+                    var result = Simulation.Run(propertyValue: Baseline.PropertyValue with {YearlyIncrease = p}, mortgageInterestRate: mortgageInterestRate, rent: Baseline.RentPrice with {YearlyIncrease = r}, savingsInterestRate: savingsInterestRate);
                     writer.WriteLine(i, p, r, $"{result.ComputeDelta():F2}");
                 }
             }
         }
     }
-
-
 
     private static StreamWriter CreateConsoleStreamWriter()
     {
