@@ -7,6 +7,7 @@ internal static class Sim
     public static void Main()
     {
         RunBaseline();
+        RunPropertyValueYearlyIncreaseSensitivityAnalysis();
         RunMortgageInterestRateSensitivityAnalysis();
         RunSavingsInterestRateSensitivityAnalysis();
         RunInitialMonthlyRentPriceSensitivityAnalysis();
@@ -39,6 +40,16 @@ internal static class Sim
             Baseline.RentPrice.YearlyIncrease,
             Baseline.SavingsInterestRate.Yearly,
             result.ComputeDelta());
+    }
+
+    private static void RunPropertyValueYearlyIncreaseSensitivityAnalysis()
+    {
+        using var writer = new CsvWriter("propertyValueYearlyIncrease.csv", "propertyValueYearlyIncrease", "delta");
+        for (var i = -0.15m; i <= 0.15m; i += 0.01m)
+        {
+            var result = Simulation.Run(propertyValue: Baseline.PropertyValue with {YearlyIncrease = i}).ComputeDelta();
+            writer.WriteLine(i, result);
+        }
     }
 
     private static void RunMortgageInterestRateSensitivityAnalysis()
