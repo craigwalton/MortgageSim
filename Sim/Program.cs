@@ -1,4 +1,6 @@
-﻿using PropertySim.Variables;
+﻿using PropertySim.Experiments;
+using PropertySim.Variables;
+using Range = PropertySim.Experiments.Range;
 
 namespace PropertySim;
 
@@ -44,19 +46,19 @@ internal static class Sim
     {
         RunOatSensitivityAnalysis(
             "propertyValueYearlyIncrease",
-            new Range(-0.15m, 0.15m, 0.01m),
+            Ranges.PropertyValueYearlyIncrease,
             x => Simulation.Run(propertyValue: Baseline.PropertyValue with { YearlyIncrease = x }));
         RunOatSensitivityAnalysis(
             "mortgageInterestRate",
-            new Range(-0m, 0.2m, 0.01m),
+            Ranges.MortgageInterestRateRange,
             x => Simulation.Run(mortgageInterestRate: new InterestRate(x)));
         RunOatSensitivityAnalysis(
             "savingsInterestRate",
-            new Range(-0.1m, 0.2m, 0.01m),
+            Ranges.SavingsInterestRateRange,
             x => Simulation.Run(savingsInterestRate: new InterestRate(x)));
         RunOatSensitivityAnalysis(
             "initialMonthlyRentPrice",
-            new Range(500m, 2000m, 100m),
+            Ranges.InitialMonthlyRentPrice,
             x => Simulation.Run(rent: Baseline.RentPrice with {InitialMonthly = x}));
     }
 
@@ -73,8 +75,8 @@ internal static class Sim
     private static void Run2DSensitivityAnalyses()
     {
         Run2DSensitivityAnalysis(
-            "mortgageInterestRate", new Range(-0m, 0.2m, 0.01m),
-            "savingsInterestRate", new Range(-0.1m, 0.2m, 0.01m),
+            "mortgageInterestRate", Ranges.MortgageInterestRateRange,
+            "savingsInterestRate", Ranges.SavingsInterestRateRange,
             (x, y) => Simulation.Run(
                 mortgageInterestRate: new InterestRate(x),
                 savingsInterestRate: new InterestRate(y)));
@@ -85,8 +87,8 @@ internal static class Sim
                 propertyValue: Baseline.PropertyValue with { InitialValue = x },
                 rent: Baseline.RentPrice with { InitialMonthly = y }));
         Run2DSensitivityAnalysis(
-            "mortgageInterestRate", new Range(-0m, 0.2m, 0.01m),
-            "propertyValueYearlyIncrease", new Range(-0.15m, 0.15m, 0.01m),
+            "mortgageInterestRate", Ranges.MortgageInterestRateRange,
+            "propertyValueYearlyIncrease", Ranges.PropertyValueYearlyIncrease,
             (x, y) => Simulation.Run(
                 mortgageInterestRate: new InterestRate(x),
                 propertyValue: Baseline.PropertyValue with {YearlyIncrease = y}));
