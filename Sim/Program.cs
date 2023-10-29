@@ -92,6 +92,11 @@ internal static class Sim
             (x, y) => Simulation.Run(
                 mortgageInterestRate: new InterestRate(x),
                 propertyValue: Baseline.PropertyValue with {YearlyIncrease = y}));
+        Run2DSensitivityAnalysis(
+            "initialMonthlyRentPrice", Ranges.InitialMonthlyRentPrice,
+            "rentPriceYearlyIncrease", Ranges.RentPriceYearlyIncrease,
+            (x, y) => Simulation.Run(
+                rent: new RentPrice(x, y)));
     }
 
     private static void Run2DSensitivityAnalysis(

@@ -9,4 +9,6 @@ public static class Ranges
     public static Range InitialMonthlyRentPrice { get; } = new(500m, 2000m, 100m);
 
     public static Range SavingsInterestRateRange { get; } = new(-0.1m, 0.2m, 0.01m);
+
+    public static Range RentPriceYearlyIncrease { get; } = new(-0.1m, 0.15m, 0.01m);
 }
