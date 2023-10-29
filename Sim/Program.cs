@@ -9,6 +9,7 @@ internal static class Sim
         RunBaseline();
         RunMortgageInterestRateSensitivityAnalysis();
         RunSavingsInterestRateSensitivityAnalysis();
+        RunInitialMonthlyRentPriceSensitivityAnalysis();
     }
 
     private static void RunBaseline()
@@ -45,8 +46,7 @@ internal static class Sim
         using var writer = new CsvWriter("mortgageInterestRate.csv", "mortgageInterestRate", "delta");
         for (var i = 0m; i <= 0.2m; i += 0.01m)
         {
-            var result = Simulation.Run(mortgageInterestRate: new InterestRate(i))
-                .ComputeDelta();
+            var result = Simulation.Run(mortgageInterestRate: new InterestRate(i)).ComputeDelta();
             writer.WriteLine(i, result);
         }
     }
@@ -56,8 +56,17 @@ internal static class Sim
         using var writer = new CsvWriter("savingsInterestRate.csv", "savingsInterestRate", "delta");
         for (var i = -0.1m; i <= 0.2m; i += 0.01m)
         {
-            var result = Simulation.Run(savingsInterestRate: new InterestRate(i))
-                .ComputeDelta();
+            var result = Simulation.Run(savingsInterestRate: new InterestRate(i)).ComputeDelta();
+            writer.WriteLine(i, result);
+        }
+    }
+
+    private static void RunInitialMonthlyRentPriceSensitivityAnalysis()
+    {
+        using var writer = new CsvWriter("initialMonthlyRentPrice.csv", "initialMonthlyRentPrice", "delta");
+        for (var i = 500m; i <= 2000m; i += 100m)
+        {
+            var result = Simulation.Run(rent: Baseline.RentPrice with {InitialMonthly = i}).ComputeDelta();
             writer.WriteLine(i, result);
         }
     }
