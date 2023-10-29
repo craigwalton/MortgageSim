@@ -6,7 +6,36 @@ internal static class Sim
 {
     public static void Main()
     {
+        RunBaseline();
         RunMortgageInterestRateSensitivityAnalysis();
+        RunSavingsInterestRateSensitivityAnalysis();
+    }
+
+    private static void RunBaseline()
+    {
+        using var writer = new CsvWriter(
+            "baseline.csv",
+            "deposit",
+            "initialPropertyValue",
+            "propertyValueYearlyIncrease",
+            "mortgageTerm",
+            "mortgageInterestRate",
+            "initialMonthlyRentPrice",
+            "rentPriceYearlyIncrease",
+            "savingsInterestRate",
+            "delta"
+        );
+        var result = Simulation.Run();
+        writer.WriteLine(
+            Baseline.Deposit,
+            Baseline.PropertyValue.InitialValue,
+            Baseline.PropertyValue.YearlyIncrease,
+            Baseline.MortgageTermYears,
+            Baseline.MortgageInterestRate.Yearly,
+            Baseline.RentPrice.InitialMonthly,
+            Baseline.RentPrice.YearlyIncrease,
+            Baseline.SavingsInterestRate.Yearly,
+            result.ComputeDelta());
     }
 
     private static void RunMortgageInterestRateSensitivityAnalysis()
@@ -14,9 +43,19 @@ internal static class Sim
         using var writer = new CsvWriter("mortgageInterestRate.csv", "mortgageInterestRate", "delta");
         for (var i = 0m; i <= 0.2m; i += 0.01m)
         {
-            var result = Simulation.Run(
-                mortgageInterestRate: new InterestRate(i),
-                simulationYears: 5).ComputeDelta();
+            var result = Simulation.Run(simulationYears: 5, mortgageInterestRate: new InterestRate(i))
+                .ComputeDelta();
+            writer.WriteLine(i, result);
+        }
+    }
+
+    private static void RunSavingsInterestRateSensitivityAnalysis()
+    {
+        using var writer = new CsvWriter("savingsInterestRate.csv", "savingsInterestRate", "delta");
+        for (var i = -0.1m; i <= 0.2m; i += 0.01m)
+        {
+            var result = Simulation.Run(simulationYears: 5, savingsInterestRate: new InterestRate(i))
+                .ComputeDelta();
             writer.WriteLine(i, result);
         }
     }
@@ -30,11 +69,7 @@ internal static class Sim
             {
                 var mortgageInterestRate = new InterestRate(i + 0.02m);
                 var savingsInterestRate = new InterestRate(i);
-                var result = Simulation.Run(
-                    mortgageInterestRate: mortgageInterestRate,
-                    savingsInterestRate: savingsInterestRate,
-                    rent: new RentPrice(r, Baseline.RentPrice.YearlyIncrease),
-                    simulationYears: 5);
+                var result = Simulation.Run(simulationYears: 5, mortgageInterestRate: mortgageInterestRate, rent: new RentPrice(r, Baseline.RentPrice.YearlyIncrease), savingsInterestRate: savingsInterestRate);
                 writer.WriteLine(i, r, $"{result.ComputeDelta():F2}");
             }
         }
@@ -51,31 +86,14 @@ internal static class Sim
                 {
                     var mortgageInterestRate = new InterestRate(i + 0.02m);
                     var savingsInterestRate = new InterestRate(i);
-                    var result = Simulation.Run(
-                        mortgageInterestRate: mortgageInterestRate,
-                        savingsInterestRate: savingsInterestRate,
-                        rent: Baseline.RentPrice with {YearlyIncrease = r},
-                        propertyValue: Baseline.PropertyValue with {YearlyIncrease = p},
-                        simulationYears: 5);
+                    var result = Simulation.Run(simulationYears: 5, propertyValue: Baseline.PropertyValue with {YearlyIncrease = p}, mortgageInterestRate: mortgageInterestRate, rent: Baseline.RentPrice with {YearlyIncrease = r}, savingsInterestRate: savingsInterestRate);
                     writer.WriteLine(i, p, r, $"{result.ComputeDelta():F2}");
                 }
             }
         }
     }
 
-    private static void RunSim()
-    {
-        const int count = 1;
-        var results = new List<Simulation.Result>(count);
-        for (var i = 0; i < count; i++)
-        {
-            var result = Simulation.Run();
-            results.Add(result);
-        }
-        var purchaseAverageEquity = results.Average(x => x.PurchaseEquity);
-        var rentAverageEquity = results.Average(x => x.RentEquity);
-        Console.WriteLine($"Avg Purchase equity={purchaseAverageEquity:C}; Avg Rent equity={rentAverageEquity:C}");
-    }
+
 
     private static StreamWriter CreateConsoleStreamWriter()
     {

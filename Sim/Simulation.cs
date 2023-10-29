@@ -9,16 +9,16 @@ public sealed class Simulation
         decimal deposit = Baseline.Deposit,
         int mortgageTermYears = Baseline.MortgageTermYears,
         int simulationYears = 25,
-        InterestRate? mortgageInterestRate = null,
-        InterestRate? savingsInterestRate = null,
-        RentPrice? rent = null,
         PropertyValue? propertyValue = null,
+        InterestRate? mortgageInterestRate = null,
+        RentPrice? rent = null,
+        InterestRate? savingsInterestRate = null,
         StreamWriter? output = null)
     {
-        mortgageInterestRate ??= Baseline.MortgageInterestRate;
-        savingsInterestRate ??= Baseline.SavingsInterestRate;
-        rent ??= Baseline.RentPrice;
         propertyValue ??= Baseline.PropertyValue;
+        mortgageInterestRate ??= Baseline.MortgageInterestRate;
+        rent ??= Baseline.RentPrice;
+        savingsInterestRate ??= Baseline.SavingsInterestRate;
         output ??= StreamWriter.Null;
 
         var purchasePlan = new HousePurchasePlan(
