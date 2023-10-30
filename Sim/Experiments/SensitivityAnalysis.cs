@@ -68,7 +68,7 @@ public static class SensitivityAnalysis
     private static void Run1D(Variable x, Func<decimal, Simulation.Result> run)
     {
         using var writer = new CsvWriter($"{x.Name}.csv", x.Name, "delta");
-        for (var i = x.Range.Start; i <= x.Range.Stop; i += x.Range.Step)
+        foreach (var i in x.Range.Enumerate())
         {
             var result = run(i).ComputeDelta();
             writer.WriteLine(i, result);
@@ -78,9 +78,9 @@ public static class SensitivityAnalysis
     private static void Run2D(Variable x, Variable y, Func<decimal, decimal, Simulation.Result> run)
     {
         using var writer = new CsvWriter($"{x.Name}-{y.Name}.csv", x.Name, y.Name, "delta");
-        for (var i = x.Range.Start; i <= x.Range.Stop; i += x.Range.Step)
+        foreach (var i in x.Range.Enumerate())
         {
-            for (var j = y.Range.Start; j <= y.Range.Stop; j += y.Range.Step)
+            foreach (var j in y.Range.Enumerate())
             {
                 var result = run(i, j).ComputeDelta();
                 writer.WriteLine(i, j, result);
@@ -95,11 +95,11 @@ public static class SensitivityAnalysis
         Func<decimal, decimal, decimal, Simulation.Result> run)
     {
         using var writer = new CsvWriter($"{x.Name}-{y.Name}-{z.Name}.csv", x.Name, y.Name, z.Name, "delta");
-        for (var i = x.Range.Start; i <= x.Range.Stop; i += x.Range.Step)
+        foreach (var i in x.Range.Enumerate())
         {
-            for (var j = y.Range.Start; j <= y.Range.Stop; j += y.Range.Step)
+            foreach (var j in y.Range.Enumerate())
             {
-                for (var k = z.Range.Start; k <= z.Range.Stop; k += z.Range.Step)
+                foreach (var k in z.Range.Enumerate())
                 {
                     var result = run(i, j, k).ComputeDelta();
                     writer.WriteLine(i, j, k, result);
