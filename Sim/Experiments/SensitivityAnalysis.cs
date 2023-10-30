@@ -51,6 +51,18 @@ public static class SensitivityAnalysis
                 rent: new RentPrice(x, y)));
     }
 
+    public static void Run3D()
+    {
+        Run3D(
+            "mortgageInterestRate", Ranges.MortgageInterestRateRange,
+            "propertyValueYearlyIncrease", Ranges.PropertyValueYearlyIncrease,
+            "initialMonthlyRentPrice", Ranges.InitialMonthlyRentPrice,
+            (x, y, z) => Simulation.Run(
+                mortgageInterestRate: new InterestRate(x),
+                propertyValue: Baseline.PropertyValue with {YearlyIncrease = y},
+                rent: Baseline.RentPrice with { InitialMonthly = z }));
+    }
+
     private static void Run1D(string variable, Range range, Func<decimal, Simulation.Result> run)
     {
         using var writer = new CsvWriter($"{variable}.csv", variable, "delta");
@@ -75,6 +87,29 @@ public static class SensitivityAnalysis
             {
                 var result = run(i, j).ComputeDelta();
                 writer.WriteLine(i, j, result);
+            }
+        }
+    }
+
+    public static void Run3D(
+        string variable1,
+        Range range1,
+        string variable2,
+        Range range2,
+        string variable3,
+        Range range3,
+        Func<decimal, decimal, decimal, Simulation.Result> run)
+    {
+        using var writer = new CsvWriter($"{variable1}-{variable2}-{variable3}.csv", variable1, variable2, variable3, "delta");
+        for (var i = range1.Start; i <= range1.Stop; i += range1.Step)
+        {
+            for (var j = range2.Start; j <= range2.Stop; j += range2.Step)
+            {
+                for (var k = range3.Start; k <= range3.Stop; k += range3.Step)
+                {
+                    var result = run(i, j, k).ComputeDelta();
+                    writer.WriteLine(i, j, k, result);
+                }
             }
         }
     }

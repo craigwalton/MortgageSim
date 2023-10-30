@@ -10,6 +10,7 @@ internal static class Sim
         RunBaseline();
         SensitivityAnalysis.Run1D();
         SensitivityAnalysis.Run2D();
+        SensitivityAnalysis.Run3D();
     }
 
     private static void RunBaseline()
