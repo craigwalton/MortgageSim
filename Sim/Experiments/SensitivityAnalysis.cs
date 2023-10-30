@@ -4,11 +4,11 @@ namespace PropertySim.Experiments;
 
 public static class SensitivityAnalysis
 {
-    private static readonly Variable PropertyValueYearlyIncrease = new("propertyValueYearlyIncrease", Ranges.PropertyValueYearlyIncrease);
-    private static readonly Variable MortgageInterestRate = new("mortgageInterestRate", Ranges.MortgageInterestRateRange);
-    private static readonly Variable InitialMonthlyRentPrice = new("initialMonthlyRentPrice", Ranges.InitialMonthlyRentPrice);
-    private static readonly Variable RentPriceYearlyIncrease = new("rentPriceYearlyIncrease", Ranges.RentPriceYearlyIncrease);
-    private static readonly Variable SavingsInterestRate = new("savingsInterestRate", Ranges.SavingsInterestRateRange);
+    private static readonly Variable PropertyValueYearlyIncrease = new("propertyValueYearlyIncrease", new(-0.15m, 0.15m, 0.01m));
+    private static readonly Variable MortgageInterestRate = new("mortgageInterestRate", new(-0m, 0.2m, 0.01m));
+    private static readonly Variable InitialMonthlyRentPrice = new("initialMonthlyRentPrice", new(500m, 2000m, 100m));
+    private static readonly Variable RentPriceYearlyIncrease = new("rentPriceYearlyIncrease", new(-0.1m, 0.15m, 0.01m));
+    private static readonly Variable SavingsInterestRate = new("savingsInterestRate", new(-0.1m, 0.2m, 0.01m));
 
     public static void Run1D()
     {
@@ -56,9 +56,9 @@ public static class SensitivityAnalysis
     public static void Run3D()
     {
         Run3D(
-            new("mortgageInterestRate", Ranges.MortgageInterestRateRange),
+            MortgageInterestRate,
             PropertyValueYearlyIncrease,
-            new("initialMonthlyRentPrice", Ranges.InitialMonthlyRentPrice),
+            InitialMonthlyRentPrice,
             (x, y, z) => Simulation.Run(
                 mortgageInterestRate: new InterestRate(x),
                 propertyValue: Baseline.PropertyValue with {YearlyIncrease = y},
