@@ -16,7 +16,7 @@ public class Savings
 
     public decimal Balance { get; private set; }
 
-    public void MakePayment(decimal payment)
+    public void MakeMonthlyPayment(decimal payment)
     {
         var accruedInterest = Balance * _interestRate.Monthly;
         Balance += accruedInterest + payment;

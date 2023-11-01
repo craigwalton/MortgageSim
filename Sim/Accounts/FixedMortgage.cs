@@ -20,7 +20,7 @@ public class FixedMortgage
 
     public decimal OutstandingLoan { get; private set; }
 
-    public decimal TakePayment()
+    public decimal TakeMonthlyPayment()
     {
         return _outstandingPayments switch
         {

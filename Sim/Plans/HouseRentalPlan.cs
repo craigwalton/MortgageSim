@@ -18,7 +18,7 @@ public sealed class HouseRentalPlan : Plan
     public void ProcessMonth(decimal amountAvailable, Time time)
     {
         var rentPayment = Rent.TakePayment(time);
-        Savings.MakePayment(amountAvailable - rentPayment);
+        Savings.MakeMonthlyPayment(amountAvailable - rentPayment);
     }
 
     public override decimal ComputeEquity(Time time)
