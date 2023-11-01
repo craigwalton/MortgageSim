@@ -22,14 +22,35 @@ public class FixedMortgage
 
     public decimal TakePayment()
     {
+        return _outstandingPayments switch
+        {
+            < 1 => throw new InvalidOperationException("There are no outstanding payments."),
+            > 1 => ProcessPayment(),
+            1 => ProcessFinalPayment(),
+        };
+    }
+
+    private decimal ProcessPayment()
+    {
         var interest = OutstandingLoan * _interestRate.Monthly;
         var principal = _monthlyPayment - interest;
         OutstandingLoan -= principal;
         _outstandingPayments--;
-        _output.WriteLine($"Mortgage payment={_monthlyPayment:C} (interest={interest:C}; principal={principal:C});" +
+        _output.WriteLine($"Mortgage payment={_monthlyPayment:C} (interest={interest:C}; principal={principal:C}); " +
                           $"Loan={OutstandingLoan:C}");
-        // TODO: ensure that final payment results in precisely outstanding loan of precisely 0.
         return _monthlyPayment;
+    }
+
+    private decimal ProcessFinalPayment()
+    {
+        var interest = OutstandingLoan * _interestRate.Monthly;
+        var principal = OutstandingLoan;
+        var payment = interest + principal;
+        OutstandingLoan = 0;
+        _outstandingPayments = 0;
+        _output.WriteLine($"Final mortgage payment={payment:C} (interest={interest:C}; principal={principal:C}); " +
+                          $"Loan={OutstandingLoan:C}");
+        return payment;
     }
 
     private static decimal ComputeMonthlyPayment(decimal loan, InterestRate interest, int totalPayments)

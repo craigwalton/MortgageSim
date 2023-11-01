@@ -1,4 +1,5 @@
 using PropertySim;
+using Sim.Tests.UnitTesting;
 using Xunit;
 
 namespace Sim.Tests;
@@ -36,17 +37,9 @@ public class TimeTests
     {
         var sut = new Time();
 
-        Repeat(() => sut.AdvanceOneMonth(), advances);
+        Utils.Repeat(() => sut.AdvanceOneMonth(), advances);
 
         Assert.Equal(expectedMonth, sut.Month);
         Assert.Equal(expectedYear, sut.Year);
-    }
-
-    private static void Repeat(Action action, int times)
-    {
-        for (var i = 0; i < times; i++)
-        {
-            action();
-        }
     }
 }
