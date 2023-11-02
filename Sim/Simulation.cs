@@ -4,7 +4,7 @@ using PropertySim.Variables;
 
 namespace PropertySim;
 
-public sealed class Simulation
+public static class Simulation
 {
     public static Result Run(
         int simulationYears = Baseline.SimulationYears,
