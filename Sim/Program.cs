@@ -21,7 +21,7 @@ internal static class Sim
             Columns.Deposit,
             Columns.InitialPropertyValue,
             Columns.PropertyValueYearlyIncrease,
-            Columns.MortgageTerm,
+            Columns.MortgageTermYears,
             Columns.MortgageInterestRate,
             Columns.InitialMonthlyRentPrice,
             Columns.RentPriceYearlyIncrease,
