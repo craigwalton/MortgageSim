@@ -15,16 +15,16 @@ public static class SensitivityAnalysis
     {
         Run1D(
             s_propertyValueYearlyIncrease,
-            x => Simulation.Run(propertyValue: Baseline.PropertyValue with { YearlyIncrease = x }));
+            x => new Simulation(propertyValue: Baseline.PropertyValue with { YearlyIncrease = x }));
         Run1D(
             s_mortgageInterestRate,
-            x => Simulation.Run(mortgageInterestRate: new InterestRate(x)));
+            x => new Simulation(mortgageInterestRate: new InterestRate(x)));
         Run1D(
             s_initialMonthlyRentPrice,
-            x => Simulation.Run(rent: Baseline.RentPrice with {InitialMonthly = x}));
+            x => new Simulation(rent: Baseline.RentPrice with {InitialMonthly = x}));
         Run1D(
             s_savingsInterestRate,
-            x => Simulation.Run(savingsInterestRate: new InterestRate(x)));
+            x => new Simulation(savingsInterestRate: new InterestRate(x)));
     }
 
     public static void Run2D()
@@ -32,25 +32,25 @@ public static class SensitivityAnalysis
         Run2D(
             s_mortgageInterestRate,
             s_savingsInterestRate,
-            (x, y) => Simulation.Run(
+            (x, y) => new Simulation(
                 mortgageInterestRate: new InterestRate(x),
                 savingsInterestRate: new InterestRate(y)));
         Run2D(
             s_initialPropertyValue,
             s_initialMonthlyRentPrice with {Range = new Range(500m, 3000m, 100m)},
-            (x, y) => Simulation.Run(
+            (x, y) => new Simulation(
                 propertyValue: Baseline.PropertyValue with { InitialValue = x },
                 rent: Baseline.RentPrice with { InitialMonthly = y }));
         Run2D(
             s_mortgageInterestRate,
             s_propertyValueYearlyIncrease,
-            (x, y) => Simulation.Run(
+            (x, y) => new Simulation(
                 mortgageInterestRate: new InterestRate(x),
                 propertyValue: Baseline.PropertyValue with {YearlyIncrease = y}));
         Run2D(
             s_initialMonthlyRentPrice,
             s_rentPriceYearlyIncrease,
-            (x, y) => Simulation.Run(
+            (x, y) => new Simulation(
                 rent: new RentPrice(x, y)));
     }
 
@@ -60,40 +60,36 @@ public static class SensitivityAnalysis
             s_mortgageInterestRate,
             s_propertyValueYearlyIncrease,
             s_initialMonthlyRentPrice,
-            (x, y, z) => Simulation.Run(
+            (x, y, z) => new Simulation(
                 mortgageInterestRate: new InterestRate(x),
                 propertyValue: Baseline.PropertyValue with {YearlyIncrease = y},
                 rent: Baseline.RentPrice with { InitialMonthly = z }));
     }
 
-    private static void Run1D(Variable x, Func<decimal, Simulation.Result> run)
+    private static void Run1D(Variable x, Func<decimal, Simulation> create)
     {
         using var writer = new CsvWriter($"{x.Name}.csv", x.Name, "delta");
         foreach (var i in x.Range.Enumerate())
         {
-            var result = run(i).ComputeDelta();
+            var result = create(i).Run().ComputeDelta();
             writer.WriteLine(i, result);
         }
     }
 
-    private static void Run2D(Variable x, Variable y, Func<decimal, decimal, Simulation.Result> run)
+    private static void Run2D(Variable x, Variable y, Func<decimal, decimal, Simulation> create)
     {
         using var writer = new CsvWriter($"{x.Name}-{y.Name}.csv", x.Name, y.Name, "delta");
         foreach (var i in x.Range.Enumerate())
         {
             foreach (var j in y.Range.Enumerate())
             {
-                var result = run(i, j).ComputeDelta();
+                var result = create(i, j).Run().ComputeDelta();
                 writer.WriteLine(i, j, result);
             }
         }
     }
 
-    private static void Run3D(
-        Variable x,
-        Variable y,
-        Variable z,
-        Func<decimal, decimal, decimal, Simulation.Result> run)
+    private static void Run3D(Variable x, Variable y, Variable z, Func<decimal, decimal, decimal, Simulation> create)
     {
         using var writer = new CsvWriter($"{x.Name}-{y.Name}-{z.Name}.csv", x.Name, y.Name, z.Name, "delta");
         foreach (var i in x.Range.Enumerate())
@@ -102,7 +98,7 @@ public static class SensitivityAnalysis
             {
                 foreach (var k in z.Range.Enumerate())
                 {
-                    var result = run(i, j, k).ComputeDelta();
+                    var result = create(i, j, k).Run().ComputeDelta();
                     writer.WriteLine(i, j, k, result);
                 }
             }
