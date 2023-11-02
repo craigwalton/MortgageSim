@@ -1,19 +1,18 @@
 # Mortgage Simulator
 
-A deterministic simulator written in C# comparing two options which prospective first time buyers are faced with a
-choice of:
+A deterministic simulator written in C# comparing two options which prospective first time buyers are faced with:
 - Buying a property with a mortgage
 - Renting a property and investing any remaining funds.
 
-The Jupyter notebooks in `analysis/` compare sensitivities of the inputs.
+The Jupyter notebooks in `Analysis/` compare sensitivities of the inputs.
 
 ## Dependent variable (output)
 
 The output of the simulation is the difference in net worth between the two scenarios after a period (e.g. 5 years):
 
 ```
-Δ net worth = total equity from property purchase scenario - total equity from property rent scenario
-            = (property value - outstanding loan)          - (savings balance)
+Δ net worth = equity from property purchase scenario - equity from property rent scenario
+            = (property value - outstanding loan)    - (savings balance)
 ```
 
 ## Independent variables (input)
@@ -29,15 +28,19 @@ The output of the simulation is the difference in net worth between the two scen
 Note that the model treats these as independent variables, but in reality there are economic dependencies between
 them.
 
-In the rent scenario, the deposit is immediately deposited into the savings account.
+In the rent scenario, the deposit is immediately paid into the savings account.
 
 ## Data Sources
 
 The following sources were consulted to select appropriate baseline values for the independent variables.
 
+[Historical House Prices: ONS](https://www.ons.gov.uk/economy/inflationandpriceindices/bulletins/housepriceindex/august2023)
+
+[Historical Mortgage Inerest Rates: Statisca](https://www.statista.com/statistics/386301/uk-average-mortgage-interest-rates/)
+
 [Historical Rent Prices: ONS](https://www.ons.gov.uk/economy/inflationandpriceindices/bulletins/indexofprivatehousingrentalprices/september2023)
 
-[Historical House Prices: ONS](https://www.ons.gov.uk/economy/inflationandpriceindices/bulletins/housepriceindex/august2023)
+[Historical Bank Rate: BoE](https://www.bankofengland.co.uk/boeapps/database/Bank-Rate.asp)
 
 ## Limitations and non-goals
 
