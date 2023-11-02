@@ -4,52 +4,52 @@ namespace PropertySim.Experiments;
 
 public static class SensitivityAnalysis
 {
-    private static readonly Variable InitialPropertyValue = new("initialPropertyValue", new Range(100_000m, 500_000m, 10_000m));
-    private static readonly Variable PropertyValueYearlyIncrease = new("propertyValueYearlyIncrease", new(-0.15m, 0.15m, 0.01m));
-    private static readonly Variable MortgageInterestRate = new("mortgageInterestRate", new(-0m, 0.2m, 0.01m));
-    private static readonly Variable InitialMonthlyRentPrice = new("initialMonthlyRentPrice", new(500m, 2000m, 100m));
-    private static readonly Variable RentPriceYearlyIncrease = new("rentPriceYearlyIncrease", new(-0.1m, 0.15m, 0.01m));
-    private static readonly Variable SavingsInterestRate = new("savingsInterestRate", new(-0.1m, 0.2m, 0.01m));
+    private static readonly Variable s_initialPropertyValue = new("initialPropertyValue", new Range(100_000m, 500_000m, 10_000m));
+    private static readonly Variable s_propertyValueYearlyIncrease = new("propertyValueYearlyIncrease", new(-0.15m, 0.15m, 0.01m));
+    private static readonly Variable s_mortgageInterestRate = new("mortgageInterestRate", new(-0m, 0.2m, 0.01m));
+    private static readonly Variable s_initialMonthlyRentPrice = new("initialMonthlyRentPrice", new(500m, 2000m, 100m));
+    private static readonly Variable s_rentPriceYearlyIncrease = new("rentPriceYearlyIncrease", new(-0.1m, 0.15m, 0.01m));
+    private static readonly Variable s_savingsInterestRate = new("savingsInterestRate", new(-0.1m, 0.2m, 0.01m));
 
     public static void Run1D()
     {
         Run1D(
-            PropertyValueYearlyIncrease,
+            s_propertyValueYearlyIncrease,
             x => Simulation.Run(propertyValue: Baseline.PropertyValue with { YearlyIncrease = x }));
         Run1D(
-            MortgageInterestRate,
+            s_mortgageInterestRate,
             x => Simulation.Run(mortgageInterestRate: new InterestRate(x)));
         Run1D(
-            InitialMonthlyRentPrice,
+            s_initialMonthlyRentPrice,
             x => Simulation.Run(rent: Baseline.RentPrice with {InitialMonthly = x}));
         Run1D(
-            SavingsInterestRate,
+            s_savingsInterestRate,
             x => Simulation.Run(savingsInterestRate: new InterestRate(x)));
     }
 
     public static void Run2D()
     {
         Run2D(
-            MortgageInterestRate,
-            SavingsInterestRate,
+            s_mortgageInterestRate,
+            s_savingsInterestRate,
             (x, y) => Simulation.Run(
                 mortgageInterestRate: new InterestRate(x),
                 savingsInterestRate: new InterestRate(y)));
         Run2D(
-            InitialPropertyValue,
-            InitialMonthlyRentPrice with {Range = new Range(500m, 3000m, 100m)},
+            s_initialPropertyValue,
+            s_initialMonthlyRentPrice with {Range = new Range(500m, 3000m, 100m)},
             (x, y) => Simulation.Run(
                 propertyValue: Baseline.PropertyValue with { InitialValue = x },
                 rent: Baseline.RentPrice with { InitialMonthly = y }));
         Run2D(
-            MortgageInterestRate,
-            PropertyValueYearlyIncrease,
+            s_mortgageInterestRate,
+            s_propertyValueYearlyIncrease,
             (x, y) => Simulation.Run(
                 mortgageInterestRate: new InterestRate(x),
                 propertyValue: Baseline.PropertyValue with {YearlyIncrease = y}));
         Run2D(
-            InitialMonthlyRentPrice,
-            RentPriceYearlyIncrease,
+            s_initialMonthlyRentPrice,
+            s_rentPriceYearlyIncrease,
             (x, y) => Simulation.Run(
                 rent: new RentPrice(x, y)));
     }
@@ -57,9 +57,9 @@ public static class SensitivityAnalysis
     public static void Run3D()
     {
         Run3D(
-            MortgageInterestRate,
-            PropertyValueYearlyIncrease,
-            InitialMonthlyRentPrice,
+            s_mortgageInterestRate,
+            s_propertyValueYearlyIncrease,
+            s_initialMonthlyRentPrice,
             (x, y, z) => Simulation.Run(
                 mortgageInterestRate: new InterestRate(x),
                 propertyValue: Baseline.PropertyValue with {YearlyIncrease = y},
