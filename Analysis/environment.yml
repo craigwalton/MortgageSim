@@ -1,0 +1,11 @@
+name: MortgageSim
+channels:
+  - defaults
+dependencies:
+  - black=23.3.0
+  - inflection=0.5.1
+  - isort=5.9.3
+  - jupyter=1.0.0
+  - pandas=2.1.1
+  - plotly=5.9.0
+  - python=3.11.5
