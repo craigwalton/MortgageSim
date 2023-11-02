@@ -2,7 +2,7 @@ using PropertySim.Variables;
 
 namespace PropertySim.Accounts;
 
-public class FixedMortgage
+public sealed class FixedMortgage
 {
     private int _outstandingPayments;
     private readonly InterestRate _interestRate;

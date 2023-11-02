@@ -4,7 +4,7 @@ using Xunit;
 
 namespace Sim.Tests;
 
-public class TimeTests
+public sealed class TimeTests
 {
     [Fact]
     public void Time_starts_at_zero()

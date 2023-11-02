@@ -5,7 +5,7 @@ using Xunit;
 
 namespace Sim.Tests.Accounts;
 
-public class RentTests
+public sealed class RentTests
 {
     [Fact]
     public void Can_take_payment()

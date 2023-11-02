@@ -3,7 +3,7 @@ using Xunit;
 
 namespace Sim.Tests.Variables;
 
-public class InterestRateTests
+public sealed class InterestRateTests
 {
     [Fact]
     public void Can_create_positive()

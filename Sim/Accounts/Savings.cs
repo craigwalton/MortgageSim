@@ -2,7 +2,7 @@ using PropertySim.Variables;
 
 namespace PropertySim.Accounts;
 
-public class Savings
+public sealed class Savings
 {
     private readonly InterestRate _interestRate;
     private readonly StreamWriter _output;

@@ -1,6 +1,6 @@
 namespace PropertySim;
 
-public class CsvWriter : IDisposable
+public sealed class CsvWriter : IDisposable
 {
     private readonly StreamWriter _writer;
     private readonly int _columns;

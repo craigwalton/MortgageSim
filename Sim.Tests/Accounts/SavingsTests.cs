@@ -4,7 +4,7 @@ using Xunit;
 
 namespace Sim.Tests.Accounts;
 
-public class SavingsTests
+public sealed class SavingsTests
 {
     [Fact]
     public void Sets_initial_balance()

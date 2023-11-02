@@ -3,7 +3,7 @@ using Xunit;
 
 namespace Sim.Tests;
 
-public class ExtensionsTests
+public sealed class ExtensionsTests
 {
     [Theory]
     [InlineData(2, 0, 1)]

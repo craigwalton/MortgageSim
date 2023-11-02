@@ -2,7 +2,7 @@ using PropertySim.Variables;
 
 namespace PropertySim.Accounts;
 
-public class Rent
+public sealed class Rent
 {
     private readonly RentPrice _rentPrice;
     private readonly StreamWriter _output;

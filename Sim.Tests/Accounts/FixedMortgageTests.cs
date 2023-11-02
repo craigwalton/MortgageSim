@@ -5,7 +5,7 @@ using Xunit;
 
 namespace Sim.Tests.Accounts;
 
-public class FixedMortgageTests
+public sealed class FixedMortgageTests
 {
     [Fact]
     public void Can_take_monthly_payment()

@@ -4,7 +4,7 @@ using Xunit;
 
 namespace Sim.Tests.Variables;
 
-public class RentPriceTests
+public sealed class RentPriceTests
 {
     [Fact]
     public void Can_create()
