@@ -1,7 +1,7 @@
 namespace PropertySim.Variables;
 
 /// <threadsafety static="true" instance="true"/>
-public readonly record struct RentPrice(decimal InitialMonthly, decimal YearlyIncrease)
+public sealed record RentPrice(decimal InitialMonthly, decimal YearlyIncrease)
 {
     public decimal ComputeMonthlyPrice(Time time)
     {

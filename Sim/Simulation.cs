@@ -21,11 +21,11 @@ public static class Simulation
         savingsInterestRate ??= Baseline.SavingsInterestRate;
 
         var purchasePlan = new HousePurchasePlan(
-            propertyValue.Value,
+            propertyValue,
             deposit,
             mortgageTermYears,
             mortgageInterestRate.Value);
-        var rentalPlan = new HouseRentalPlan(deposit, rent.Value, savingsInterestRate.Value);
+        var rentalPlan = new HouseRentalPlan(deposit, rent, savingsInterestRate.Value);
 
         Time time;
         for (time = new Time(); time.Year < simulationYears; time.AdvanceOneMonth())
@@ -41,7 +41,7 @@ public static class Simulation
         return new Result(purchasePlan.ComputeEquity(time), rentalPlan.ComputeEquity(time));
     }
 
-    public readonly record struct Result(decimal PurchaseEquity, decimal RentEquity)
+    public sealed record Result(decimal PurchaseEquity, decimal RentEquity)
     {
         public override string ToString()
         {
