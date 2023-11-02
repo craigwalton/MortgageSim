@@ -17,8 +17,8 @@ public sealed class Simulation
     public Simulation(
         int simulationYears = Baseline.SimulationYears,
         decimal deposit = Baseline.Deposit,
-        int mortgageTermYears = Baseline.MortgageTermYears,
         PropertyValue? propertyValue = null,
+        int mortgageTermYears = Baseline.MortgageTermYears,
         InterestRate? mortgageInterestRate = null,
         RentPrice? rent = null,
         InterestRate? savingsInterestRate = null)

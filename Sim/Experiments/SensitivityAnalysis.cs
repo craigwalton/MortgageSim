@@ -45,9 +45,7 @@ public static class SensitivityAnalysis
         Run2D(
             s_mortgageInterestRate,
             s_propertyValueYearlyIncrease,
-            (x, y) => new Simulation(
-                mortgageInterestRate: new InterestRate(x),
-                propertyValue: Baseline.PropertyValue with {YearlyIncrease = y}));
+            (x, y) => new Simulation(propertyValue: Baseline.PropertyValue with {YearlyIncrease = y}, mortgageInterestRate: new InterestRate(x)));
         Run2D(
             s_initialMonthlyRentPrice,
             s_rentPriceYearlyIncrease,
@@ -61,10 +59,8 @@ public static class SensitivityAnalysis
             s_mortgageInterestRate,
             s_propertyValueYearlyIncrease,
             s_initialMonthlyRentPrice,
-            (x, y, z) => new Simulation(
-                mortgageInterestRate: new InterestRate(x),
-                propertyValue: Baseline.PropertyValue with {YearlyIncrease = y},
-                rent: Baseline.RentPrice with { InitialMonthly = z }));
+            (x, y, z) => new Simulation(propertyValue: Baseline.PropertyValue with {YearlyIncrease = y},
+                mortgageInterestRate: new InterestRate(x), rent: Baseline.RentPrice with { InitialMonthly = z }));
     }
 
     private static void Run1D(Variable x, Func<decimal, Simulation> create)
