@@ -1,11 +1,11 @@
-namespace PropertySim;
+namespace PropertySim.Csv;
 
-public sealed class CsvWriter : IDisposable
+public sealed class Writer : IDisposable
 {
     private readonly StreamWriter _writer;
     private readonly int _columns;
 
-    public CsvWriter(string filepath, params string[] columnHeaders)
+    public Writer(string filepath, params string[] columnHeaders)
     {
         _writer = new StreamWriter($"../../../../data/{filepath}");
         _columns = columnHeaders.Length;

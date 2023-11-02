@@ -1,4 +1,5 @@
-﻿using PropertySim.Experiments;
+﻿using PropertySim.Csv;
+using PropertySim.Experiments;
 
 namespace PropertySim;
 
@@ -14,19 +15,18 @@ internal static class Sim
 
     private static void RunBaseline()
     {
-        using var writer = new CsvWriter(
+        using var writer = new Writer(
             "baseline.csv",
-            "simulationYears",
-            "deposit",
-            "initialPropertyValue",
-            "propertyValueYearlyIncrease",
-            "mortgageTerm",
-            "mortgageInterestRate",
-            "initialMonthlyRentPrice",
-            "rentPriceYearlyIncrease",
-            "savingsInterestRate",
-            "delta"
-        );
+            Columns.SimulationYears,
+            Columns.Deposit,
+            Columns.InitialPropertyValue,
+            Columns.PropertyValueYearlyIncrease,
+            Columns.MortgageTerm,
+            Columns.MortgageInterestRate,
+            Columns.InitialMonthlyRentPrice,
+            Columns.RentPriceYearlyIncrease,
+            Columns.SavingsInterestRate,
+            Columns.Delta);
         var result = new Simulation().Run();
         writer.WriteLine(
             Baseline.SimulationYears,

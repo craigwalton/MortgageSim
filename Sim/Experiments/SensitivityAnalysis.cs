@@ -1,15 +1,16 @@
+using PropertySim.Csv;
 using PropertySim.Variables;
 
 namespace PropertySim.Experiments;
 
 public static class SensitivityAnalysis
 {
-    private static readonly Variable s_initialPropertyValue = new("initialPropertyValue", new Range(100_000m, 500_000m, 10_000m));
-    private static readonly Variable s_propertyValueYearlyIncrease = new("propertyValueYearlyIncrease", new(-0.15m, 0.15m, 0.01m));
-    private static readonly Variable s_mortgageInterestRate = new("mortgageInterestRate", new(-0m, 0.2m, 0.01m));
-    private static readonly Variable s_initialMonthlyRentPrice = new("initialMonthlyRentPrice", new(500m, 2000m, 100m));
-    private static readonly Variable s_rentPriceYearlyIncrease = new("rentPriceYearlyIncrease", new(-0.1m, 0.15m, 0.01m));
-    private static readonly Variable s_savingsInterestRate = new("savingsInterestRate", new(-0.1m, 0.2m, 0.01m));
+    private static readonly Variable s_initialPropertyValue = new(Columns.InitialPropertyValue, new Range(100_000m, 500_000m, 10_000m));
+    private static readonly Variable s_propertyValueYearlyIncrease = new(Columns.PropertyValueYearlyIncrease, new(-0.15m, 0.15m, 0.01m));
+    private static readonly Variable s_mortgageInterestRate = new(Columns.MortgageInterestRate, new(-0m, 0.2m, 0.01m));
+    private static readonly Variable s_initialMonthlyRentPrice = new(Columns.InitialMonthlyRentPrice, new(500m, 2000m, 100m));
+    private static readonly Variable s_rentPriceYearlyIncrease = new(Columns.RentPriceYearlyIncrease, new(-0.1m, 0.15m, 0.01m));
+    private static readonly Variable s_savingsInterestRate = new(Columns.SavingsInterestRate, new(-0.1m, 0.2m, 0.01m));
 
     public static void Run1D()
     {
@@ -68,7 +69,7 @@ public static class SensitivityAnalysis
 
     private static void Run1D(Variable x, Func<decimal, Simulation> create)
     {
-        using var writer = new CsvWriter($"{x.Name}.csv", x.Name, "delta");
+        using var writer = new Writer($"{x.Name}.csv", x.Name, Columns.Delta);
         foreach (var i in x.Range.Enumerate())
         {
             var result = create(i).Run().ComputeDelta();
@@ -78,7 +79,7 @@ public static class SensitivityAnalysis
 
     private static void Run2D(Variable x, Variable y, Func<decimal, decimal, Simulation> create)
     {
-        using var writer = new CsvWriter($"{x.Name}-{y.Name}.csv", x.Name, y.Name, "delta");
+        using var writer = new Writer($"{x.Name}-{y.Name}.csv", x.Name, y.Name, Columns.Delta);
         foreach (var i in x.Range.Enumerate())
         {
             foreach (var j in y.Range.Enumerate())
@@ -91,7 +92,7 @@ public static class SensitivityAnalysis
 
     private static void Run3D(Variable x, Variable y, Variable z, Func<decimal, decimal, decimal, Simulation> create)
     {
-        using var writer = new CsvWriter($"{x.Name}-{y.Name}-{z.Name}.csv", x.Name, y.Name, z.Name, "delta");
+        using var writer = new Writer($"{x.Name}-{y.Name}-{z.Name}.csv", x.Name, y.Name, z.Name, Columns.Delta);
         foreach (var i in x.Range.Enumerate())
         {
             foreach (var j in y.Range.Enumerate())
