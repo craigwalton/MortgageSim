@@ -32,14 +32,16 @@ public sealed class Simulation
         _savingsInterestRate = savingsInterestRate ?? Baseline.SavingsInterestRate;
     }
 
-    public Result Run()
+    public SimulationResult Run()
     {
         var purchasePlan = new HousePurchasePlan(_propertyValue, _deposit, _mortgageTermYears, _mortgageInterestRate);
         var rentalPlan = new HouseRentalPlan(_deposit, _rent, _savingsInterestRate);
         var time = RunCore(_simulationYears, purchasePlan, rentalPlan);
-        Debug.WriteLine($"Purchase plan: Equity={purchasePlan.ComputeEquity(time):C}");
-        Debug.WriteLine($"Rental plan: Equity={rentalPlan.ComputeEquity(time):C}");
-        return new Result(purchasePlan.ComputeEquity(time), rentalPlan.ComputeEquity(time));
+        var result = new SimulationResult(purchasePlan.ComputeEquity(time), rentalPlan.ComputeEquity(time));
+        Debug.WriteLine($"Purchase plan equity={result.PurchaseEquity:C}");
+        Debug.WriteLine($"Rental plan equity={result.RentEquity:C}");
+        Debug.WriteLine($"Delta={result.ComputeDelta():C}");
+        return result;
     }
 
     private static Time RunCore(int simulationYears, HousePurchasePlan purchasePlan, HouseRentalPlan rentalPlan)
@@ -52,18 +54,5 @@ public sealed class Simulation
             rentalPlan.ProcessMonth(payment, time);
         }
         return time;
-    }
-
-    public sealed record Result(decimal PurchaseEquity, decimal RentEquity)
-    {
-        public override string ToString()
-        {
-            return $"Purchase equity={PurchaseEquity:C}; Rent equity={RentEquity:C}";
-        }
-
-        public decimal ComputeDelta()
-        {
-            return PurchaseEquity - RentEquity;
-        }
     }
 }
