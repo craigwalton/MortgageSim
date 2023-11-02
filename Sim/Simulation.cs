@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using PropertySim.Plans;
 using PropertySim.Variables;
 
@@ -12,33 +13,30 @@ public sealed class Simulation
         PropertyValue? propertyValue = null,
         InterestRate? mortgageInterestRate = null,
         RentPrice? rent = null,
-        InterestRate? savingsInterestRate = null,
-        StreamWriter? output = null)
+        InterestRate? savingsInterestRate = null)
     {
         propertyValue ??= Baseline.PropertyValue;
         mortgageInterestRate ??= Baseline.MortgageInterestRate;
         rent ??= Baseline.RentPrice;
         savingsInterestRate ??= Baseline.SavingsInterestRate;
-        output ??= StreamWriter.Null;
 
         var purchasePlan = new HousePurchasePlan(
             propertyValue.Value,
             deposit,
             mortgageTermYears,
-            mortgageInterestRate.Value,
-            output);
-        var rentalPlan = new HouseRentalPlan(deposit, rent.Value, savingsInterestRate.Value, output);
+            mortgageInterestRate.Value);
+        var rentalPlan = new HouseRentalPlan(deposit, rent.Value, savingsInterestRate.Value);
 
         Time time;
         for (time = new Time(); time.Year < simulationYears; time.AdvanceOneMonth())
         {
-            output.WriteLine($"## {time} ##");
+            Debug.WriteLine($"## {time} ##");
             purchasePlan.ProcessMonth(out var payment);
             rentalPlan.ProcessMonth(payment, time);
         }
 
-        output.WriteLine($"Purchase plan: Equity={purchasePlan.ComputeEquity(time):C}");
-        output.WriteLine($"Rental plan: Equity={rentalPlan.ComputeEquity(time):C}");
+        Debug.WriteLine($"Purchase plan: Equity={purchasePlan.ComputeEquity(time):C}");
+        Debug.WriteLine($"Rental plan: Equity={rentalPlan.ComputeEquity(time):C}");
 
         return new Result(purchasePlan.ComputeEquity(time), rentalPlan.ComputeEquity(time));
     }

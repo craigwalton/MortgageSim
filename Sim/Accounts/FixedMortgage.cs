@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using PropertySim.Variables;
 
 namespace PropertySim.Accounts;
@@ -7,15 +8,13 @@ public sealed class FixedMortgage
     private int _outstandingPayments;
     private readonly InterestRate _interestRate;
     private readonly decimal _monthlyPayment;
-    private readonly StreamWriter _output;
 
-    public FixedMortgage(decimal initialLoan, int initialTermYears, InterestRate interestRate, StreamWriter output)
+    public FixedMortgage(decimal initialLoan, int initialTermYears, InterestRate interestRate)
     {
         OutstandingLoan = initialLoan;
         _outstandingPayments = 12 * initialTermYears;
         _interestRate = interestRate;
         _monthlyPayment = ComputeMonthlyPayment(initialLoan, interestRate, _outstandingPayments);
-        _output = output;
     }
 
     public decimal OutstandingLoan { get; private set; }
@@ -36,8 +35,8 @@ public sealed class FixedMortgage
         var principal = _monthlyPayment - interest;
         OutstandingLoan -= principal;
         _outstandingPayments--;
-        _output.WriteLine($"Mortgage payment={_monthlyPayment:C} (interest={interest:C}; principal={principal:C}); " +
-                          $"Loan={OutstandingLoan:C}");
+        Debug.WriteLine($"Mortgage payment={_monthlyPayment:C} (interest={interest:C}; principal={principal:C}); " +
+                        $"Loan={OutstandingLoan:C}");
         return _monthlyPayment;
     }
 
@@ -48,8 +47,8 @@ public sealed class FixedMortgage
         var payment = interest + principal;
         OutstandingLoan = 0;
         _outstandingPayments = 0;
-        _output.WriteLine($"Final mortgage payment={payment:C} (interest={interest:C}; principal={principal:C}); " +
-                          $"Loan={OutstandingLoan:C}");
+        Debug.WriteLine($"Final mortgage payment={payment:C} (interest={interest:C}; principal={principal:C}); " + 
+                        $"Loan={OutstandingLoan:C}");
         return payment;
     }
 

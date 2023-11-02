@@ -11,11 +11,10 @@ public sealed class HousePurchasePlan : Plan
         PropertyValue propertyValue,
         decimal deposit,
         int mortgageTermYears,
-        InterestRate mortgageInterestRate,
-        StreamWriter output)
+        InterestRate mortgageInterestRate)
     {
         _propertyValue = propertyValue;
-        Mortgage = new FixedMortgage(propertyValue.InitialValue - deposit, mortgageTermYears, mortgageInterestRate, output);
+        Mortgage = new FixedMortgage(propertyValue.InitialValue - deposit, mortgageTermYears, mortgageInterestRate);
     }
 
     public FixedMortgage Mortgage { get; }

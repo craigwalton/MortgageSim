@@ -9,7 +9,7 @@ public sealed class SavingsTests
     [Fact]
     public void Sets_initial_balance()
     {
-        var sut = new Savings(100m, new InterestRate(0.01m), StreamWriter.Null);
+        var sut = new Savings(100m, new InterestRate(0.01m));
 
         var actual = sut.Balance;
 
@@ -19,7 +19,7 @@ public sealed class SavingsTests
     [Fact]
     public void Can_make_monthly_payment()
     {
-        var sut = new Savings(100m, new InterestRate(0.12m), StreamWriter.Null);
+        var sut = new Savings(100m, new InterestRate(0.12m));
 
         sut.MakeMonthlyPayment(10m);
 
@@ -29,7 +29,7 @@ public sealed class SavingsTests
     [Fact]
     public void Can_make_zero_monthly_payment()
     {
-        var sut = new Savings(100m, new InterestRate(0.12m), StreamWriter.Null);
+        var sut = new Savings(100m, new InterestRate(0.12m));
 
         sut.MakeMonthlyPayment(0m);
         sut.MakeMonthlyPayment(0m);
@@ -41,7 +41,7 @@ public sealed class SavingsTests
     [Fact]
     public void Interest_compounds()
     {
-        var sut = new Savings(100m, new InterestRate(0.12m), StreamWriter.Null);
+        var sut = new Savings(100m, new InterestRate(0.12m));
 
         sut.MakeMonthlyPayment(10m);
         sut.MakeMonthlyPayment(10m);
@@ -52,7 +52,7 @@ public sealed class SavingsTests
     [Fact]
     public void Can_open_empty_account()
     {
-        var sut = new Savings(0m, new InterestRate(0.12m), StreamWriter.Null);
+        var sut = new Savings(0m, new InterestRate(0.12m));
 
         sut.MakeMonthlyPayment(0m);
 
@@ -62,7 +62,7 @@ public sealed class SavingsTests
     [Fact]
     public void Supports_zero_interest_rate()
     {
-        var sut = new Savings(100m, new InterestRate(0m), StreamWriter.Null);
+        var sut = new Savings(100m, new InterestRate(0m));
 
         sut.MakeMonthlyPayment(0m);
 

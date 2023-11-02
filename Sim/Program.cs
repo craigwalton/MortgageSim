@@ -59,11 +59,4 @@ internal static class Sim
             }
         }
     }
-
-    private static StreamWriter CreateConsoleStreamWriter()
-    {
-        var output = new StreamWriter(Console.OpenStandardOutput());
-        output.AutoFlush = true;
-        return output;
-    }
 }

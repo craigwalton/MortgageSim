@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using PropertySim.Variables;
 
 namespace PropertySim.Accounts;
@@ -5,13 +6,11 @@ namespace PropertySim.Accounts;
 public sealed class Savings
 {
     private readonly InterestRate _interestRate;
-    private readonly StreamWriter _output;
 
-    public Savings(decimal initialBalance, InterestRate interestRate, StreamWriter output)
+    public Savings(decimal initialBalance, InterestRate interestRate)
     {
         Balance = initialBalance;
         _interestRate = interestRate;
-        _output = output;
     }
 
     public decimal Balance { get; private set; }
@@ -26,6 +25,6 @@ public sealed class Savings
         //     throw new InvalidOperationException(
         //         $"A payment of {payment:C} will result in this account being overdrawn: {Balance:C}.");
         // }
-        _output.WriteLine($"Savings payment={payment:C}; Interest={accruedInterest:C}; Balance={Balance:C}");
+        Debug.WriteLine($"Savings payment={payment:C}; Interest={accruedInterest:C}; Balance={Balance:C}");
     }
 }

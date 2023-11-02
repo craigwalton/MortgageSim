@@ -10,7 +10,7 @@ public sealed class RentTests
     [Fact]
     public void Can_take_payment()
     {
-        var sut = new Rent(new RentPrice(100m, 0.01m), StreamWriter.Null);
+        var sut = new Rent(new RentPrice(100m, 0.01m));
 
         var actual = sut.TakePayment(new Time());
 
@@ -20,7 +20,7 @@ public sealed class RentTests
     [Fact]
     public void Computes_yearly_rent_increase()
     {
-        var sut = new Rent(new RentPrice(100m, 0.01m), StreamWriter.Null);
+        var sut = new Rent(new RentPrice(100m, 0.01m));
 
         Assert.Equal(100m, sut.TakePayment(new Time(month: 0, year: 0)));
         Assert.Equal(100m, sut.TakePayment(new Time(month: 1, year: 0)));

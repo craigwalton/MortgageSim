@@ -5,10 +5,10 @@ namespace PropertySim.Plans;
 
 public sealed class HouseRentalPlan : Plan
 {
-    public HouseRentalPlan(decimal deposit, RentPrice rentPrice, InterestRate savingsInterestRate, StreamWriter output)
+    public HouseRentalPlan(decimal deposit, RentPrice rentPrice, InterestRate savingsInterestRate)
     {
-        Rent = new Rent(rentPrice, output);
-        Savings = new Savings(deposit, savingsInterestRate, output);
+        Rent = new Rent(rentPrice);
+        Savings = new Savings(deposit, savingsInterestRate);
     }
 
     public Rent Rent { get; }
