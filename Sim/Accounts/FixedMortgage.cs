@@ -5,9 +5,9 @@ namespace PropertySim.Accounts;
 
 public sealed class FixedMortgage
 {
-    private int _outstandingPayments;
     private readonly InterestRate _interestRate;
     private readonly decimal _monthlyPayment;
+    private int _outstandingPayments;
 
     public FixedMortgage(decimal initialLoan, int initialTermYears, InterestRate interestRate)
     {
