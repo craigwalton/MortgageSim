@@ -12,7 +12,7 @@ public sealed class Rent
         _rentPrice = rentPrice;
     }
 
-    public decimal TakePayment(Time time)
+    public decimal TakeMonthlyPayment(Time time)
     {
         var price = _rentPrice.ComputeMonthlyPrice(time);
         Debug.WriteLine($"Rent payment={price:C}");

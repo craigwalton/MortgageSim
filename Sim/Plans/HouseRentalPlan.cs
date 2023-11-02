@@ -17,7 +17,7 @@ public sealed class HouseRentalPlan : Plan
 
     public void ProcessMonth(decimal amountAvailable, Time time)
     {
-        var rentPayment = Rent.TakePayment(time);
+        var rentPayment = Rent.TakeMonthlyPayment(time);
         Savings.MakeMonthlyPayment(amountAvailable - rentPayment);
     }
 

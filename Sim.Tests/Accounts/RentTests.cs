@@ -12,7 +12,7 @@ public sealed class RentTests
     {
         var sut = new Rent(new RentPrice(100m, 0.01m));
 
-        var actual = sut.TakePayment(new Time());
+        var actual = sut.TakeMonthlyPayment(new Time());
 
         Assert.Equal(100m, actual);
     }
@@ -22,9 +22,9 @@ public sealed class RentTests
     {
         var sut = new Rent(new RentPrice(100m, 0.01m));
 
-        Assert.Equal(100m, sut.TakePayment(new Time(month: 0, year: 0)));
-        Assert.Equal(100m, sut.TakePayment(new Time(month: 1, year: 0)));
-        Assert.Equal(101m, sut.TakePayment(new Time(month: 0, year: 1)));
-        Assert.Equal(102.01m, sut.TakePayment(new Time(month: 0, year: 2)));
+        Assert.Equal(100m, sut.TakeMonthlyPayment(new Time(month: 0, year: 0)));
+        Assert.Equal(100m, sut.TakeMonthlyPayment(new Time(month: 1, year: 0)));
+        Assert.Equal(101m, sut.TakeMonthlyPayment(new Time(month: 0, year: 1)));
+        Assert.Equal(102.01m, sut.TakeMonthlyPayment(new Time(month: 0, year: 2)));
     }
 }
