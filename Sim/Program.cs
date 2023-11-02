@@ -1,5 +1,4 @@
 ﻿using PropertySim.Experiments;
-using PropertySim.Variables;
 
 namespace PropertySim;
 
