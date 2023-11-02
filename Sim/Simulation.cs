@@ -20,11 +20,7 @@ public static class Simulation
         rent ??= Baseline.RentPrice;
         savingsInterestRate ??= Baseline.SavingsInterestRate;
 
-        var purchasePlan = new HousePurchasePlan(
-            propertyValue,
-            deposit,
-            mortgageTermYears,
-            mortgageInterestRate.Value);
+        var purchasePlan = new HousePurchasePlan(propertyValue, deposit, mortgageTermYears, mortgageInterestRate.Value);
         var rentalPlan = new HouseRentalPlan(deposit, rent, savingsInterestRate.Value);
 
         Time time;
