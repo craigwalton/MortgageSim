@@ -31,7 +31,7 @@ def infer_units(var):
     name = var.lower()
     if "rate" in name or "increase" in name:
         return "%"
-    if "duration" in name or "years" in name:
+    if "duration" in name or "term" in name:
         return "years"
     return "£"
 
