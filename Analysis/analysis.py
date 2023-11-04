@@ -11,12 +11,12 @@ def load_baseline():
     return load_csv("baseline")
 
 
-def add_2d_baseline(fig, var_1, var_1_multiplier, var_2, var_2_multiplier):
+def add_2d_baseline(fig, var_1, var_2):
     df = load_csv("baseline")
     fig.add_trace(
         go.Scatter(
-            x=df[var_1] * var_1_multiplier,
-            y=df[var_2] * var_2_multiplier,
+            x=df[var_1] * infer_multiplier(var_1),
+            y=df[var_2] * infer_multiplier(var_2),
             mode="markers+text",
             name="Baseline",
             text=["Baseline"],
@@ -36,7 +36,11 @@ def infer_units(var):
     return "£"
 
 
-def infer_multipler(units):
+def infer_multiplier(var):
+    return infer_multiplier_from_units(infer_units(var))
+
+
+def infer_multiplier_from_units(units):
     return 100 if units == "%" else 1
 
 
@@ -56,8 +60,8 @@ def print_baseline():
 
     def print_row(name, value):
         units = infer_units(name)
-        multipler = infer_multipler(units)
-        print(f"{titleize(name):<30}{format_value(value*multipler, units)}")
+        multiplier = infer_multiplier(units)
+        print(f"{titleize(name):<30}{format_value(value*multiplier, units)}")
 
     for name, values in load_baseline().transpose().iterrows():
         print_row(name, values.iloc[0])
