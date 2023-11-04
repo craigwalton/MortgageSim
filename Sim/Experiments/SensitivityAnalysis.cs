@@ -15,6 +15,9 @@ public static class SensitivityAnalysis
     public static void Run1D()
     {
         Run1D(
+            s_initialPropertyValue,
+            x => new Simulation(propertyValue: Baseline.PropertyValue with { InitialValue = x }));
+        Run1D(
             s_propertyValueYearlyIncrease,
             x => new Simulation(propertyValue: Baseline.PropertyValue with { YearlyIncrease = x }));
         Run1D(
@@ -23,6 +26,9 @@ public static class SensitivityAnalysis
         Run1D(
             s_initialMonthlyRentPrice,
             x => new Simulation(rent: Baseline.RentPrice with {InitialMonthly = x}));
+        Run1D(
+            s_rentPriceYearlyIncrease,
+            x => new Simulation(rent: Baseline.RentPrice with {YearlyIncrease = x}));
         Run1D(
             s_savingsInterestRate,
             x => new Simulation(savingsInterestRate: new InterestRate(x)));
