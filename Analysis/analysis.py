@@ -22,6 +22,7 @@ def add_2d_baseline(fig, var_1, var_1_multiplier, var_2, var_2_multiplier):
             text=["Baseline"],
             textposition="bottom center",
             marker=dict(color="green"),
+            showlegend=False,
         )
     )
 
