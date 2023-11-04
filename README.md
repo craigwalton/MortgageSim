@@ -47,5 +47,8 @@ The following sources were consulted to select appropriate baseline values for t
 This simulator takes no consideration of the affordability of either scenario. Either scenario may result
 in negative equity.
 
-Costs associated with property purchase (e.g. stamp duty, solicitor fees, mortgage product fees, maintenance) are not
-considered.
+Costs associated with property purchase (e.g. stamp duty, solicitor fees, mortgage product fees, maintenance fees or
+mortgage early repayment fees) are not considered.
+
+This simulator only considers the financial ramifications of the two options. It does not consider non-monetary aspects
+such as the speed of property transactions, the flexibility to make home modifications, or other lifestyle factors.
