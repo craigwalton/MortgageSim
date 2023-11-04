@@ -8,7 +8,7 @@ def load_csv(name):
 
 
 def load_baseline():
-    return load_csv("baseline").transpose()
+    return load_csv("baseline")
 
 
 def add_2d_baseline(fig, var_1, var_1_multiplier, var_2, var_2_multiplier):
@@ -27,9 +27,37 @@ def add_2d_baseline(fig, var_1, var_1_multiplier, var_2, var_2_multiplier):
     )
 
 
+def infer_units(var):
+    name = var.lower()
+    if "rate" in name or "increase" in name:
+        return "%"
+    if "duration" in name or "years" in name:
+        return "years"
+    return "£"
+
+
 def infer_multipler(units):
     return 100 if units == "%" else 1
 
 
-def get_axis_title(var, units):
-    return f"{titleize(var)} ({units})"
+def get_axis_title(var):
+    return f"{titleize(var)} ({infer_units(var)})"
+
+
+def print_baseline():
+    def format_value(value, units):
+        match units:
+            case "%":
+                return f"{value:10} {units}"
+            case "years":
+                return f"{value:10.0f} {units}"
+            case "£":
+                return f"{value:10.0f} {units}"
+
+    def print_row(name, value):
+        units = infer_units(name)
+        multipler = infer_multipler(units)
+        print(f"{titleize(name):<30}{format_value(value*multipler, units)}")
+
+    for name, values in load_baseline().transpose().iterrows():
+        print_row(name, values.iloc[0])
