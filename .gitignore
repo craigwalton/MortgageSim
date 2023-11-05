@@ -398,3 +398,6 @@ FodyWeavers.xsd
 *.sln.iml
 /.idea/
 .idea/workspace.xml
+
+# Mac OS
+.DS_Store
