@@ -401,3 +401,6 @@ FodyWeavers.xsd
 
 # Mac OS
 .DS_Store
+
+# Jupyter checkpoints
+.ipynb_checkpoints
