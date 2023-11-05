@@ -2144,6 +2144,40 @@ input, select, textarea {
 
 				}
 
+/* Customisations */
+
+	.blue {
+		color: rgb(76, 101, 242);
+	}
+
+	.purple {
+		color: rgb(158, 89, 242);
+	}
+
+	.red {
+		color: rgb(242, 69, 55);
+	}
+
+	.orange {
+		color: rgb(255, 148, 87);
+	}
+
+	.green {
+		color: rgb(0, 199, 143);
+	}
+
+	.cyan {
+		color: rgb(0, 207, 239);
+	}
+
+	.contourblue {
+		color: rgb(24, 117, 187);
+	}
+
+	.contourred {
+		color: rgb(172, 10, 39);
+	}
+
 /* Footer */
 
 	#footer {
