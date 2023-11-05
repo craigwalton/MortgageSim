@@ -33,6 +33,10 @@ body {
 	line-height: 1;
 }
 
+section {
+	font-size: 0.7em;
+}
+
 ol, ul {
 	list-style: none;
 }

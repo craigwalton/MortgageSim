@@ -6,7 +6,7 @@
 -->
 <html>
 	<head>
-		<title>Astral by HTML5 UP</title>
+		<title>Buying vs Renting</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
@@ -17,115 +17,78 @@
 		<!-- Wrapper-->
 			<div id="wrapper">
 
-				<!-- Nav -->
-					<nav id="nav">
-						<a href="#" class="icon solid fa-home"><span>Home</span></a>
-						<a href="#work" class="icon solid fa-folder"><span>Work</span></a>
-						<a href="#contact" class="icon solid fa-envelope"><span>Contact</span></a>
-						<a href="https://twitter.com/ajlkn" class="icon brands fa-twitter"><span>Twitter</span></a>
-					</nav>
-
 				<!-- Main -->
 					<div id="main">
 
 						<!-- Me -->
-							<article id="home" class="panel intro">
+							<article id="home" class="panel">
 								<header>
-									<h1>Jane Doe</h1>
-									<p>Senior Astral Projectionist</p>
+									<h1>Buying vs Renting</h1>
+									<p>Analysis based on a 5 year simulation</p>
 								</header>
-								<a href="#work" class="jumplink pic">
-									<span class="arrow icon solid fa-chevron-right"><span>See my work</span></span>
-									<img src="images/me.jpg" alt="" />
-								</a>
+                                
+                                <section>
+                                    <h2>Baseline</h2>
+                                    
+                                    <table>
+                                        <tr>
+                                            <td>Deposit</td>
+                                            <td>£30,000</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Initial Property Value</td>
+                                            <td>£200,000</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Property Value Yearly Increase</td>
+                                            <td>2.5%</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Mortgage Term</td>
+                                            <td>25 years</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Mortgage Interest Rate</td>
+                                            <td>5%</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Initial Monthly Rent Price</td>
+                                            <td>£1200</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Rent Price Yearly Increase</td>
+                                            <td>3%</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Savings Interest Rate</td>
+                                            <td>5%</td>
+                                        </tr>
+                                    </table>
+
+                                    If these parameters stayed the same for 5 years, you'd be <b>£56,008 better off</b> if you chose to purchase rather than rent. We'll call this number the delta, where a positive value indicates the buyer is better off and a negative value indicates the renter is better off.
+
+                                </section>
+
+                                <section>
+                                    <h2>Sensitivity Analysis</h2>
+
+                                    What happens to the delta when we change each of the input variables in turn?<br/>
+
+                                    <iframe src="plots/1d-sensitivity.html" width="100%" height="400px"></iframe>
+
+                                    With slopes<br/>
+                                    <iframe src="plots/1d-sensitivity-slope.html" width="100%" height="400px"></iframe>
+
+                                </section>
 							</article>
 
-						<!-- Work -->
-							<article id="work" class="panel">
-								<header>
-									<h2>Work</h2>
-								</header>
-								<p>
-									Phasellus enim sapien, blandit ullamcorper elementum eu, condimentum eu elit.
-									Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia
-									luctus elit eget interdum.
-								</p>
-								<section>
-									<div class="row">
-										<div class="col-4 col-6-medium col-12-small">
-											<a href="#" class="image fit"><img src="images/pic01.jpg" alt=""></a>
-										</div>
-										<div class="col-4 col-6-medium col-12-small">
-											<a href="#" class="image fit"><img src="images/pic02.jpg" alt=""></a>
-										</div>
-										<div class="col-4 col-6-medium col-12-small">
-											<a href="#" class="image fit"><img src="images/pic03.jpg" alt=""></a>
-										</div>
-										<div class="col-4 col-6-medium col-12-small">
-											<a href="#" class="image fit"><img src="images/pic04.jpg" alt=""></a>
-										</div>
-										<div class="col-4 col-6-medium col-12-small">
-											<a href="#" class="image fit"><img src="images/pic05.jpg" alt=""></a>
-										</div>
-										<div class="col-4 col-6-medium col-12-small">
-											<a href="#" class="image fit"><img src="images/pic06.jpg" alt=""></a>
-										</div>
-										<div class="col-4 col-6-medium col-12-small">
-											<a href="#" class="image fit"><img src="images/pic07.jpg" alt=""></a>
-										</div>
-										<div class="col-4 col-6-medium col-12-small">
-											<a href="#" class="image fit"><img src="images/pic08.jpg" alt=""></a>
-										</div>
-										<div class="col-4 col-6-medium col-12-small">
-											<a href="#" class="image fit"><img src="images/pic09.jpg" alt=""></a>
-										</div>
-										<div class="col-4 col-6-medium col-12-small">
-											<a href="#" class="image fit"><img src="images/pic10.jpg" alt=""></a>
-										</div>
-										<div class="col-4 col-6-medium col-12-small">
-											<a href="#" class="image fit"><img src="images/pic11.jpg" alt=""></a>
-										</div>
-										<div class="col-4 col-6-medium col-12-small">
-											<a href="#" class="image fit"><img src="images/pic12.jpg" alt=""></a>
-										</div>
-									</div>
-								</section>
-							</article>
-
-						<!-- Contact -->
-							<article id="contact" class="panel">
-								<header>
-									<h2>Contact Me</h2>
-								</header>
-								<form action="#" method="post">
-									<div>
-										<div class="row">
-											<div class="col-6 col-12-medium">
-												<input type="text" name="name" placeholder="Name" />
-											</div>
-											<div class="col-6 col-12-medium">
-												<input type="text" name="email" placeholder="Email" />
-											</div>
-											<div class="col-12">
-												<input type="text" name="subject" placeholder="Subject" />
-											</div>
-											<div class="col-12">
-												<textarea name="message" placeholder="Message" rows="6"></textarea>
-											</div>
-											<div class="col-12">
-												<input type="submit" value="Send Message" />
-											</div>
-										</div>
-									</div>
-								</form>
-							</article>
-
+			
 					</div>
 
 				<!-- Footer -->
 					<div id="footer">
 						<ul class="copyright">
-							<li>&copy; Untitled.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+							<li>&copy; Craig Walton</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
 						</ul>
 					</div>
 
