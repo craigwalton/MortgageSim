@@ -8,9 +8,9 @@ internal static class Sim
     public static void Main()
     {
         RunBaseline();
-        // SensitivityAnalysis.Run1D();
-        // SensitivityAnalysis.Run2D();
-        // SensitivityAnalysis.Run3D();
+        SensitivityAnalysis.Run1D();
+        SensitivityAnalysis.Run2D();
+        SensitivityAnalysis.Run3D();
     }
 
     private static void RunBaseline()
