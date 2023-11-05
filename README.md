@@ -4,7 +4,9 @@ A deterministic simulator written in C# comparing two options which prospective 
 - Buying a property with a mortgage
 - Renting a property and investing any remaining funds.
 
-The Jupyter notebooks in `Analysis/` compare sensitivities of the inputs.
+The results of this simulation are presented as an HTML web page in `docs/` and hosted at [craigwalton.github.io/MortgageSim](https://craigwalton.github.io/MortgageSim).
+
+The Jupyter notebooks in `Analysis/` are used to generate the Plotly plots used on the web page.
 
 ## Dependent variable (output)
 
