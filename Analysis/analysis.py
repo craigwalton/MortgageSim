@@ -1,10 +1,23 @@
+import os
+from itertools import permutations
+
 import pandas as pd
+import plotly.express as px
 import plotly.graph_objects as go
+import plotly.offline as offline
 from inflection import titleize
 
 
 def load_csv(name):
     return pd.read_csv(f"../Data/{name}.csv")
+
+
+def load_csv_from_vars(*args):
+    for p in list(permutations(args)):
+        joined = "-".join(p)
+        name = f"../Data/{joined}.csv"
+        if os.path.exists(name):
+            return pd.read_csv(name)
 
 
 def load_baseline():
@@ -65,3 +78,24 @@ def print_baseline():
 
     for name, values in load_baseline().transpose().iterrows():
         print_row(name, values.iloc[0])
+
+
+def save(fig, name):
+    fig.update_layout(
+        font={"size": 8},
+        margin={"l": 0, "r": 0, "t": 0, "b": 0},
+    )
+    offline.plot(fig, filename=f"Presentation/plots/{name}.html", auto_open=False)
+
+
+def get_color(var):
+    colors = px.colors.qualitative.Plotly
+    l = [
+        "initialPropertyValue",
+        "propertyValueYearlyIncrease",
+        "mortgageInterestRate",
+        "initialMonthlyRentPrice",
+        "rentPriceYearlyIncrease",
+        "savingsInterestRate",
+    ]
+    return colors[l.index(var)]
