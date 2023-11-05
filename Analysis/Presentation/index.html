@@ -22,52 +22,106 @@
 
 						<!-- Article -->
 							<article id="home" class="panel">
+								<a style="float: right; font-size: small;" href="https://github.com/craigwalton/MortgageSim">Source on GitHub</a>
+
 								<header>
 									<h1>Buying vs Renting</h1>
 									<p>Analysis based on a 5 year simulation</p>
+
+									
 								</header>
+
                                 
                                 <section>
-                                    <h2>Baseline</h2>
-                                    
-                                    <table>
-                                        <tr>
-                                            <td>Deposit</td>
-                                            <td>£30,000</td>
-                                        </tr>
-                                        <tr>
-                                            <td><b class="blue">Initial property value</b></td>
-                                            <td>£200,000</td>
-                                        </tr>
-                                        <tr>
-                                            <td><b class="red">Property value yearly increase</b></td>
-                                            <td>2.5%</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Mortgage term</td>
-                                            <td>25 years</td>
-                                        </tr>
-                                        <tr>
-                                            <td><b class="green">Mortgage interest rate</b></td>
-                                            <td>5%</td>
-                                        </tr>
-                                        <tr>
-                                            <td><b class="purple">Initial monthly rent price</b></td>
-                                            <td>£1200</td>
-                                        </tr>
-                                        <tr>
-                                            <td><b class="orange">Rent price yearly increase</b></td>
-                                            <td>3%</td>
-                                        </tr>
-                                        <tr>
-                                            <td><b class="cyan">Savings interest rate</b></td>
-                                            <td>5%</td>
-                                        </tr>
-                                    </table>
+                                    <h1>Baseline</h1>
 
-                                    If these parameters stayed the same for 5 years, you'd be <b>£56,008 better off</b> if you chose to purchase rather than rent.
-									We'll call this number the delta, where a positive value indicates the buyer is better off and a negative value indicates the renter is better off.
+									The following values will form the baseline for the simulation.
+									
+									<div style="display: flex; justify-content: space-between; align-items: flex-start; flex-shrink: 0;">
+										<div style="width: 30%;">
+											<b>Common</b>
+											<table>
+												<tr>
+													<td>Deposit</td>
+													<td style="text-align: right;">£30,000</td>
+												</tr>
+											</table>
+										</div>
 
+										<div style="width: 30%;">
+											<b>Buy</b>
+											<table>
+												<tr>
+													<td><b class="blue">Initial property value</b></td>
+													<td style="text-align: right;">£200,000</td>
+												</tr>
+												<tr>
+													<td><b class="red">Property value yearly increase</b></td>
+													<td style="text-align: right;">2.5%</td>
+												</tr>
+												<tr>
+													<td><b class="green">Mortgage interest rate</b></td>
+													<td style="text-align: right;">5%</td>
+												</tr>
+												<tr>
+													<td>Mortgage term</td>
+													<td style="text-align: right;">25 years</td>
+												</tr>
+											</table>
+										</div>
+
+										<div style="width: 30%;">
+											<b>Rent</b>
+											<table>
+												<tr>
+													<td><b class="purple">Initial monthly rent price</b></td>
+													<td style="text-align: right;">£1200</td>
+												</tr>
+												<tr>
+													<td><b class="orange">Rent price yearly increase</b></td>
+													<td style="text-align: right;">3%</td>
+												</tr>
+												<tr>
+													<td><b class="cyan">Savings interest rate</b></td>
+													<td style="text-align: right;">5%</td>
+												</tr>
+											</table>
+										</div>
+									</div>
+
+									<h2>Method</h2>
+
+									<table style="table-layout: fixed;">
+										<tr>
+											<td><b>Buy</b></td>
+											<td><b>Rent</b></td>
+										</tr>
+										<tr>
+											<td style="vertical-align: top; padding-right: 10px;">
+												<p>
+													Each month, a <code>mortgage payment</code> is taken. Part of it is interest and the rest goes towards paying off the loan.
+													At the end of the 5 years, the resulting net worth is<br/>
+													<code>(property value) - (outstanding loan)</code>.
+												</p>
+											</td>
+											<td style="vertical-align: top;">
+												<p>
+													£30,000 is immediately payed into the savings account. Each month, a payment of
+													<code>(mortgage payment - rent)</code> is made into the savings account (note: may represent a withdrawal).<br/>
+													At the end of the 5 years, the resulting net worth is the <code>savings balance</code>.
+												</p>
+											</td>
+										</tr>
+									</table>
+
+									<p>
+										The result of the rent scenario is subtracted from that of the buy scenario to compute what we'll call the delta.
+										A positive value indicates that the buyer is better off and a negative value indicates that the renter is better off.
+									</p>
+
+									<p>
+										For the baseline as outlined above, the delta is £56,008 meaning you'd be <b>£56k better off</b> if you chose to purchase rather than rent.
+									</p>
                                 </section>
 
                                 <section>
@@ -82,37 +136,47 @@
 
                                     <iframe src="plots/1d-sensitivity-slope.html" width="100%" height="400px"></iframe>
 									
-									We can see that the simulation's result (delta) is most sensitive to:
-									<ul>
-										<li><b class="red">Property value yearly increase</b>: each 1% pt increase results in the buyer being £5k-£17k better off</li>
-										<li><b class="green">Mortgage interest rate</b>: each 1% pt increase results in the buyer being £8k-£10k worse off</li>
-										<li><b class="purple">Initial monthly rent price</b>: each £100 increase results in the buyer being £7k better off.</li>
-									</ul>
+									<para style="line-height: 1.6;">
+										We can see that the simulation's result (delta) is most sensitive to:
+										<ul>
+											<li><b class="red">Property value yearly increase</b>: each <b>1% pt increase</b> results in the buyer being <b>£5k-£17k better off</b></li>
+											<li><b class="green">Mortgage interest rate</b>: each <b>1% pt increase</b> results in the buyer being <b>£8k-£10k worse off</b></li>
+											<li><b class="purple">Initial monthly rent price</b>: each <b>£100 increase</b> results in the buyer being <b>£7k better off</b>.</li>
+										</ul>
+									</p>
 
 									<h2>Two at a time</h2>
 									
-									The previous anaysis changed just one variable at a time. The contour plots below show the effect on the delta when we change two variables.
-									A positive delta (better to buy) is <b class="contourblue">blue</b> and a negative delta (better to rent) is <b class="contourred">red</b>.<br/>
-									
-									We'd normally expect the mortgage and savings interest rates to be linked (perhaps as an offset from the Bank of England's base rate).
-									Here's how the <b class="green">mortgage interest rate</b> and <b class="cyan">savings interest rate</b> affect the simulation:
-									
+									<p>
+										The previous anaysis changed just one variable at a time. The contour plots below show the effect on the delta when we change two variables.
+										A positive delta (better to buy) is <b class="contourblue">blue</b> and a negative delta (better to rent) is <b class="contourred">red</b>.<br/>
+									</p>
+
+									<p>
+										We'd normally expect the mortgage and savings interest rates to be linked (perhaps as an offset from the Bank of England's base rate).
+										Here's how the <b class="green">mortgage interest rate</b> and <b class="cyan">savings interest rate</b> affect the simulation:
+									</p>
+
                                     <iframe src="plots/savingsInterestRate-mortgageInterestRate.html" width="100%" height="400px"></iframe>
 
 									We can see that high interest rates (whether mortgage or savings) are bad for buying and good for renting.<br/>
 
 									<hr/>
 
-									For a buyer, we know that high <b class="green">mortgage interest rates</b> are bad and that high <b class="red">property value growth</b> is good.
-									Let's see what the interplay between the two is and where the breakeven point is (i.e. where the delta is £0).
-
+									<p>
+										For a buyer, we know that high <b class="green">mortgage interest rates</b> are bad and that high <b class="red">property value growth</b> is good.
+										Let's see what the interplay between the two is and where the breakeven point is (i.e. where the delta is £0).
+									</p>		
+									
 									<iframe src="plots/propertyValueYearlyIncrease-mortgageInterestRate.html" width="100%" height="400px"></iframe>
 
 									<hr/>
 
-									So far, we've assumed that the prospective buyer can borrow enough money for a <b class="blue">property valued</b> at £200,000 which is roughly equivalent to a <b class="purple">monthly rent</b> of £1,200.
-									What are the results if the budget is reduced or stretched?
-									The <b style="color: gray; text-decoration: underline; text-decoration-style: dashed;">grey dotted line</b> shows an approximate expected relationship between property values and rent prices.
+									<p>
+										So far, we've assumed that the prospective buyer can borrow enough money for a <b class="blue">property valued</b> at £200,000 which is roughly equivalent to a <b class="purple">monthly rent</b> of £1,200.
+										What are the results if the budget is reduced or stretched?
+										The <b style="color: gray; text-decoration: underline; text-decoration-style: dashed;">grey dotted line</b> shows an approximate expected relationship between property values and rent prices.
+									</p>
 
 									<iframe src="plots/initialPropertyValue-initialMonthlyRentPrice.html" width="100%" height="400px"></iframe>
 
@@ -121,25 +185,29 @@
 									<br/><br/>
 									<h2>Three at a time</h2>
 
-									Let's see how the delta is affected when we sweep through a range of values for the 3 most powerful variables:
+									<para style="line-height: 1.6;">
+										Let's see how the delta is affected when we sweep through a range of values for the 3 most powerful variables:
 
-									<ul>
-										<li><b class="red">Property value yearly increase</b></li>
-										<li><b class="green">Mortgage interest rate</b></li>
-										<li><b class="purple">Initial monthly rent price</b></li>
-									</ul>
+										<ul>
+											<li><b class="red">Property value yearly increase</b></li>
+											<li><b class="green">Mortgage interest rate</b></li>
+											<li><b class="purple">Initial monthly rent price</b></li>
+										</ul>
+									</p>
 
-									Like with the 2D contour plots, a positive delta (better to buy) is <b class="contourblue">blue</b> and a negative delta (better to rent) is <b class="contourred">red</b>.
-									Surfaces are drawn at 
-									<b style="color: rgb(49, 76, 101);">+£300k</b>, 
-									<b style="color: rgb(30, 124, 177);">+£200k</b>, 
-									<b style="color: rgb(158, 204, 223);">+£100k</b>, 
-									<b style="color: rgb(0, 0, 0);">£0</b>, 
-									<b style="color: rgb(250, 176, 150);">-£100k</b>, 
-									<b style="color: rgb(197, 54, 58);">-£200k</b>, 
-									<b style="color: rgb(97, 0, 29);">-£300k</b>.
-									Click and drag to orbit the 3D volume plot.
-
+									<p>
+										Like with the 2D contour plots, a positive delta (better to buy) is <b class="contourblue">blue</b> and a negative delta (better to rent) is <b class="contourred">red</b>.<br/>
+										Surfaces are drawn at 
+										<b style="color: rgb(49, 76, 101);">+£300k</b>, 
+										<b style="color: rgb(30, 124, 177);">+£200k</b>, 
+										<b style="color: rgb(158, 204, 223);">+£100k</b>, 
+										<b style="color: rgb(0, 0, 0);">£0</b>, 
+										<b style="color: rgb(250, 176, 150);">-£100k</b>, 
+										<b style="color: rgb(197, 54, 58);">-£200k</b>, 
+										<b style="color: rgb(97, 0, 29);">-£300k</b>.
+										Click and drag to orbit the 3D volume plot.
+									</p>
+									
 									<iframe src="plots/initialMonthlyRentPrice-mortgageInterestRate-propertyValueYearlyIncrease.html" width="100%" height="400px"></iframe>
 
                                 </section>

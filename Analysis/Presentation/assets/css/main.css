@@ -9,8 +9,8 @@
 
 html, body, div, span, applet, object,
 iframe, h1, h2, h3, h4, h5, h6, p, blockquote,
-pre, a, abbr, acronym, address, big, cite,
-code, del, dfn, em, img, ins, kbd, q, s, samp,
+a, abbr, acronym, address, big, cite,
+del, dfn, em, img, ins, kbd, q, s, samp,
 small, strike, strong, sub, sup, tt, var, b,
 u, i, center, dl, dt, dd, ol, ul, li, fieldset,
 form, label, legend, table, caption, tbody,
@@ -51,8 +51,10 @@ blockquote, q {
 	}
 
 table {
-	border-collapse: collapse;
-	border-spacing: 0;
+	border-spacing: 1;
+	-webkit-border-horizontal-spacing: 0px;
+	border-color: gray;
+	border-width: 1px;
 }
 
 body {
@@ -1386,6 +1388,11 @@ input, select, textarea {
 	h3, h4, h5, h6 {
 		font-size: 1.25em;
 		letter-spacing: -0.015em;
+	}
+
+	p {
+		display: inline-block;
+		line-height: 1.4em;
 	}
 
 	@media screen and (max-width: 736px) {
