@@ -62,7 +62,7 @@ def save(fig, name):
         font={"size": 8},
         margin={"l": 0, "r": 0, "t": 0, "b": 0},
     )
-    offline.plot(fig, filename=f"Presentation/plots/{name}.html", auto_open=False, include_plotlyjs="cdn")
+    offline.plot(fig, filename=f"../docs/plots/{name}.html", auto_open=False, include_plotlyjs="cdn")
 
 
 def get_color(var):
