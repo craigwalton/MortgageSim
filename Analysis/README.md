@@ -14,9 +14,8 @@ Python files and Jupyter notebooks are formatted using black and isort:
     isort .
 
 
-## Exporting
+## Clear output
 
-To export the jupyter notebooks to HTML:
+Before comitting, clear the output of the notebooks:
 
-    conda activate MortgageSim
-    jupyter nbconvert --execute --no-input --to html <name>.ipynb
+    jupyter nbconvert --clear-output --inplace Analysis/*.ipynb
