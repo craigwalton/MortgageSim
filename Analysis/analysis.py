@@ -61,25 +61,6 @@ def get_axis_title(var):
     return f"{titleize(var)} ({infer_units(var)})"
 
 
-def print_baseline():
-    def format_value(value, units):
-        match units:
-            case "%":
-                return f"{value:10} {units}"
-            case "years":
-                return f"{value:10.0f} {units}"
-            case "£":
-                return f"{value:10.0f} {units}"
-
-    def print_row(name, value):
-        units = infer_units(name)
-        multiplier = infer_multiplier(units)
-        print(f"{titleize(name):<30}{format_value(value*multiplier, units)}")
-
-    for name, values in load_baseline().transpose().iterrows():
-        print_row(name, values.iloc[0])
-
-
 def save(fig, name):
     fig.update_layout(
         font={"size": 8},
