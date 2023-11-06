@@ -20,22 +20,6 @@ def load_csv_from_vars(*args):
             return pd.read_csv(name)
 
 
-def add_2d_baseline(fig, var_1, var_2):
-    df = load_csv("baseline")
-    fig.add_trace(
-        go.Scatter(
-            x=df[var_1] * infer_multiplier(var_1),
-            y=df[var_2] * infer_multiplier(var_2),
-            mode="markers+text",
-            name="Baseline",
-            text=["Baseline"],
-            textposition="bottom center",
-            marker=dict(color="green"),
-            showlegend=False,
-        )
-    )
-
-
 def infer_units(var):
     name = var.lower()
     if "rate" in name or "increase" in name:
@@ -57,6 +41,22 @@ def get_axis_title(var):
     return f"{titleize(var)} ({infer_units(var)})"
 
 
+def add_2d_baseline(fig, var_1, var_2):
+    df = load_csv("baseline")
+    fig.add_trace(
+        go.Scatter(
+            x=df[var_1] * infer_multiplier(var_1),
+            y=df[var_2] * infer_multiplier(var_2),
+            mode="markers+text",
+            name="Baseline",
+            text=["Baseline"],
+            textposition="bottom center",
+            marker=dict(color="green"),
+            showlegend=False,
+        )
+    )
+
+
 def save(fig, name):
     fig.update_layout(
         font={"size": 8},
@@ -66,8 +66,7 @@ def save(fig, name):
 
 
 def get_color(var):
-    colors = px.colors.qualitative.Plotly
-    l = [
+    vars = [
         "initialPropertyValue",
         "propertyValueYearlyIncrease",
         "mortgageInterestRate",
@@ -75,4 +74,4 @@ def get_color(var):
         "rentPriceYearlyIncrease",
         "savingsInterestRate",
     ]
-    return colors[l.index(var)]
+    return px.colors.qualitative.Plotly[vars.index(var)]
