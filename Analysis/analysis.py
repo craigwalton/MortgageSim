@@ -20,10 +20,6 @@ def load_csv_from_vars(*args):
             return pd.read_csv(name)
 
 
-def load_baseline():
-    return load_csv("baseline")
-
-
 def add_2d_baseline(fig, var_1, var_2):
     df = load_csv("baseline")
     fig.add_trace(
