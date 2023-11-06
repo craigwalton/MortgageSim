@@ -1,6 +1,6 @@
 # Mortgage Simulator
 
-A deterministic simulator written in C# comparing two options which prospective first time buyers are faced with:
+A deterministic simulator written in C# can be found in `Simulator/` which compares two options which prospective first time buyers are faced with:
 - Buying a property with a mortgage
 - Renting a property and investing any remaining funds.
 

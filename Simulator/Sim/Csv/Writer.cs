@@ -7,7 +7,7 @@ public sealed class Writer : IDisposable
 
     public Writer(string filepath, params string[] columnHeaders)
     {
-        _writer = new StreamWriter($"../../../../data/{filepath}");
+        _writer = new StreamWriter($"../../../../../Data/{filepath}");
         _columns = columnHeaders.Length;
         _writer.WriteLine(string.Join(',', columnHeaders));
     }
