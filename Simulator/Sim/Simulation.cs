@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using CommunityToolkit.Diagnostics;
 using PropertySim.Plans;
 using PropertySim.Variables;
 
@@ -6,7 +7,7 @@ namespace PropertySim;
 
 public sealed class Simulation
 {
-    private readonly int _simulationYears;
+    private readonly int _simulationDurationYears;
     private readonly decimal _deposit;
     private readonly int _mortgageTermYears;
     private readonly PropertyValue _propertyValue;
@@ -15,7 +16,7 @@ public sealed class Simulation
     private readonly InterestRate _savingsInterestRate;
 
     public Simulation(
-        int simulationYears = Baseline.SimulationYears,
+        int simulationDurationYears = Baseline.SimulationYears,
         decimal deposit = Baseline.Deposit,
         PropertyValue? propertyValue = null,
         int mortgageTermYears = Baseline.MortgageTermYears,
@@ -23,25 +24,35 @@ public sealed class Simulation
         RentPrice? rent = null,
         InterestRate? savingsInterestRate = null)
     {
-        _simulationYears = simulationYears;
+        _simulationDurationYears = simulationDurationYears;
         _deposit = deposit;
         _mortgageTermYears = mortgageTermYears;
         _propertyValue = propertyValue ?? Baseline.PropertyValue;
         _mortgageInterestRate = mortgageInterestRate ?? Baseline.MortgageInterestRate;
         _rent = rent ?? Baseline.RentPrice;
         _savingsInterestRate = savingsInterestRate ?? Baseline.SavingsInterestRate;
+        Validate();
     }
 
     public SimulationResult Run()
     {
         var purchasePlan = new PurchasePlan(_propertyValue, _deposit, _mortgageTermYears, _mortgageInterestRate);
         var rentalPlan = new RentalPlan(_deposit, _rent, _savingsInterestRate);
-        var time = RunCore(_simulationYears, purchasePlan, rentalPlan);
+        var time = RunCore(_simulationDurationYears, purchasePlan, rentalPlan);
         var result = new SimulationResult(purchasePlan.ComputeEquity(time), rentalPlan.ComputeEquity());
         Debug.WriteLine($"Purchase plan equity={result.PurchaseEquity:C}");
         Debug.WriteLine($"Rental plan equity={result.RentEquity:C}");
         Debug.WriteLine($"Delta={result.ComputeDelta():C}");
         return result;
+    }
+
+    private void Validate()
+    {
+        Guard.IsGreaterThan(_simulationDurationYears, 0);
+        Guard.IsGreaterThanOrEqualTo(_deposit, 0m);
+        Guard.IsGreaterThanOrEqualTo(_propertyValue.InitialValue, 0m);
+        Guard.IsGreaterThan(_mortgageTermYears, 0);
+        Guard.IsGreaterThanOrEqualTo(_rent.InitialMonthly, 0m);
     }
 
     private static Time RunCore(int simulationYears, PurchasePlan purchasePlan, RentalPlan rentalPlan)

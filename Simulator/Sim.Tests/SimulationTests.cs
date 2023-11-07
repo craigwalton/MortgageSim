@@ -10,7 +10,7 @@ public sealed class SimulationTests
     public void Verify_ground_truth_1()
     {
         var sut = new Simulation(
-            simulationYears: 5,
+            simulationDurationYears: 5,
             deposit: 30_000m,
             propertyValue: new PropertyValue(200_000, 0.03m),
             mortgageInterestRate: new InterestRate(0.035m),
@@ -28,7 +28,7 @@ public sealed class SimulationTests
     public void Verify_ground_truth_2()
     {
         var sut = new Simulation(
-            simulationYears: 5,
+            simulationDurationYears: 5,
             deposit: 30_000m,
             propertyValue: new PropertyValue(200_000, 0.03m),
             mortgageInterestRate: new InterestRate(0.06m),
@@ -45,7 +45,7 @@ public sealed class SimulationTests
     [Fact]
     public void Can_run_simulation_until_mortgage_paid()
     {
-        var sut = new Simulation(simulationYears: 25);
+        var sut = new Simulation(simulationDurationYears: 25);
 
         sut.Run();
     }
@@ -54,10 +54,44 @@ public sealed class SimulationTests
     public void Handles_zero_interest()
     {
         var sut = new Simulation(
-            simulationYears: 1,
+            simulationDurationYears: 1,
             mortgageInterestRate: new InterestRate(0m),
             savingsInterestRate: new InterestRate(0m));
 
         sut.Run();
+    }
+
+    [Fact]
+    public void Validates_simulation_duration()
+    {
+        Assert.Throws<ArgumentOutOfRangeException>(() => new Simulation(simulationDurationYears: 0));
+        Assert.Throws<ArgumentOutOfRangeException>(() => new Simulation(simulationDurationYears: -1));
+    }
+
+    [Fact]
+    public void Validates_deposit()
+    {
+        Assert.Throws<ArgumentOutOfRangeException>(() => new Simulation(deposit: -1m));
+    }
+
+    [Fact]
+    public void Validates_initial_property_value()
+    {
+        Assert.Throws<ArgumentOutOfRangeException>(
+            () => new Simulation(propertyValue: Baseline.PropertyValue with { InitialValue = -1m }));
+    }
+
+    [Fact]
+    public void Validates_mortgage_term()
+    {
+        Assert.Throws<ArgumentOutOfRangeException>(() => new Simulation(mortgageTermYears: 0));
+        Assert.Throws<ArgumentOutOfRangeException>(() => new Simulation(mortgageTermYears: -1));
+    }
+
+    [Fact]
+    public void Validates_initial_rent()
+    {
+        Assert.Throws<ArgumentOutOfRangeException>(
+            () => new Simulation(rent: Baseline.RentPrice with { InitialMonthly = -1m }));
     }
 }
