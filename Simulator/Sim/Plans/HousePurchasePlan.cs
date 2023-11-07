@@ -3,7 +3,7 @@ using PropertySim.Variables;
 
 namespace PropertySim.Plans;
 
-public sealed class HousePurchasePlan : Plan
+public sealed class HousePurchasePlan
 {
     private readonly PropertyValue _propertyValue;
 
@@ -24,7 +24,7 @@ public sealed class HousePurchasePlan : Plan
         mortgagePayment = Mortgage.TakeMonthlyPayment();
     }
 
-    public override decimal ComputeEquity(Time time)
+    public decimal ComputeEquity(Time time)
     {
         var liabilities = Mortgage.OutstandingLoan;
         var assets = _propertyValue.ComputeValue(time);

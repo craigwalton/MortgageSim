@@ -3,7 +3,7 @@ using PropertySim.Variables;
 
 namespace PropertySim.Plans;
 
-public sealed class HouseRentalPlan : Plan
+public sealed class HouseRentalPlan
 {
     public HouseRentalPlan(decimal deposit, RentPrice rentPrice, InterestRate savingsInterestRate)
     {
@@ -21,7 +21,7 @@ public sealed class HouseRentalPlan : Plan
         Savings.MakeMonthlyPayment(amountAvailable - rentPayment);
     }
 
-    public override decimal ComputeEquity(Time time)
+    public decimal ComputeEquity(Time time)
     {
         return Savings.Balance;
     }
