@@ -6,6 +6,7 @@ namespace PropertySim.Plans;
 public sealed class PurchasePlan
 {
     private readonly PropertyValue _propertyValue;
+    private readonly FixedMortgage _mortgage;
 
     public PurchasePlan(
         PropertyValue propertyValue,
@@ -14,19 +15,17 @@ public sealed class PurchasePlan
         InterestRate mortgageInterestRate)
     {
         _propertyValue = propertyValue;
-        Mortgage = new FixedMortgage(propertyValue.InitialValue - deposit, mortgageTermYears, mortgageInterestRate);
+        _mortgage = new FixedMortgage(propertyValue.InitialValue - deposit, mortgageTermYears, mortgageInterestRate);
     }
-
-    public FixedMortgage Mortgage { get; }
 
     public void ProcessMonth(out decimal mortgagePayment)
     {
-        mortgagePayment = Mortgage.TakeMonthlyPayment();
+        mortgagePayment = _mortgage.TakeMonthlyPayment();
     }
 
     public decimal ComputeEquity(Time time)
     {
-        var liabilities = Mortgage.OutstandingLoan;
+        var liabilities = _mortgage.OutstandingLoan;
         var assets = _propertyValue.ComputeValue(time);
         return assets - liabilities;
     }

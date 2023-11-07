@@ -5,24 +5,23 @@ namespace PropertySim.Plans;
 
 public sealed class RentalPlan
 {
+    private readonly Rent _rent;
+    private readonly Savings _savings;
+
     public RentalPlan(decimal deposit, RentPrice rentPrice, InterestRate savingsInterestRate)
     {
-        Rent = new Rent(rentPrice);
-        Savings = new Savings(deposit, savingsInterestRate);
+        _rent = new Rent(rentPrice);
+        _savings = new Savings(deposit, savingsInterestRate);
     }
-
-    public Rent Rent { get; }
-
-    public Savings Savings { get; }
 
     public void ProcessMonth(decimal amountAvailable, Time time)
     {
-        var rentPayment = Rent.TakeMonthlyPayment(time);
-        Savings.MakeMonthlyPayment(amountAvailable - rentPayment);
+        var rentPayment = _rent.TakeMonthlyPayment(time);
+        _savings.MakeMonthlyPayment(amountAvailable - rentPayment);
     }
 
     public decimal ComputeEquity(Time time)
     {
-        return Savings.Balance;
+        return _savings.Balance;
     }
 }
