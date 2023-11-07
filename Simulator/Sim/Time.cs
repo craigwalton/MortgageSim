@@ -2,7 +2,7 @@ using CommunityToolkit.Diagnostics;
 
 namespace PropertySim;
 
-public sealed class Time
+internal sealed class Time
 {
     private int _totalMonths;
 

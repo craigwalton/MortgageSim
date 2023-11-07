@@ -1,6 +1,6 @@
 namespace PropertySim.Experiments;
 
-public sealed record Range(decimal Start, decimal Stop, decimal Step)
+internal sealed record Range(decimal Start, decimal Stop, decimal Step)
 {
     public IEnumerable<decimal> Enumerate()
     {

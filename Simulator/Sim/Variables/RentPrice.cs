@@ -3,7 +3,7 @@ namespace PropertySim.Variables;
 /// <threadsafety static="true" instance="true"/>
 public sealed record RentPrice(decimal InitialMonthly, decimal YearlyIncrease)
 {
-    public decimal ComputeMonthlyPrice(Time time)
+    internal decimal ComputeMonthlyPrice(Time time)
     {
         return InitialMonthly * (YearlyIncrease + 1).RaiseToPowerOf(time.Year);
     }

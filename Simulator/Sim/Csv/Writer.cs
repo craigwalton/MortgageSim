@@ -2,7 +2,7 @@ using CommunityToolkit.Diagnostics;
 
 namespace PropertySim.Csv;
 
-public sealed class Writer : IDisposable
+internal sealed class Writer : IDisposable
 {
     private readonly StreamWriter _writer;
     private readonly int _columns;

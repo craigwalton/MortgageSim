@@ -3,7 +3,7 @@ using PropertySim.Variables;
 
 namespace PropertySim.Experiments;
 
-public static class SensitivityAnalysis
+internal static class SensitivityAnalysis
 {
     private static readonly Variable s_initialPropertyValue = new(Columns.InitialPropertyValue, new Range(100_000m, 500_000m, 10_000m));
     private static readonly Variable s_propertyValueYearlyIncrease = new(Columns.PropertyValueYearlyIncrease, new(-0.15m, 0.15m, 0.01m));

@@ -3,7 +3,7 @@ using PropertySim.Variables;
 
 namespace PropertySim.Accounts;
 
-public sealed class Savings
+internal sealed class Savings
 {
     private readonly InterestRate _interestRate;
 

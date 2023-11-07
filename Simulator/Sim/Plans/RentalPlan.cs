@@ -3,7 +3,7 @@ using PropertySim.Variables;
 
 namespace PropertySim.Plans;
 
-public sealed class RentalPlan
+internal sealed class RentalPlan
 {
     private readonly Rent _rent;
     private readonly Savings _savings;

@@ -3,7 +3,7 @@ using PropertySim.Variables;
 
 namespace PropertySim.Accounts;
 
-public sealed class Rent
+internal sealed class Rent
 {
     private readonly RentPrice _rentPrice;
 

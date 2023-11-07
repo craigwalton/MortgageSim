@@ -1,6 +1,6 @@
 namespace PropertySim.Csv;
 
-public static class Columns
+internal static class Columns
 {
     public const string SimulationYears = "simulationDuration";
     public const string Deposit = "deposit";

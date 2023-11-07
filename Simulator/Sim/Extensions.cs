@@ -2,7 +2,7 @@ using CommunityToolkit.Diagnostics;
 
 namespace PropertySim;
 
-public static class Extensions
+internal static class Extensions
 {
     public static decimal RaiseToPowerOf(this decimal value, int power)
     {
