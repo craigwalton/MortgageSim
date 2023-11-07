@@ -10,11 +10,11 @@ The Jupyter notebooks in `Analysis/` are used to generate the Plotly plots used 
 
 ## Dependent variable (output)
 
-The output of the simulation is the difference in net worth between the two scenarios after a period (e.g. 5 years):
+The output of the simulation is the difference in equity between the two scenarios after a period (e.g. 5 years):
 
 ```
-Δ net worth = equity from property purchase scenario - equity from property rent scenario
-            = (property value - outstanding loan)    - (savings balance)
+Δ equity = equity from property purchase scenario - equity from property rent scenario
+         = (property value - outstanding loan)    - (savings balance)
 ```
 
 ## Independent variables (input)
