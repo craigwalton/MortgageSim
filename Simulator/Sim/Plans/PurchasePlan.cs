@@ -3,11 +3,11 @@ using PropertySim.Variables;
 
 namespace PropertySim.Plans;
 
-public sealed class HousePurchasePlan
+public sealed class PurchasePlan
 {
     private readonly PropertyValue _propertyValue;
 
-    public HousePurchasePlan(
+    public PurchasePlan(
         PropertyValue propertyValue,
         decimal deposit,
         int mortgageTermYears,

@@ -34,8 +34,8 @@ public sealed class Simulation
 
     public SimulationResult Run()
     {
-        var purchasePlan = new HousePurchasePlan(_propertyValue, _deposit, _mortgageTermYears, _mortgageInterestRate);
-        var rentalPlan = new HouseRentalPlan(_deposit, _rent, _savingsInterestRate);
+        var purchasePlan = new PurchasePlan(_propertyValue, _deposit, _mortgageTermYears, _mortgageInterestRate);
+        var rentalPlan = new RentalPlan(_deposit, _rent, _savingsInterestRate);
         var time = RunCore(_simulationYears, purchasePlan, rentalPlan);
         var result = new SimulationResult(purchasePlan.ComputeEquity(time), rentalPlan.ComputeEquity(time));
         Debug.WriteLine($"Purchase plan equity={result.PurchaseEquity:C}");
@@ -44,7 +44,7 @@ public sealed class Simulation
         return result;
     }
 
-    private static Time RunCore(int simulationYears, HousePurchasePlan purchasePlan, HouseRentalPlan rentalPlan)
+    private static Time RunCore(int simulationYears, PurchasePlan purchasePlan, RentalPlan rentalPlan)
     {
         Time time;
         for (time = new Time(); time.Year < simulationYears; time.AdvanceOneMonth())

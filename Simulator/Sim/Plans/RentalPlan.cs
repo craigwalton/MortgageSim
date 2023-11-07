@@ -3,9 +3,9 @@ using PropertySim.Variables;
 
 namespace PropertySim.Plans;
 
-public sealed class HouseRentalPlan
+public sealed class RentalPlan
 {
-    public HouseRentalPlan(decimal deposit, RentPrice rentPrice, InterestRate savingsInterestRate)
+    public RentalPlan(decimal deposit, RentPrice rentPrice, InterestRate savingsInterestRate)
     {
         Rent = new Rent(rentPrice);
         Savings = new Savings(deposit, savingsInterestRate);
