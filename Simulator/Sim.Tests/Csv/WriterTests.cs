@@ -35,6 +35,6 @@ public sealed class WriterTests
     [Fact]
     public void Verifies_at_least_1_column()
     {
-        Assert.Throws<ArgumentException>(() => new Writer("out.csv"));
+        Assert.Throws<ArgumentOutOfRangeException>(() => new Writer("out.csv"));
     }
 }

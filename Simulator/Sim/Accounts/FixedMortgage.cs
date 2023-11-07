@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using CommunityToolkit.Diagnostics;
 using PropertySim.Variables;
 
 namespace PropertySim.Accounts;
@@ -11,6 +12,9 @@ public sealed class FixedMortgage
 
     public FixedMortgage(decimal initialLoan, int initialTermYears, InterestRate interestRate)
     {
+        Guard.IsGreaterThan(initialLoan, 0m);
+        Guard.IsGreaterThan(initialTermYears, 0m);
+
         OutstandingLoan = initialLoan;
         _outstandingPayments = 12 * initialTermYears;
         _interestRate = interestRate;
@@ -47,7 +51,7 @@ public sealed class FixedMortgage
         var payment = interest + principal;
         OutstandingLoan = 0;
         _outstandingPayments = 0;
-        Debug.WriteLine($"Final mortgage payment={payment:C} (interest={interest:C}; principal={principal:C}); " + 
+        Debug.WriteLine($"Final mortgage payment={payment:C} (interest={interest:C}; principal={principal:C}); " +
                         $"Loan={OutstandingLoan:C}");
         return payment;
     }

@@ -1,3 +1,5 @@
+using CommunityToolkit.Diagnostics;
+
 namespace PropertySim;
 
 public sealed class Time
@@ -10,14 +12,9 @@ public sealed class Time
 
     public Time(int month, int year)
     {
-        if (month is < 0 or > 12)
-        {
-            throw new ArgumentOutOfRangeException(nameof(month));
-        }
-        if (year < 0)
-        {
-            throw new ArgumentOutOfRangeException(nameof(year));
-        }
+        Guard.IsBetweenOrEqualTo(month, 0, 12);
+        Guard.IsGreaterThanOrEqualTo(year, 0);
+
         _totalMonths = month + year * 12;
     }
 

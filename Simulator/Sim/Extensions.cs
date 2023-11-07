@@ -1,15 +1,16 @@
+using CommunityToolkit.Diagnostics;
+
 namespace PropertySim;
 
 public static class Extensions
 {
     public static decimal RaiseToPowerOf(this decimal value, int power)
     {
-        switch (power)
+        Guard.IsGreaterThanOrEqualTo(power, 0);
+
+        if (power == 0)
         {
-            case < 0:
-                throw new ArgumentOutOfRangeException(nameof(power));
-            case 0:
-                return 1;
+            return 1;
         }
         var result = value;
         while (power > 1)
