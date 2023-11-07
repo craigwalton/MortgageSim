@@ -4,7 +4,7 @@ using Xunit;
 
 namespace Sim.Tests;
 
-public sealed class SimTests
+public sealed class SimulationTests
 {
     [Fact]
     public void Verify_ground_truth_1()
