@@ -68,4 +68,24 @@ public sealed class SavingsTests
 
         Assert.Equal(100m, sut.Balance);
     }
+
+    [Fact]
+    public void Can_make_withdrawal()
+    {
+        var sut = new Savings(100m, new InterestRate(0.12m));
+
+        sut.MakeMonthlyPayment(-50m);
+
+        Assert.Equal(51m, sut.Balance);
+    }
+
+    [Fact]
+    public void Can_go_into_overdraft()
+    {
+        var sut = new Savings(100m, new InterestRate(0.12m));
+
+        sut.MakeMonthlyPayment(-200m);
+
+        Assert.Equal(-99m, sut.Balance);
+    }
 }
