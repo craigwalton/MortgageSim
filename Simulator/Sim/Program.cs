@@ -3,7 +3,7 @@ using PropertySim.Experiments;
 
 namespace PropertySim;
 
-internal static class Sim
+internal static class Program
 {
     public static void Main()
     {
