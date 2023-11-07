@@ -7,5 +7,4 @@ public sealed record PropertyValue(decimal InitialValue, decimal YearlyIncrease)
     {
         return InitialValue * (YearlyIncrease + 1).RaiseToPowerOf(time.Year);
     }
-
 }
