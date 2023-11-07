@@ -37,7 +37,7 @@ public sealed class Simulation
         var purchasePlan = new PurchasePlan(_propertyValue, _deposit, _mortgageTermYears, _mortgageInterestRate);
         var rentalPlan = new RentalPlan(_deposit, _rent, _savingsInterestRate);
         var time = RunCore(_simulationYears, purchasePlan, rentalPlan);
-        var result = new SimulationResult(purchasePlan.ComputeEquity(time), rentalPlan.ComputeEquity(time));
+        var result = new SimulationResult(purchasePlan.ComputeEquity(time), rentalPlan.ComputeEquity());
         Debug.WriteLine($"Purchase plan equity={result.PurchaseEquity:C}");
         Debug.WriteLine($"Rental plan equity={result.RentEquity:C}");
         Debug.WriteLine($"Delta={result.ComputeDelta():C}");

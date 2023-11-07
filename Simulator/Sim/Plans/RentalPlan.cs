@@ -20,7 +20,7 @@ public sealed class RentalPlan
         _savings.MakeMonthlyPayment(amountAvailable - rentPayment);
     }
 
-    public decimal ComputeEquity(Time time)
+    public decimal ComputeEquity()
     {
         return _savings.Balance;
     }
