@@ -5,6 +5,7 @@ using PropertySim.Variables;
 
 namespace PropertySim;
 
+/// <threadsafety static="true" instance="false"/>
 public sealed class Simulation
 {
     private readonly int _simulationDurationYears;

@@ -2,6 +2,7 @@ using PropertySim.Variables;
 
 namespace PropertySim;
 
+/// <threadsafety static="true" instance="true"/>
 public static class Baseline
 {
     public const int SimulationYears = 5;
