@@ -4,6 +4,8 @@ A deterministic simulator written in C# can be found in `Simulator/` which compa
 - Buying a property with a mortgage
 - Renting a property and investing any remaining funds.
 
+[![.NET](https://github.com/craigwalton/MortgageSim/actions/workflows/dotnet.yml/badge.svg)](https://github.com/craigwalton/MortgageSim/actions/workflows/dotnet.yml)
+
 The results of this simulation are presented as an HTML web page in `docs/` and hosted at [craigwalton.github.io/MortgageSim](https://craigwalton.github.io/MortgageSim).
 
 The Jupyter notebooks in `Analysis/` are used to generate the Plotly plots used on the web page.
