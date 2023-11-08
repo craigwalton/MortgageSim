@@ -1,6 +1,6 @@
-using PropertySim.Variables;
+using MortgageSim.Sim.Variables;
 
-namespace PropertySim;
+namespace MortgageSim.Sim;
 
 /// <threadsafety static="true" instance="true"/>
 public static class Baseline

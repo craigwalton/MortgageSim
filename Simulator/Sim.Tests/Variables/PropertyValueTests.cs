@@ -1,8 +1,7 @@
-using PropertySim;
-using PropertySim.Variables;
+using MortgageSim.Sim.Variables;
 using Xunit;
 
-namespace Sim.Tests.Variables;
+namespace MortgageSim.Sim.Tests.Variables;
 
 public sealed class PropertyValueTests
 {

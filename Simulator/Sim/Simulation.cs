@@ -1,9 +1,9 @@
 using System.Diagnostics;
 using CommunityToolkit.Diagnostics;
-using PropertySim.Plans;
-using PropertySim.Variables;
+using MortgageSim.Sim.Plans;
+using MortgageSim.Sim.Variables;
 
-namespace PropertySim;
+namespace MortgageSim.Sim;
 
 /// <threadsafety static="true" instance="false"/>
 public sealed class Simulation

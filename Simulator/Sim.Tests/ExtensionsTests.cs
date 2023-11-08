@@ -1,7 +1,6 @@
-using PropertySim;
 using Xunit;
 
-namespace Sim.Tests;
+namespace MortgageSim.Sim.Tests;
 
 public sealed class ExtensionsTests
 {

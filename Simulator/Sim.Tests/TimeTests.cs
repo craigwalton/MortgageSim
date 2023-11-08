@@ -1,8 +1,7 @@
-using PropertySim;
-using Sim.Tests.UnitTesting;
+using MortgageSim.Sim.Tests.UnitTesting;
 using Xunit;
 
-namespace Sim.Tests;
+namespace MortgageSim.Sim.Tests;
 
 public sealed class TimeTests
 {

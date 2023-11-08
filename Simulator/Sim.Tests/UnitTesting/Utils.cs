@@ -1,4 +1,4 @@
-namespace Sim.Tests.UnitTesting;
+namespace MortgageSim.Sim.Tests.UnitTesting;
 
 public static class Utils
 {

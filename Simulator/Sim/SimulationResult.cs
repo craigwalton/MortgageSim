@@ -1,4 +1,4 @@
-namespace PropertySim;
+namespace MortgageSim.Sim;
 
 /// <threadsafety static="true" instance="true"/>
 public sealed record SimulationResult(decimal PurchaseEquity, decimal RentEquity)

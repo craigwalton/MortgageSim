@@ -1,6 +1,6 @@
 using CommunityToolkit.Diagnostics;
 
-namespace PropertySim;
+namespace MortgageSim.Sim;
 
 internal sealed class Time
 {

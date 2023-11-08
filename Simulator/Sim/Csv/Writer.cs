@@ -1,6 +1,6 @@
 using CommunityToolkit.Diagnostics;
 
-namespace PropertySim.Csv;
+namespace MortgageSim.Sim.Csv;
 
 internal sealed class Writer : IDisposable
 {

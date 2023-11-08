@@ -1,7 +1,7 @@
 using System.Diagnostics;
-using PropertySim.Variables;
+using MortgageSim.Sim.Variables;
 
-namespace PropertySim.Accounts;
+namespace MortgageSim.Sim.Accounts;
 
 internal sealed class Rent
 {

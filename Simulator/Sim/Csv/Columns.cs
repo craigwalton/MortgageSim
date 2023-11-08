@@ -1,4 +1,4 @@
-namespace PropertySim.Csv;
+namespace MortgageSim.Sim.Csv;
 
 internal static class Columns
 {

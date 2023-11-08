@@ -1,7 +1,7 @@
-using PropertySim.Accounts;
-using PropertySim.Variables;
+using MortgageSim.Sim.Accounts;
+using MortgageSim.Sim.Variables;
 
-namespace PropertySim.Plans;
+namespace MortgageSim.Sim.Plans;
 
 internal sealed class PurchasePlan
 {

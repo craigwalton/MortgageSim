@@ -1,7 +1,7 @@
-﻿using PropertySim.Csv;
-using PropertySim.Experiments;
+﻿using MortgageSim.Sim.Csv;
+using MortgageSim.Sim.Experiments;
 
-namespace PropertySim;
+namespace MortgageSim.Sim;
 
 internal static class Program
 {

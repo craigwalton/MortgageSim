@@ -1,4 +1,4 @@
-namespace PropertySim.Variables;
+namespace MortgageSim.Sim.Variables;
 
 /// <threadsafety static="true" instance="true"/>
 public sealed record RentPrice(decimal InitialMonthly, decimal YearlyIncrease)

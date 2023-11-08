@@ -1,7 +1,7 @@
-using PropertySim.Csv;
+using MortgageSim.Sim.Csv;
 using Xunit;
 
-namespace Sim.Tests.Csv;
+namespace MortgageSim.Sim.Tests.Csv;
 
 public sealed class WriterTests
 {

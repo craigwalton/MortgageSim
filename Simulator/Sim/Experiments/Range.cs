@@ -1,4 +1,4 @@
-namespace PropertySim.Experiments;
+namespace MortgageSim.Sim.Experiments;
 
 internal sealed record Range(decimal Start, decimal Stop, decimal Step)
 {

@@ -1,7 +1,7 @@
-using PropertySim.Csv;
-using PropertySim.Variables;
+using MortgageSim.Sim.Csv;
+using MortgageSim.Sim.Variables;
 
-namespace PropertySim.Experiments;
+namespace MortgageSim.Sim.Experiments;
 
 internal static class SensitivityAnalysis
 {
