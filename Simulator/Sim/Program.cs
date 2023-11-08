@@ -29,7 +29,7 @@ internal static class Program
             Columns.Delta);
         var result = new Simulation().Run();
         writer.WriteLine(
-            Baseline.SimulationYears,
+            Baseline.SimulationDurationYears,
             Baseline.Deposit,
             Baseline.PropertyValue.InitialValue,
             Baseline.PropertyValue.YearlyIncrease,

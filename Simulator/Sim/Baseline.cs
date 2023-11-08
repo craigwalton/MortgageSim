@@ -5,7 +5,7 @@ namespace PropertySim;
 /// <threadsafety static="true" instance="true"/>
 public static class Baseline
 {
-    public const int SimulationYears = 5;
+    public const int SimulationDurationYears = 5;
     public const decimal Deposit = 30_000m;
     public static readonly PropertyValue PropertyValue = new(200_000m, 0.025m);
     public const int MortgageTermYears = 25;

@@ -17,7 +17,7 @@ public sealed class Simulation
     private readonly InterestRate _savingsInterestRate;
 
     public Simulation(
-        int simulationDurationYears = Baseline.SimulationYears,
+        int simulationDurationYears = Baseline.SimulationDurationYears,
         decimal deposit = Baseline.Deposit,
         PropertyValue? propertyValue = null,
         int mortgageTermYears = Baseline.MortgageTermYears,
