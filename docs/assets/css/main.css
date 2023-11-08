@@ -2186,6 +2186,10 @@ input, select, textarea {
 		color: rgb(172, 10, 39);
 	}
 
+	a {
+		color: gray;
+	}
+
 /* Footer */
 
 	#footer {
