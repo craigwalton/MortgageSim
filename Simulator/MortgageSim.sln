@@ -10,6 +10,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionIt
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sim.Tests", "Sim.Tests\Sim.Tests.csproj", "{01D8B31D-010C-4C4F-BC66-EBD423B082D6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sim.Cli", "Sim.Cli\Sim.Cli.csproj", "{899CB333-F6BC-49C0-8DA9-621984CB0272}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,11 @@ Global
 		{01D8B31D-010C-4C4F-BC66-EBD423B082D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{01D8B31D-010C-4C4F-BC66-EBD423B082D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{01D8B31D-010C-4C4F-BC66-EBD423B082D6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{899CB333-F6BC-49C0-8DA9-621984CB0272}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{899CB333-F6BC-49C0-8DA9-621984CB0272}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{899CB333-F6BC-49C0-8DA9-621984CB0272}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{899CB333-F6BC-49C0-8DA9-621984CB0272}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
 	EndGlobalSection
 EndGlobal
