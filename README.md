@@ -1,8 +1,8 @@
 # Mortgage Simulator
 
 A deterministic simulator written in C# can be found in `Simulator/` which compares two options which prospective first time buyers are faced with:
-- Buying a property with a mortgage
-- Renting a property and investing any remaining funds.
+* Buying a property with a mortgage
+* Renting a property and investing any remaining funds.
 
 [![.NET](https://github.com/craigwalton/MortgageSim/actions/workflows/dotnet.yml/badge.svg)](https://github.com/craigwalton/MortgageSim/actions/workflows/dotnet.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -28,10 +28,7 @@ such as the speed of property transactions, the flexibility to make home modific
 
 The following sources were consulted to select appropriate baseline values for the independent variables.
 
-[Historical House Prices: ONS](https://www.ons.gov.uk/economy/inflationandpriceindices/bulletins/housepriceindex/august2023)
-
-[Historical Mortgage Inerest Rates: Statisca](https://www.statista.com/statistics/386301/uk-average-mortgage-interest-rates/)
-
-[Historical Rent Prices: ONS](https://www.ons.gov.uk/economy/inflationandpriceindices/bulletins/indexofprivatehousingrentalprices/september2023)
-
-[Historical Bank Rate: BoE](https://www.bankofengland.co.uk/boeapps/database/Bank-Rate.asp)
+* [Historical House Prices: ONS](https://www.ons.gov.uk/economy/inflationandpriceindices/bulletins/housepriceindex/august2023)
+* [Historical Mortgage Inerest Rates: Statisca](https://www.statista.com/statistics/386301/uk-average-mortgage-interest-rates/)
+* [Historical Rent Prices: ONS](https://www.ons.gov.uk/economy/inflationandpriceindices/bulletins/indexofprivatehousingrentalprices/september2023)
+* [Historical Bank Rate: BoE](https://www.bankofengland.co.uk/boeapps/database/Bank-Rate.asp)
