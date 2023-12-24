@@ -9,6 +9,8 @@ A deterministic simulator written in C# can be found in `Simulator/` which compa
 
 The results of this simulation are presented on a web page in `docs/` and hosted at [craigwalton.github.io/MortgageSim](https://craigwalton.github.io/MortgageSim).
 
+[![Screenshot of results web page](docs/preview-screenshot.png)](https://craigwalton.github.io/MortgageSim)
+
 The Jupyter notebooks in `Analysis/` are used to generate the Plotly plots used on the web page.
 
 
