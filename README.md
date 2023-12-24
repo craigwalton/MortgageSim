@@ -26,7 +26,7 @@ such as the speed of property transactions, the flexibility to make home modific
 
 ## Data Sources
 
-The following sources were consulted to select appropriate baseline values for the independent variables.
+The following sources were consulted in November 2023 to select appropriate baseline values for the independent variables.
 
 * [Historical House Prices: ONS](https://www.ons.gov.uk/economy/inflationandpriceindices/bulletins/housepriceindex/august2023)
 * [Historical Mortgage Inerest Rates: Statisca](https://www.statista.com/statistics/386301/uk-average-mortgage-interest-rates/)
