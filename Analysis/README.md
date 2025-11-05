@@ -1,3 +1,7 @@
+# Analysis
+
+The `Analysis` directory contains Jupyter notebooks which are used to generate the Plotly plots on the web page.
+
 ## Environment
 
 The environment is managed using [uv](https://docs.astral.sh/uv/).

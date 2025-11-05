@@ -1,6 +1,6 @@
-# Mortgage Simulator
+# MortgageSim
 
-A mortgage vs renting simulator written in C#.
+The `MortgageSim` directory contains mortgage vs renting simulator written in C#.
 
 ## Prerequisites
 
