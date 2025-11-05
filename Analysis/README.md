@@ -14,13 +14,19 @@ Prefix commands with `uv run` to use the virtual environment e.g.:
 
     uv run jupyter notebook
 
-## Formatting
+## Linting & formatting
 
-Python files and Jupyter notebooks are linted and formatted with [ruff](https://docs.astral.sh/ruff/).
+Python modules and Jupyter notebooks are linted and formatted with [ruff](https://docs.astral.sh/ruff/).
 
     uv run ruff check .
     uv run ruff format .
 
+## Type checking
+
+Python modules and Jupyter notebooks are type checked with Mypy. `nbqa` is used to run Mypy on `.ipynb` files.
+
+    uv run mypy .
+    uv run nbqa mypy .
 
 ## Clear output
 
