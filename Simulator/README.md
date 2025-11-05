@@ -4,7 +4,7 @@ A mortgage vs renting simulator written in C#.
 
 ## Prerequisites
 
-- .NET 7 SDK or later.
+- .NET 9 SDK or later.
 
 ## Run
 
