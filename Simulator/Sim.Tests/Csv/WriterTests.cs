@@ -39,9 +39,9 @@ public sealed class WriterTests
     }
 
     [Fact]
-    public void Can_create_writer_with_default_data_dir()
+    public void Can_create_writer_with_default_results_dir()
     {
-        const string expectedCsv = "../../../../../Data/test-file.csv";
+        const string expectedCsv = "../../../../../Results/test-file.csv";
 
         var sut = Writer.Create("test-file.csv", "Column a", "Column b");
 

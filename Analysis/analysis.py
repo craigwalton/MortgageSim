@@ -9,13 +9,13 @@ from inflection import titleize
 
 
 def load_csv(name):
-    return pd.read_csv(f"../Data/{name}.csv")
+    return pd.read_csv(f"../Results/{name}.csv")
 
 
 def load_csv_from_vars(*args):
     for p in list(permutations(args)):
         joined = "-".join(p)
-        name = f"../Data/{joined}.csv"
+        name = f"../Results/{joined}.csv"
         if os.path.exists(name):
             return pd.read_csv(name)
 

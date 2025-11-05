@@ -19,7 +19,7 @@ internal sealed class Writer : IDisposable
 
     public static Writer Create(string filename, params string[] columnHeaders)
     {
-        return new Writer(GetDefaultDataDir(), filename, columnHeaders);
+        return new Writer(GetDefaultResultsDir(), filename, columnHeaders);
     }
 
     public static Writer Create(DirectoryInfo dir, string filename, params string[] columnHeaders)
@@ -39,9 +39,9 @@ internal sealed class Writer : IDisposable
         _writer.Dispose();
     }
 
-    private static string GetDefaultDataDir()
+    private static string GetDefaultResultsDir()
     {
-        // The Data directory is in the repo root. Use the assembly path to be agnostic to CWD.
+        // The Results directory is in the repo root. Use the assembly path to be agnostic to CWD.
         var assemblyDirectory = new FileInfo(Assembly.GetExecutingAssembly().Location).Directory;
         var repoRoot = assemblyDirectory?.Parent?.Parent?.Parent?.Parent?.Parent?.FullName;
         if (repoRoot == null)
@@ -49,6 +49,6 @@ internal sealed class Writer : IDisposable
             throw new DirectoryNotFoundException(
                 $"Failed to find repo root dir relative to assembly directory: '{assemblyDirectory}'.");
         }
-        return Path.Combine(repoRoot, "Data");
+        return Path.Combine(repoRoot, "Results");
     }
 }
