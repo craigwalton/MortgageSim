@@ -404,3 +404,12 @@ FodyWeavers.xsd
 
 # Jupyter checkpoints
 .ipynb_checkpoints
+
+# Mypy
+.mypy_cache
+
+# Ruff
+.ruff_cache
+
+# Virtual environments
+.venv
