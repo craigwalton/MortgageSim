@@ -1,3 +1,5 @@
+"""Common functions used by analysis notebooks."""
+
 import os
 from itertools import permutations
 from typing import cast
