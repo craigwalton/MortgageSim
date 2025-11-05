@@ -5,6 +5,7 @@ A deterministic simulator written in C# can be found in `Simulator/` which compa
 * Renting a property and investing any remaining funds.
 
 [![.NET](https://github.com/craigwalton/MortgageSim/actions/workflows/dotnet.yml/badge.svg)](https://github.com/craigwalton/MortgageSim/actions/workflows/dotnet.yml)
+[![Python - lint and check format using Ruff](https://github.com/craigwalton/MortgageSim/actions/workflows/python.yml/badge.svg)](https://github.com/craigwalton/MortgageSim/actions/workflows/python.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 The results of this simulation are presented on a web page in `docs/` and hosted at [craigwalton.github.io/MortgageSim](https://craigwalton.github.io/MortgageSim).
