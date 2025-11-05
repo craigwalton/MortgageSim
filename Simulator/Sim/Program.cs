@@ -15,7 +15,7 @@ internal static class Program
 
     private static void RunBaseline()
     {
-        using var writer = new Writer(
+        using var writer = Writer.Create(
             "baseline.csv",
             Columns.SimulationYears,
             Columns.Deposit,
