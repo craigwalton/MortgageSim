@@ -22,4 +22,4 @@ Python files and Jupyter notebooks are linted and formatted with [ruff](https://
 
 Before comitting, clear the output of the notebooks:
 
-    jupyter nbconvert --clear-output --inplace Analysis/*.ipynb
+    uv run jupyter nbconvert --clear-output --inplace *.ipynb
