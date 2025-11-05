@@ -1,0 +1,1 @@
+The numeric results of the simulation are written to this directory as CSV files.
