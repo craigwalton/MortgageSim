@@ -1,17 +1,21 @@
 ## Environment
 
-The environment is managed using Conda:
+The environment is managed using [uv](https://docs.astral.sh/uv/).
 
-    conda env create -f environment.yml
-    conda activate MortgageSim
+To create the virtual environment:
 
+    uv sync
+
+Prefix commands with `uv run` to use the virtual environment e.g.:
+
+    uv run jupyter notebook
 
 ## Formatting
 
-Python files and Jupyter notebooks are formatted using black and isort:
+Python files and Jupyter notebooks are linted and formatted with [ruff](https://docs.astral.sh/ruff/).
 
-    black .
-    isort .
+    uv run ruff check .
+    uv run ruff format .
 
 
 ## Clear output

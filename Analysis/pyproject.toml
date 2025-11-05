@@ -1,0 +1,31 @@
+[project]
+name = "analysis"
+version = "0.1.0"
+description = "Analysis notebooks for MortgageSim"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "inflection>=0.5.1",
+    "jupyter>=1.1.1",
+    "pandas>=2.3.3",
+    "plotly>=6.4.0",
+]
+
+[dependency-groups]
+dev = [
+    "ruff>=0.14.3",
+]
+
+[tool.ruff.lint]
+select = [
+  "E",   # pycodestyle errors
+  "W",   # pycodestyle warnings
+  "F",   # flake8
+  "D",   # pydocstyle
+  "I",   # isort
+]
+ignore = [
+  "D10",   # undocumented-(public|magic)-*
+  "D203",  # incorrect-blank-line-before-class
+  "D212",  # multi-line-summary-first-line
+]
