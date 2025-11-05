@@ -30,6 +30,6 @@ Python modules and Jupyter notebooks are type checked with Mypy. `nbqa` is used 
 
 ## Clear output
 
-Before comitting, clear the output of the notebooks:
+Before committing, clear the output of the notebooks:
 
     uv run jupyter nbconvert --clear-output --inplace *.ipynb
