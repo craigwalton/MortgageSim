@@ -71,7 +71,7 @@ internal static class SensitivityAnalysis
 
     private static void Run1D(Variable x, Func<decimal, Simulation> create)
     {
-        using var writer = new Writer($"{x.Name}.csv", x.Name, Columns.Delta);
+        using var writer = Writer.Create($"{x.Name}.csv", x.Name, Columns.Delta);
         foreach (var i in x.Range.Enumerate())
         {
             var result = create(i).Run().ComputeDelta();
@@ -81,7 +81,7 @@ internal static class SensitivityAnalysis
 
     private static void Run2D(Variable x, Variable y, Func<decimal, decimal, Simulation> create)
     {
-        using var writer = new Writer($"{x.Name}-{y.Name}.csv", x.Name, y.Name, Columns.Delta);
+        using var writer = Writer.Create($"{x.Name}-{y.Name}.csv", x.Name, y.Name, Columns.Delta);
         foreach (var i in x.Range.Enumerate())
         {
             foreach (var j in y.Range.Enumerate())
@@ -94,7 +94,7 @@ internal static class SensitivityAnalysis
 
     private static void Run3D(Variable x, Variable y, Variable z, Func<decimal, decimal, decimal, Simulation> create)
     {
-        using var writer = new Writer($"{x.Name}-{y.Name}-{z.Name}.csv", x.Name, y.Name, z.Name, Columns.Delta);
+        using var writer = Writer.Create($"{x.Name}-{y.Name}-{z.Name}.csv", x.Name, y.Name, z.Name, Columns.Delta);
         foreach (var i in x.Range.Enumerate())
         {
             foreach (var j in y.Range.Enumerate())

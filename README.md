@@ -13,6 +13,8 @@ The results of this simulation are presented on a web page in `docs/` and hosted
 
 The Jupyter notebooks in `Analysis/` are used to generate the Plotly plots used on the web page.
 
+The numeric results of the simulation are written to the `Results/` directory as CSV files.
+
 
 ## Limitations and non-goals
 
