@@ -39,5 +39,6 @@ internal static class Program
             Baseline.RentPrice.YearlyIncrease,
             Baseline.SavingsInterestRate.Yearly,
             result.ComputeDelta());
+        Console.WriteLine($"Wrote baseline results to '{writer.FilePath}'.");
     }
 }

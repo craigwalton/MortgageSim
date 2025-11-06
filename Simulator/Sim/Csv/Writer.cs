@@ -12,7 +12,8 @@ internal sealed class Writer : IDisposable
     {
         Guard.IsGreaterThan(columnHeaders.Length, 0);
 
-        _writer = new StreamWriter(Path.Combine(writerDir, writerFilename));
+        FilePath = Path.Combine(writerDir, writerFilename);
+        _writer = new StreamWriter(FilePath);
         _columns = columnHeaders.Length;
         _writer.WriteLine(string.Join(',', columnHeaders));
     }
@@ -26,6 +27,8 @@ internal sealed class Writer : IDisposable
     {
         return new Writer(dir.ToString(), filename, columnHeaders);
     }
+
+    public string FilePath { get; }
 
     public void WriteLine(params object[] values)
     {

@@ -23,6 +23,16 @@ public sealed class WriterTests
     }
 
     [Fact]
+    public void Can_get_file_path()
+    {
+        using var sut = Writer.Create(new DirectoryInfo("."), "out.csv", "Column a", "Column b");
+
+        var actual = sut.FilePath;
+
+        Assert.Equal("./out.csv", actual);
+    }
+
+    [Fact]
     public void Verifies_number_of_columns()
     {
         var sut = Writer.Create(new DirectoryInfo("."), "out.csv", "Column a", "Column b");

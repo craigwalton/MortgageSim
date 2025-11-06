@@ -25,10 +25,10 @@ internal static class SensitivityAnalysis
             x => new Simulation(mortgageInterestRate: new InterestRate(x)));
         Run1D(
             s_initialMonthlyRentPrice,
-            x => new Simulation(rent: Baseline.RentPrice with {InitialMonthly = x}));
+            x => new Simulation(rent: Baseline.RentPrice with { InitialMonthly = x }));
         Run1D(
             s_rentPriceYearlyIncrease,
-            x => new Simulation(rent: Baseline.RentPrice with {YearlyIncrease = x}));
+            x => new Simulation(rent: Baseline.RentPrice with { YearlyIncrease = x }));
         Run1D(
             s_savingsInterestRate,
             x => new Simulation(savingsInterestRate: new InterestRate(x)));
@@ -44,14 +44,15 @@ internal static class SensitivityAnalysis
                 savingsInterestRate: new InterestRate(y)));
         Run2D(
             s_initialPropertyValue,
-            s_initialMonthlyRentPrice with {Range = new(500m, 3000m, 100m)},
+            s_initialMonthlyRentPrice with { Range = new(500m, 3000m, 100m) },
             (x, y) => new Simulation(
                 propertyValue: Baseline.PropertyValue with { InitialValue = x },
                 rent: Baseline.RentPrice with { InitialMonthly = y }));
         Run2D(
             s_mortgageInterestRate,
             s_propertyValueYearlyIncrease,
-            (x, y) => new Simulation(propertyValue: Baseline.PropertyValue with {YearlyIncrease = y}, mortgageInterestRate: new InterestRate(x)));
+            (x, y) => new Simulation(propertyValue: Baseline.PropertyValue with { YearlyIncrease = y },
+                mortgageInterestRate: new InterestRate(x)));
         Run2D(
             s_initialMonthlyRentPrice,
             s_rentPriceYearlyIncrease,
@@ -65,7 +66,7 @@ internal static class SensitivityAnalysis
             s_mortgageInterestRate,
             s_propertyValueYearlyIncrease,
             s_initialMonthlyRentPrice,
-            (x, y, z) => new Simulation(propertyValue: Baseline.PropertyValue with {YearlyIncrease = y},
+            (x, y, z) => new Simulation(propertyValue: Baseline.PropertyValue with { YearlyIncrease = y },
                 mortgageInterestRate: new InterestRate(x), rent: Baseline.RentPrice with { InitialMonthly = z }));
     }
 
@@ -77,6 +78,7 @@ internal static class SensitivityAnalysis
             var result = create(i).Run().ComputeDelta();
             writer.WriteLine(i, result);
         }
+        Console.WriteLine($"Wrote 1D sensitivity analysis results for {x.Name} to '{writer.FilePath}'.");
     }
 
     private static void Run2D(Variable x, Variable y, Func<decimal, decimal, Simulation> create)
@@ -90,6 +92,7 @@ internal static class SensitivityAnalysis
                 writer.WriteLine(i, j, result);
             }
         }
+        Console.WriteLine($"Wrote 2D sensitivity analysis results for [{x.Name}, {y.Name}] to '{writer.FilePath}'.");
     }
 
     private static void Run3D(Variable x, Variable y, Variable z, Func<decimal, decimal, decimal, Simulation> create)
@@ -106,6 +109,8 @@ internal static class SensitivityAnalysis
                 }
             }
         }
+        Console.WriteLine(
+            $"Wrote 3D sensitivity analysis results for [{x.Name}, {y.Name}, {z.Name}] to '{writer.FilePath}'.");
     }
 
     private sealed record Variable(string Name, Range Range);
