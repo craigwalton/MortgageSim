@@ -5,7 +5,7 @@ namespace MortgageSim.Sim.Experiments;
 
 internal static class SensitivityAnalysis
 {
-    private static readonly Variable s_initialPropertyValue = new(Columns.InitialPropertyValue, new Range(100_000m, 500_000m, 10_000m));
+    private static readonly Variable s_initialPropertyValue = new(Columns.InitialPropertyValue, new(100_000m, 500_000m, 10_000m));
     private static readonly Variable s_propertyValueYearlyIncrease = new(Columns.PropertyValueYearlyIncrease, new(-0.15m, 0.15m, 0.01m));
     private static readonly Variable s_mortgageInterestRate = new(Columns.MortgageInterestRate, new(-0m, 0.2m, 0.01m));
     private static readonly Variable s_initialMonthlyRentPrice = new(Columns.InitialMonthlyRentPrice, new(500m, 2000m, 100m));
@@ -44,7 +44,7 @@ internal static class SensitivityAnalysis
                 savingsInterestRate: new InterestRate(y)));
         Run2D(
             s_initialPropertyValue,
-            s_initialMonthlyRentPrice with {Range = new Range(500m, 3000m, 100m)},
+            s_initialMonthlyRentPrice with {Range = new(500m, 3000m, 100m)},
             (x, y) => new Simulation(
                 propertyValue: Baseline.PropertyValue with { InitialValue = x },
                 rent: Baseline.RentPrice with { InitialMonthly = y }));
