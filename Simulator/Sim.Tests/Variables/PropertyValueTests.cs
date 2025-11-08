@@ -26,6 +26,16 @@ public sealed class PropertyValueTests
     }
 
     [Fact]
+    public void Can_compute_current_value_with_zero_yearly_growth()
+    {
+        var sut = new PropertyValue(100_000m, 0);
+
+        var actual = sut.ComputeValue(new Time(month: 4, year: 2));
+
+        Assert.Equal(100_000m, actual);
+    }
+
+    [Fact]
     public void Can_compute_current_value_with_decreasing_yearly_value()
     {
         var sut = new PropertyValue(100_000m, -0.01m);
