@@ -31,9 +31,9 @@ such as the speed of property transactions, the flexibility to make home modific
 
 ## Data Sources
 
-The following sources were consulted in November 2023 to select appropriate baseline values for the independent variables.
+The following sources were consulted in November 2025 to select appropriate baseline values for the independent variables.
 
-* [Historical House Prices: ONS](https://www.ons.gov.uk/economy/inflationandpriceindices/bulletins/housepriceindex/august2023)
+* [Historical House Prices: ONS](https://www.ons.gov.uk/economy/inflationandpriceindices/bulletins/privaterentandhousepricesuk/october2025)
 * [Historical Mortgage Interest Rates: Statistics](https://www.statista.com/statistics/386301/uk-average-mortgage-interest-rates/)
-* [Historical Rent Prices: ONS](https://www.ons.gov.uk/economy/inflationandpriceindices/bulletins/indexofprivatehousingrentalprices/september2023)
+* [Historical Rent Prices: ONS](https://www.ons.gov.uk/economy/inflationandpriceindices/bulletins/privaterentandhousepricesuk/october2025)
 * [Historical Bank Rate: BoE](https://www.bankofengland.co.uk/boeapps/database/Bank-Rate.asp)
