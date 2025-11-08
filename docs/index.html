@@ -40,7 +40,7 @@
 						The following values will form the baseline for the simulation. The coloured variables are the
 						independent* variables we'll be adjusting in this analysis.<br />
 						<i style="font-size: smaller;">*These are treated as independent for the purpose of studying
-							their effects. In reality, there will be ecomomic dependencies between them.</i>
+							their effects. In reality, there will be economic dependencies between them.</i>
 
 					</p>
 
@@ -52,7 +52,7 @@
 							<table>
 								<tr>
 									<td>Deposit</td>
-									<td style="text-align: right;">£30,000</td>
+									<td style="text-align: right;">£40,000</td>
 								</tr>
 							</table>
 						</div>
@@ -62,11 +62,11 @@
 							<table>
 								<tr>
 									<td><b class="blue">Initial property value</b></td>
-									<td style="text-align: right;">£200,000</td>
+									<td style="text-align: right;">£270,000</td>
 								</tr>
 								<tr>
 									<td><b class="red">Property value yearly increase</b></td>
-									<td style="text-align: right;">2.5%</td>
+									<td style="text-align: right;">3.0%</td>
 								</tr>
 								<tr>
 									<td><b class="green">Mortgage interest rate</b></td>
@@ -84,15 +84,15 @@
 							<table>
 								<tr>
 									<td><b class="purple">Initial monthly rent price</b></td>
-									<td style="text-align: right;">£1200</td>
+									<td style="text-align: right;">£1350</td>
 								</tr>
 								<tr>
 									<td><b class="orange">Rent price yearly increase</b></td>
-									<td style="text-align: right;">3%</td>
+									<td style="text-align: right;">5%</td>
 								</tr>
 								<tr>
 									<td><b class="cyan">Savings interest rate</b></td>
-									<td style="text-align: right;">5%</td>
+									<td style="text-align: right;">4%</td>
 								</tr>
 							</table>
 						</div>
@@ -117,7 +117,7 @@
 							</td>
 							<td style="vertical-align: top;">
 								<p>
-									£30,000 is immediately payed into the savings account.<br />
+									£40,000 is immediately payed into the savings account.<br />
 									Each month, a payment of <code>(mortgage payment - rent)</code> is made into the
 									savings account (note: may
 									represent a withdrawal). For example, with a mortgage payment of £800 and a rent
@@ -137,8 +137,8 @@
 					</p>
 
 					<p>
-						For the baseline as outlined above, the delta is £56,008 meaning you'd be <b>£56k better off</b>*
-						if you chose to buy rather than rent. The monthly mortgage payment is £993.80.<br />
+						For the baseline as outlined above, the delta is £69,815 meaning you'd be <b>£70k better off</b>*
+						if you chose to buy rather than rent. The monthly mortgage payment is £1,344.56.<br />
 						<i style="font-size: smaller;">*Costs associated with property purchase (e.g. stamp duty,
 							solicitor fees, mortgage product fees, maintenance fees or mortgage early repayment fees)
 							are not considered.
@@ -165,9 +165,9 @@
 					We can see that the simulation's result (delta) is most sensitive to:
 					<ul>
 						<li><b class="red">Property value yearly increase</b>: each <b>1% pt increase</b> results in
-							the buyer being <b>£5k-£17k better off</b></li>
+							the buyer being <b>£7k-£23k better off</b></li>
 						<li><b class="green">Mortgage interest rate</b>: each <b>1% pt increase</b> results in the
-							buyer being <b>£8k-£10k worse off</b></li>
+							buyer being <b>£11k-£13k worse off</b></li>
 						<li><b class="purple">Initial monthly rent price</b>: each <b>£100 increase</b> results in
 							the buyer being <b>£7k better off</b>.</li>
 					</ul>
@@ -176,7 +176,7 @@
 					<h2>Two at a time</h2>
 
 					<p>
-						The previous anaysis changed just one variable at a time. The contour plots below show the
+						The previous analysis changed just one variable at a time. The contour plots below show the
 						effect on the delta when we change two variables.
 						A positive delta (better to buy) is <b class="contourblue">blue</b> and a negative delta
 						(better to rent) is <b class="contourred">red</b>.<br />
@@ -211,13 +211,15 @@
 
 					<p>
 						So far, we've assumed that the prospective buyer can borrow enough money for a <b
-							class="blue">property valued</b> at £200,000 which is roughly equivalent to a <b
-							class="purple">monthly rent</b> of £1,200.
-						What are the results if the budget is reduced or stretched?
-						The <b
-							style="color: rgb(128,128,128); text-decoration: underline; text-decoration-style: dashed;">grey
-							dotted line</b> shows an approximate expected relationship between property values and
-						rent prices.
+							class="blue">property valued</b> at £270,000 which is roughly equivalent to a <b
+							class="purple">monthly rent</b> of £1,350.
+						What are the results if the budget is reduced or stretched (e.g. choose to live in a smaller
+						or larger home).
+						The
+						<b style="color: rgb(128,128,128); text-decoration: underline; text-decoration-style: dashed;">grey
+							dotted line</b>
+						shows an approximate expected relationship between property values and rent prices for a
+						range of budgets.
 					</p>
 
 					<iframe src="plots/initialPropertyValue-initialMonthlyRentPrice.html" width="100%"
@@ -225,7 +227,8 @@
 
 					<p>
 						We can see that increasing or decreasing the budget results in a linear change to the delta.
-						I.e. doubling the budget doubles the delta.
+						I.e. doubling the budget doubles the delta: a £150k property results in a £50k delta, and a
+						£300k property results in a £100k delta.
 					</p>
 
 					<br /><br />
@@ -280,7 +283,7 @@
 		<!-- Footer -->
 		<div id="footer">
 			<ul class="copyright">
-				<li>&copy; Craig Walton 2023</li>
+				<li>&copy; Craig Walton 2025</li>
 				<li>GitHub: <a href="https://github.com/craigwalton/MortgageSim">MortgageSim</a></li>
 				<li>Page template: <a href="http://html5up.net">HTML5 UP</a></li>
 			</ul>
